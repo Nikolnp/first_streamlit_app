@@ -5,7 +5,7 @@ import requests
 
 
 #Page Title
-streamlit.title('Blog')
+#streamlit.title('Blog')
 # Object notation
 
 # "with" notation
