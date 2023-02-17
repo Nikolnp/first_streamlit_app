@@ -11,10 +11,10 @@ import requests
 # "with" notation
 with streamlit.sidebar:
    streamlit.image("https://i.pinimg.com/originals/42/43/74/424374bd1876ded649b5d6ddba2c3ab5.png")
-   if streamlit.button('Say hello'):
-      streamlit.write('Why hello there')
+   if streamlit.button('HEALTH'):
+      streamlit.write('Redirect to Healthy page')
    else:
-      streamlit.write('Goodbye')
+      streamlit.write('Home Page')
 
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
