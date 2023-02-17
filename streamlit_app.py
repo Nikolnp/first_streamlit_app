@@ -6,6 +6,8 @@ import requests
 
 #Page Title
 streamlit.title('Blog')
+# Object notation
+streamlit.sidebar.[button]
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
 streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png" )
