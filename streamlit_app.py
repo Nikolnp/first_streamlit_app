@@ -6,14 +6,10 @@ import requests
 
 #Page Title
 streamlit.title('HEALTHY CAN BE TAISTY')
+streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 #Columns
-col1, col2, col3, = streamlit.columns(3)
-with col1:
-   #empty col
-with col2:
-   streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
-with col3:
-   #empty col
+#col1, col2, col3, = streamlit.columns(3)
+streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png" )
 col4, col5, col6 = streamlit.columns(3)
 with col4:
    streamlit.header('Breakfast Menu')
