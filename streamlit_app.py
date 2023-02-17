@@ -8,7 +8,13 @@ import requests
 streamlit.title('Blog')
 # Object notation
 
-streamlit.sidebar.[streamlit.button(label, key=None, help=None, on_click=None, args=None, kwargs=None, *, type="secondary", disabled=False, use_container_width=False)]
+streamlit.sidebar.["Blog"]
+   
+   if st.button('Say hello'):
+       st.write('Why hello there')
+   else:
+       st.write('Goodbye')
+         
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
 streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png" )
