@@ -64,8 +64,10 @@ with col9:
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
    streamlit.text( '🥑🍞 Avocado Toast')
-col1, col2, col3, = streamlit.columns(3)      
-      
+col1, col2, col3, = streamlit.columns(3) 
+
+streamlit.empty()
+
 #Header of Smootie Maker
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 #initialise the dataframe
