@@ -37,6 +37,22 @@ with col2:
    streamlit.text( '🥑🍞 Avocado Toast')
 with col3:
     streamlit.image("https://cdn.pixabay.com/photo/2014/04/02/10/48/woman-304646_640.png")
+with col4:
+   streamlit.header('Breakfast Menu')
+   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
+   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
+   streamlit.text('🐔 Hard-boiled free range egg')
+   streamlit.text( '🥑🍞 Avocado Toast')
+with col5:
+   streamlit.image("http://www.pngall.com/wp-content/uploads/5/Diet-PNG-Clipart.png")
+with col6:
+   streamlit.header('Snack Menu')
+   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
+   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
+   streamlit.text('🐔 Hard-boiled free range egg')
+   streamlit.text( '🥑🍞 Avocado Toast')
+col1, col2, col3, = streamlit.columns(3)      
+      
 #Header of Smootie Maker
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 #initialise the dataframe
