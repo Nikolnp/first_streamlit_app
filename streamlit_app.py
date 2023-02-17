@@ -10,6 +10,7 @@ streamlit.title('Blog')
 
 # "with" notation
 with streamlit.sidebar:
+   streamlit.image("http://clipart-library.com/new_gallery/52-522940_clipart-drops-prismatic-transparent-background-brain-png.png")
    if streamlit.button('Say hello'):
       streamlit.write('Why hello there')
    else:
