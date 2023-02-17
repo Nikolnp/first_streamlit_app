@@ -12,11 +12,9 @@ with col1:
    #empty col
 with col2:
    streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
-
-col4, col5, col6 = streamlit.columns(3)
 with col3:
    #empty col
-
+col4, col5, col6 = streamlit.columns(3)
 with col4:
    streamlit.header('Breakfast Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
