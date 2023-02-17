@@ -9,13 +9,13 @@ streamlit.title('HEALTHY CAN BE TAISTY')
 #Columns
 col1, col2, col3, = streamlit.columns(3)
 with col1:
-   
+   #empty col
 with col2:
-streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
+   streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
 
 col4, col5, col6 = streamlit.columns(3)
 with col3:
-
+   #empty col
 
 with col4:
    streamlit.header('Breakfast Menu')
