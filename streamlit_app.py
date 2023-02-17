@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit 
 import pandas
 import requests
 
@@ -6,7 +6,7 @@ import requests
 streamlit.title('Nikki`s New Healthy Diner')
 
 #Columns
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = streamlit.columns(3)
 
 with col1:
    streamlit.header('Breakfast Menu')
