@@ -15,7 +15,7 @@ with streamlit.sidebar:
    
    #if streamlit.button('HEALTH'):
     #  streamlit.write('Redirect to Healthy page')
-  # else:
+   #else:
     #  streamlit.write('Home Page')
 
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
@@ -66,6 +66,9 @@ with col9:
    streamlit.text( '🥑🍞 Avocado Toast')
 col1, col2, col3, = streamlit.columns(3) 
 
+streamlit.empty()
+streamlit.empty()
+streamlit.empty()
 streamlit.empty()
 
 #Header of Smootie Maker
