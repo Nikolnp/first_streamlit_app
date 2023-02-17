@@ -21,7 +21,7 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 #display the dataframe
 streamlit.dataframe(fruits_to_show)
  
-#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
 #New section to display the API call
@@ -33,6 +33,6 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
 
 #output it the screen as a table
-streamlit.dataframe(fruityvice_normalized)
+#streamlit.dataframe(fruityvice_normalized)
 
 
