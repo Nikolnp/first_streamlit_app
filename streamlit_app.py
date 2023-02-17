@@ -11,12 +11,16 @@ import requests
 # "with" notation
 with streamlit.sidebar:
    streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
-   streamlit.markdown("img style = 'img-align: center;'", unsafe_allow_html=True)
-   streamlit.image("https://i.pinimg.com/originals/42/43/74/424374bd1876ded649b5d6ddba2c3ab5.png")
-   if streamlit.button('HEALTH'):
-      streamlit.write('Redirect to Healthy page')
-   else:
-      streamlit.write('Home Page')
+   col1, col2, col3 = streamlit.columns(3)
+   with col1:
+      #
+   with col2:
+      streamlit.image("https://i.pinimg.com/originals/42/43/74/424374bd1876ded649b5d6ddba2c3ab5.png")
+   with col3:
+      if streamlit.button('HEALTH'):
+         streamlit.write('Redirect to Healthy page')
+      else:
+         streamlit.write('Home Page')
 
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
