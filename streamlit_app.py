@@ -3,7 +3,7 @@ import pandas
 import requests
 
 #Page Title
-streamlit.title('Nikki`s New Healthy Diner')
+streamlit.title('HEALTHY CAN BE TAISTY')
 
 #Columns
 col1, col2, col3 = streamlit.columns(3)
@@ -15,7 +15,7 @@ with col1:
    streamlit.text('🐔 Hard-boiled free range egg')
    streamlit.text( '🥑🍞 Avocado Toast')
 with col2:
-   streamlit.image("https://static.streamlit.io/examples/dog.jpg")
+   streamlit.image("http://www.pngall.com/wp-content/uploads/5/Diet-PNG-Clipart.png")
 with col3:
    streamlit.header('Snack Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
