@@ -2,11 +2,18 @@ import streamlit
 import pandas
 import requests
 
-#Page Title
-streamlit.title('HEALTHY CAN BE TAISTY')
-
 #Columns
 col1, col2, col3 = streamlit.columns(3)
+
+#Page Title
+streamlit.title('HEALTHY CAN BE TAISTY')
+with col1:
+   
+with col2:
+streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
+
+with col3:
+
 
 with col1:
    streamlit.header('Breakfast Menu')
