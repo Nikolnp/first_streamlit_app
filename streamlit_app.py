@@ -25,7 +25,7 @@ with col6:
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
    streamlit.text( '🥑🍞 Avocado Toast')
- col1, col2, col3, = streamlit.columns(3)
+col1, col2, col3, = streamlit.columns(3)
 
 with col1:
    streamlit.image("https://cdn.pixabay.com/photo/2014/04/03/10/38/yoga-310940_960_720.png")
