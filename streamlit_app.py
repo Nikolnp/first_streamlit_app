@@ -3,7 +3,8 @@ import pandas
 import requests
 
 #Columns
-col1, col2, col3 = streamlit.columns(3)
+col1, col2, col3, = streamlit.columns(3)
+col4, col5, col6 = streamlit.columns(3)
 
 #Page Title
 streamlit.title('HEALTHY CAN BE TAISTY')
@@ -15,15 +16,15 @@ streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Tra
 with col3:
 
 
-with col1:
+with col4:
    streamlit.header('Breakfast Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
    streamlit.text( '🥑🍞 Avocado Toast')
-with col2:
+with col5:
    streamlit.image("http://www.pngall.com/wp-content/uploads/5/Diet-PNG-Clipart.png")
-with col3:
+with col6:
    streamlit.header('Snack Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
