@@ -12,8 +12,7 @@ import requests
 with streamlit.sidebar:
    streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
    streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
-   streamlit.caption('_“One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy.”_'
-― Alain de Botton_')
+   streamlit.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." ― Alain de Botton_')
    
    #if streamlit.button('HEALTH'):
     #  streamlit.write('Redirect to Healthy page')
