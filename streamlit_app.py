@@ -10,12 +10,11 @@ streamlit.title('Blog')
 
 # "with" notation
 with streamlit.sidebar:
-   streamlit.[element_name]
-      if streamlit.button('Say hello'):
-         streamlit.write('Why hello there')
-      else:
-         streamlit.write('Goodbye')
-         
+   if streamlit.button('Say hello'):
+      streamlit.write('Why hello there')
+   else:
+      streamlit.write('Goodbye')
+
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
 streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png" )
