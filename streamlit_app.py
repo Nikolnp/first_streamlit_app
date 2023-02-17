@@ -1,14 +1,37 @@
-import streamlit
+import streamlit as st
 import pandas
 import requests
 
+#Page Title
 streamlit.title('Nikki`s New Healthy Diner')
-streamlit.header('Breakfast Menu')
-streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
-streamlit.text(' 🥗 Kale spinah and rocket smoothie')
-streamlit.text('🐔 Hard-boiled free range egg')
-streamlit.text( '🥑🍞 Avocado Toast')
-streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+
+#Columns
+col1, col2, col3 = st.columns(3)
+
+with col1:
+   streamlit.header('Breakfast Menu')
+   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
+   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
+   streamlit.text('🐔 Hard-boiled free range egg')
+   streamlit.text( '🥑🍞 Avocado Toast')
+   streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+
+with col2:
+   streamlit.header('Lunch Menu')
+   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
+   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
+   streamlit.text('🐔 Hard-boiled free range egg')
+   streamlit.text( '🥑🍞 Avocado Toast')
+   streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+
+with col3:
+   streamlit.header('Dinner Menu')
+   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
+   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
+   streamlit.text('🐔 Hard-boiled free range egg')
+   streamlit.text( '🥑🍞 Avocado Toast')
+   streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+
 
 #initialise the dataframe
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
