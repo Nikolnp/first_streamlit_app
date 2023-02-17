@@ -7,7 +7,7 @@ import requests
 #Page Title
 streamlit.title('Blog')
 # Object notation
-select_element = streamlit.button(label, key=None, help=None, on_click=None, args=None, kwargs=None, *, type="secondary", disabled=False, use_container_width=False)
+streamlit.button(label, key=None, help=None, on_click=None, args=None, kwargs=None, *, type="secondary", disabled=False, use_container_width=False)
 streamlit.sidebar.[select_element]
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
