@@ -8,12 +8,13 @@ import requests
 streamlit.title('Blog')
 # Object notation
 
-streamlit.sidebar.["Blog"]
-   
-   if st.button('Say hello'):
-       st.write('Why hello there')
-   else:
-       st.write('Goodbye')
+# "with" notation
+with streamlit.sidebar:
+   streamlit.[element_name]
+      if streamlit.button('Say hello'):
+         streamlit.write('Why hello there')
+      else:
+         streamlit.write('Goodbye')
          
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
