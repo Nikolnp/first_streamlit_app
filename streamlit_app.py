@@ -5,7 +5,7 @@ import requests
 
 
 #Page Title
-streamlit.title('HEALTHY CAN BE TAISTY')
+streamlit.title('Blog by Nikoleta Petkova')
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 #Columns
 #col1, col2, col3, = streamlit.columns(3)
