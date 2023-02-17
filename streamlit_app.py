@@ -12,7 +12,7 @@ import requests
 with streamlit.sidebar:
    streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
    streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
-   streamlit.caption('A caption with _italics_ :blue[colors] and emojis :sunglasses:')
+   streamlit.caption('_A caption with italics :blue[colors]_')
    
    #if streamlit.button('HEALTH'):
     #  streamlit.write('Redirect to Healthy page')
