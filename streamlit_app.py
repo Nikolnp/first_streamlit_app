@@ -14,25 +14,17 @@ with col1:
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
    streamlit.text( '🥑🍞 Avocado Toast')
-   streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
-
 with col2:
-   streamlit.header('Lunch Menu')
-   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
-   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
-   streamlit.text('🐔 Hard-boiled free range egg')
-   streamlit.text( '🥑🍞 Avocado Toast')
-   streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
-
+   streamlit.image("https://static.streamlit.io/examples/dog.jpg")
 with col3:
-   streamlit.header('Dinner Menu')
+   streamlit.header('Snack Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
    streamlit.text( '🥑🍞 Avocado Toast')
-   streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
-
-
+   
+#Header of Smootie Maker
+streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 #initialise the dataframe
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list =  my_fruit_list.set_index('Fruit')
