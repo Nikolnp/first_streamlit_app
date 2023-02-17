@@ -7,8 +7,7 @@ import requests
 #Page Title
 streamlit.title('Blog')
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
-#Columns
-#col1, col2, col3, = streamlit.columns(3)
+
 streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png" )
 col4, col5, col6 = streamlit.columns(3)
 with col4:
@@ -25,12 +24,13 @@ with col6:
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
    streamlit.text( '🥑🍞 Avocado Toast')
+#def columns list
 col1, col2, col3, = streamlit.columns(3)
 
 with col1:
    streamlit.image("https://cdn.pixabay.com/photo/2014/04/03/10/38/yoga-310940_960_720.png")
 with col2:
-   streamlit.header('Breakfast Menu')
+   streamlit.header('Lunch Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
@@ -39,7 +39,7 @@ with col3:
     streamlit.image("https://cdn.pixabay.com/photo/2014/04/02/10/48/woman-304646_640.png")
 col7, col8, col9, = streamlit.columns(3)
 with col7:
-   streamlit.header('Breakfast Menu')
+   streamlit.header('Snack Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
@@ -47,7 +47,7 @@ with col7:
 with col8:
    streamlit.image("https://cdn3.iconfinder.com/data/icons/wrestler/755/muscle_bodybuilding_bodybuilder_bicep_tricep_healthy_fitness-512.png")
 with col9:
-   streamlit.header('Snack Menu')
+   streamlit.header('Dinner Menu')
    streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
    streamlit.text(' 🥗 Kale spinah and rocket smoothie')
    streamlit.text('🐔 Hard-boiled free range egg')
