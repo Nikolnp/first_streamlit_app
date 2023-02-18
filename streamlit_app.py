@@ -1,6 +1,8 @@
 import streamlit 
 import pandas
 import requests
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 
@@ -94,5 +96,17 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
 #output it the screen as a table
 #streamlit.dataframe(fruityvice_normalized)
+#Matplot lib and numpy test example 
+x = np.linspace(0,2*np.pi,100)
+y = np.sin(x)
+y2 =np.cos(x)
+
+plt.title("Sin and cos from 0 to 2*pi")
+plt.xlabel("input")
+plt.ylabel("output")
+plt.plot(x,y)
+plt.plot(x,y2)
+plt.show()
+
 
 
