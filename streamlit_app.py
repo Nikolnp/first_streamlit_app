@@ -101,13 +101,15 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 x = np.linspace(0,2*np.pi,100)
 y = np.sin(x)
 y2 =np.cos(x)
-
+print(x)
+print(y)
+print(y2)
 #streamlit.pyplot.title('Sin and cos from 0 to 2*pi')
 #streamlit.pyplot.xlabel('input')
 #streamlit.pyplot.ylabel('output')
-streamlit.pyplot.plot(x,y)
-streamlit.pyplot.plot(x,y2)
-streamlit.pyplot.show()
+#streamlit.pyplot.plot(x,y)
+#streamlit.pyplot.plot(x,y2)
+#streamlit.pyplot.show()
 
 
 
