@@ -2,7 +2,7 @@ import streamlit
 import pandas
 import requests
 import numpy as np
-import matplotlib
+
 
 
 
@@ -101,12 +101,12 @@ x = np.linspace(0,2*np.pi,100)
 y = np.sin(x)
 y2 =np.cos(x)
 
-matplotlib.pyplot.title("Sin and cos from 0 to 2*pi")
-matplotlib.pyplot.xlabel("input")
-matplotlib.pyplot.ylabel("output")
-matplotlib.pyplot.plot(x,y)
-matplotlib.pyplot.plot(x,y2)
-matplotlib.pyplot.show()
+streamlit.pyplot.title("Sin and cos from 0 to 2*pi")
+streamlit.pyplot.xlabel("input")
+streamlit.pyplot.ylabel("output")
+streamlit.pyplot.plot(x,y)
+streamlit.pyplot.plot(x,y2)
+streamlit.pyplot.show()
 
 
 
