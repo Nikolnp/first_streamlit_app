@@ -18,7 +18,10 @@ with streamlit.sidebar:
    streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
    streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
    streamlit.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
-   
+   col1, col2, col3 = streamlit.columns(3)
+   col1.metric("Temperature", "70 °F", "1.2 °F")
+   col2.metric("Wind", "9 mph", "-8%")
+   col3.metric("Humidity", "86%", "4%")
    #if streamlit.button('HEALTH'):
     #  streamlit.write('Redirect to Healthy page')
    #else:
@@ -88,7 +91,4 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
 #--------------------------------------------------------------------------------------------
 
-col1, col2, col3 = streamlit.columns(3)
-col1.metric("Temperature", "70 °F", "1.2 °F")
-col2.metric("Wind", "9 mph", "-8%")
-col3.metric("Humidity", "86%", "4%")
+
