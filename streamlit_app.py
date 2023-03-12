@@ -36,10 +36,9 @@ with col5:
    streamlit.image("http://www.pngall.com/wp-content/uploads/5/Diet-PNG-Clipart.png")
 with col6:
    streamlit.header('Snack Menu')
-   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
-   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
-   streamlit.text('🐔 Hard-boiled free range egg')
-   streamlit.text( '🥑🍞 Avocado Toast')
+   streamlit.text('Apple')
+   streamlit.text('Kiwi')
+   streamlit.text('or another favorite fruit')
 #def columns list
 col1, col2, col3, = streamlit.columns(3)
 
@@ -56,10 +55,8 @@ with col3:
 col7, col8, col9, = streamlit.columns(3)
 with col7:
    streamlit.header('Snack Menu')
-   streamlit.text('🥣 Omega 3 and Bluberry Oatmeal')
-   streamlit.text(' 🥗 Kale spinah and rocket smoothie')
-   streamlit.text('🐔 Hard-boiled free range egg')
-   streamlit.text( '🥑🍞 Avocado Toast')
+   streamlit.text('Carrots')
+   streamlit.text('Humous')
 with col8:
    streamlit.image("https://cdn3.iconfinder.com/data/icons/wrestler/755/muscle_bodybuilding_bodybuilder_bicep_tricep_healthy_fitness-512.png")
 with col9:
@@ -87,28 +84,7 @@ streamlit.dataframe(fruits_to_show)
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
-#New section to display the API call
-#streamlit.header('Fruityvice Fruit Advice!')
-#fruit_choice = streamlit.text_input('What fruit would you like information about?', 'Kiwi')
-#streamlit.write('The user entered ', fruit_choice)
-
-#fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ fruit_choice)
 
 
-#output it the screen as a table
-#streamlit.dataframe(fruityvice_normalized)
-#Matplot lib and numpy test example 
-x = np.linspace(0,2*np.pi,100)
-y = np.sin(x)
-y2 =np.cos(x)
-streamlit.write(x)
-streamlit.write(y)
-streamlit.write(y2)
-#streamlit.pyplot.title('Sin and cos from 0 to 2*pi')
-#streamlit.pyplot.xlabel('input')
-#streamlit.pyplot.ylabel('output')
-#streamlit.pyplot.plot(x,y)
-#streamlit.pyplot.plot(x,y2)
-#streamlit.pyplot.show()
 
 
