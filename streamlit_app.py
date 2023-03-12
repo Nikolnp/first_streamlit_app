@@ -78,6 +78,32 @@ my_fruit_list =  my_fruit_list.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 
+# Necessary libraries
+import os
+import json
+
+# Store the realtime weather endpoint link
+endpoint = 'https://api.climacell.co/v3/weather/realtime'
+
+# Build a dict for parameters to be used
+params = {
+    'lat': '40.689247', 'lon': '-74.044502', # Statue of Liberty, NY
+    'fields': 'temp,humidity',    # Get the current temperature and humidity
+    'apikey': os.environ['CLIMACELL_API'], # Get my API key from env variables
+    'unit_system': 'us'   # Display in Fahrenheit
+} 
+# Make an API call
+res = requests.request("GET", endpoint, params=params)
+# Use JSON to parse into a dictionary
+response = json.loads(res.content)
+>>> response
+
+{'lat': 40.689247,
+ 'lon': -74.044502,
+ 'temp': {'value': 55.51, 'units': 'F'},
+ 'humidity': {'value': 90.69, 'units': '%'},
+ 'observation_time': {'value': '2020-11-23T14:35:48.617Z'}}
+
 #display the dataframe
 streamlit.dataframe(fruits_to_show)
  
