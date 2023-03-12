@@ -2,7 +2,9 @@ import streamlit
 import pandas
 import requests
 import numpy as np
-
+# Necessary libraries weather
+import os
+import json
 
 
 
@@ -78,9 +80,13 @@ my_fruit_list =  my_fruit_list.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 
-# Necessary libraries
-import os
-import json
+#display the dataframe
+streamlit.dataframe(fruits_to_show)
+ 
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
+fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+
+#--------------------------------------------------------------------------------------------
 
 # Store the realtime weather endpoint link
 endpoint = 'https://api.climacell.co/v3/weather/realtime'
@@ -103,14 +109,6 @@ response = json.loads(res.content)
  'temp': {'value': 55.51, 'units': 'F'},
  'humidity': {'value': 90.69, 'units': '%'},
  'observation_time': {'value': '2020-11-23T14:35:48.617Z'}}
-
-#display the dataframe
-streamlit.dataframe(fruits_to_show)
- 
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-
-
 
 
 
