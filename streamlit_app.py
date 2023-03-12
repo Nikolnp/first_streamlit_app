@@ -88,27 +88,7 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
 #--------------------------------------------------------------------------------------------
 
-# Store the realtime weather endpoint link
-endpoint = 'https://api.climacell.co/v3/weather/realtime'
-
-# Build a dict for parameters to be used
-params = {
-    'lat': '40.689247', 'lon': '-74.044502', # Statue of Liberty, NY
-    'fields': 'temp,humidity',    # Get the current temperature and humidity
-    'apikey': os.environ['CLIMACELL_API'], # Get my API key from env variables
-    'unit_system': 'us'   # Display in Fahrenheit
-} 
-# Make an API call
-res = requests.request("GET", endpoint, params=params)
-# Use JSON to parse into a dictionary
-response = json.loads(res.content)
->>> response
-
-{'lat': 40.689247,
- 'lon': -74.044502,
- 'temp': {'value': 55.51, 'units': 'F'},
- 'humidity': {'value': 90.69, 'units': '%'},
- 'observation_time': {'value': '2020-11-23T14:35:48.617Z'}}
-
-
-
+col1, col2, col3 = st.columns(3)
+col1.metric("Temperature", "70 °F", "1.2 °F")
+col2.metric("Wind", "9 mph", "-8%")
+col3.metric("Humidity", "86%", "4%")
