@@ -15,6 +15,40 @@ import json
 
 # "with" notation
 with streamlit.sidebar:
+   import streamlit as st
+import requests
+
+def get_weather_data(city, api_key):
+    """Fetch weather data from OpenWeatherMap API."""
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    response = requests.get(url)
+    data = response.json()
+    return data
+
+def display_weather(data):
+    """Display weather data in a user-friendly format."""
+    st.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
+    st.write(f"**Temperature:** {data['main']['temp']} °C")
+    st.write(f"**Weather:** {data['weather'][0]['description']}")
+    st.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
+    st.write(f"**Pressure:** {data['main']['pressure']} hPa")
+    st.write(f"**Humidity:** {data['main']['humidity']}%")
+
+def main():
+    st.title("Weather Forecast App")
+    city = st.text_input("Enter a city name", "London")
+
+    api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
+
+    if st.button("Get Weather"):
+        weather_data = get_weather_data(city, api_key)
+        if weather_data.get("cod") != 404:
+            display_weather(weather_data)
+        else:
+            st.error("City not found!")
+
+if __name__ == "__main__":
+    main()
    streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
    streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
    streamlit.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
