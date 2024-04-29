@@ -23,7 +23,6 @@ def display_weather(data):
     streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
-    streamlit.title("Weather Forecast")  # Moved the title here
     with streamlit.sidebar:
         streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
         streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
@@ -32,6 +31,8 @@ def main():
         col1.metric("Temperature", "70 °F", "1.2 °F")
         col2.metric("Wind", "9 mph", "-8%")
         col3.metric("Humidity", "86%", "4%")
+        # Title
+        streamlit.title("Weather Forecast")  
         city = streamlit.text_input("Enter a city name", "London")
         
         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
