@@ -30,9 +30,7 @@ def display_weather(data):
     st.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
-   
-    # "with" notation
-with streamlit.sidebar:
+   with streamlit.sidebar:
    streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
    streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
    streamlit.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
@@ -52,10 +50,7 @@ with streamlit.sidebar:
         else:
             st.error("City not found!")
  
-   #if streamlit.button('HEALTH'):
-    #  streamlit.write('Redirect to Healthy page')
-   #else:
-    #  streamlit.write('Home Page')
+
 
 streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TAISTY</h1>", unsafe_allow_html=True)
 
@@ -119,7 +114,6 @@ streamlit.dataframe(fruits_to_show)
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
-#--------------------------------------------------------------------------------------------
 
 
 
