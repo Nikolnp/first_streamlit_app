@@ -12,7 +12,7 @@ import json
 #Page Title
 #streamlit.title('Blog')
 # Object notation
-   import streamlit as st
+import streamlit as st
 import requests
 
 def get_weather_data(city, api_key):
