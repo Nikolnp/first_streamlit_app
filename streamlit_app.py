@@ -38,8 +38,8 @@ def main():
        col1.metric("Temperature", "70 °F", "1.2 °F")
        col2.metric("Wind", "9 mph", "-8%")
        col3.metric("Humidity", "86%", "4%")
-        st.title("Weather Forecast")
-        city = st.text_input("Enter a city name", "London")
+            st.title("Weather Forecast")
+            city = st.text_input("Enter a city name", "London")
     
         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
 
