@@ -2,7 +2,7 @@ import streamlit
 import pandas
 import requests
 import numpy as np
-
+import streamlit as st
 # Page Title
 # streamlit.title('Blog')
 # Object notation
