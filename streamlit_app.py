@@ -96,3 +96,5 @@ def main():
     streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
     #initialise the dataframe
    
+if __name__ == "__main__":
+    main()
