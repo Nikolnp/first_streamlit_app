@@ -24,6 +24,7 @@ def display_weather(data):
     st.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
+    st.title("Weather Forecast")  # Moved the title here
     with streamlit.sidebar:
         streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
         streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
@@ -33,7 +34,6 @@ def main():
         col2.metric("Wind", "9 mph", "-8%")
         col3.metric("Humidity", "86%", "4%")
         
-    st.title("Weather Forecast")
     city = st.text_input("Enter a city name", "London")
     
     api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
@@ -96,18 +96,4 @@ def main():
     #Header of Smoothie Maker
     streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
     #initialise the dataframe
-    my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
-    my_fruit_list = my_fruit_list.set_index('Fruit')
-    
-    #Add multiselect
-    fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
-    fruits_to_show = my_fruit_list.loc[fruits_selected]
-    
-    #display the dataframe
-    streamlit.dataframe(fruits_to_show)
-    
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
-    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-
-if __name__ == "__main__":
-    main()
+   
