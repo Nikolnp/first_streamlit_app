@@ -32,17 +32,16 @@ def main():
         col1.metric("Temperature", "70 °F", "1.2 °F")
         col2.metric("Wind", "9 mph", "-8%")
         col3.metric("Humidity", "86%", "4%")
+        city = streamlit.text_input("Enter a city name", "London")
         
-    city = streamlit.text_input("Enter a city name", "London")
+        api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
     
-    api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
-
-    if streamlit.button("Get Weather"):
-        weather_data = get_weather_data(city, api_key)
-        if weather_data.get("cod") != 404:
-            display_weather(weather_data)
-        else:
-            streamlit.error("City not found!")
+        if streamlit.button("Get Weather"):
+            weather_data = get_weather_data(city, api_key)
+            if weather_data.get("cod") != 404:
+                display_weather(weather_data)
+            else:
+                streamlit.error("City not found!")
 
     streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TASTY</h1>", unsafe_allow_html=True)
     
