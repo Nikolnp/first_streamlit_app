@@ -16,15 +16,15 @@ def get_weather_data(city, api_key):
 
 def display_weather(data):
     """Display weather data in a user-friendly format."""
-    st.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
-    st.write(f"**Temperature:** {data['main']['temp']} °C")
-    st.write(f"**Weather:** {data['weather'][0]['description']}")
-    st.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
-    st.write(f"**Pressure:** {data['main']['pressure']} hPa")
-    st.write(f"**Humidity:** {data['main']['humidity']}%")
+    streamlit.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
+    streamlit.write(f"**Temperature:** {data['main']['temp']} °C")
+    streamlit.write(f"**Weather:** {data['weather'][0]['description']}")
+    streamlit.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
+    streamlit.write(f"**Pressure:** {data['main']['pressure']} hPa")
+    streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
-    st.title("Weather Forecast")  # Moved the title here
+    streamlit.title("Weather Forecast")  # Moved the title here
     with streamlit.sidebar:
         streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
         streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
@@ -34,16 +34,16 @@ def main():
         col2.metric("Wind", "9 mph", "-8%")
         col3.metric("Humidity", "86%", "4%")
         
-    city = st.text_input("Enter a city name", "London")
+    city = streamlit.text_input("Enter a city name", "London")
     
     api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
 
-    if st.button("Get Weather"):
+    if streamlit.button("Get Weather"):
         weather_data = get_weather_data(city, api_key)
         if weather_data.get("cod") != 404:
             display_weather(weather_data)
         else:
-            st.error("City not found!")
+            streamlit.error("City not found!")
 
     streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TASTY</h1>", unsafe_allow_html=True)
     
