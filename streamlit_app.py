@@ -108,32 +108,24 @@ def main():
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
-    from googleapiclient.discovery import build
-    
-    # Set up YouTube API client
-    youtube = build('youtube', 'v3', developerKey='AIzaSyDxYVcvlLNIW3TP3jNgdzhao7JAr407BAw')
-    
-    # Fetch popular yoga videos from YouTube API
-    request = youtube.search().list(
-        part='snippet',
-        q='yoga',
-        type='video',
-        order='viewCount',  # Order by view count to get popular videos
-        maxResults=5  # Fetch top 5 videos
-    )
-    response = request.execute()
-    videos = [item['id']['videoId'] for item in response['items']]
+    @streamlit.cache
+    def fetch_popular_yoga_videos():
+        # Fetch popular yoga videos from YouTube API
+        api_key = 'YOUR_API_KEY'  # Replace 'YOUR_API_KEY' with your actual YouTube API key
+        youtube_url = f'https://www.googleapis.com/youtube/v3/search?part=snippet&q=yoga&type=video&order=viewCount&maxResults=5&key={api_key}'
+        response = streamlit.session.get(youtube_url)
+        if response.status_code == 200:
+            return response.json()['items']
+        else:
+            streamlit.error("Failed to fetch videos")
     
     # Display videos in carousel
-    streamlit.write("Popular Yoga Videos")
-    num_videos = len(videos)
-    cols = streamlit.columns(num_videos)
-    for i in range(num_videos):
-        with cols[i]:
-            streamlit.write(f"**Video {i+1}:**")
-            streamlit.markdown(f'<iframe width="280" height="157" src="https://www.youtube.com/embed/{videos[i]}" frameborder="0" allowfullscreen></iframe>', unsafe_allow_html=True)
-
-
-   
+    streamlit.title("Popular Yoga Videos")
+    videos = fetch_popular_yoga_videos()
+    for i, video in enumerate(videos):
+        streamlit.write(f"**Video {i+1}:**")
+        video_id = video['id']['videoId']
+        streamlit.markdown(f'<iframe width="280" height="157" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>', unsafe_allow_html=True)
+       
 if __name__ == "__main__":
     main()
