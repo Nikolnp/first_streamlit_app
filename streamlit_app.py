@@ -68,7 +68,7 @@ def main():
         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
     
         if streamlit.button("Get Weather"):
-            weather_data = get_weather_data(city, api_key)
+            weather_data = col1.get_weather_data(city, api_key)
             if weather_data.get("cod") != 404:
                 display_weather(weather_data)
             else:
