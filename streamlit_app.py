@@ -109,20 +109,31 @@ def main():
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
-  
+    from googleapiclient.discovery import build
     
-    # Title
-    streamlit.title("Yoga Videos")
+    # Set up YouTube API client
+    youtube = build('youtube', 'v3', developerKey='AIzaSyDxYVcvlLNIW3TP3jNgdzhao7JAr407BAw')
     
-    # Popular Yoga Videos Carousel
+    # Fetch popular yoga videos from YouTube API
+    request = youtube.search().list(
+        part='snippet',
+        q='yoga',
+        type='video',
+        order='viewCount',  # Order by view count to get popular videos
+        maxResults=5  # Fetch top 5 videos
+    )
+    response = request.execute()
+    videos = [item['id']['videoId'] for item in response['items']]
+    
+    # Display videos in carousel
     streamlit.write("Popular Yoga Videos")
-    st_youtube(["VIDEO_ID_1", "VIDEO_ID_2", "VIDEO_ID_3"])
-    
-    # YouTube Search Functionality
-    search_query = streamlit.text_input("Search YouTube")
-    if search_query:
-        streamlit.write(f"Search Results for '{search_query}'")
-        st_youtube(search_query)
+    num_videos = len(videos)
+    cols = streamlit.columns(num_videos)
+    for i in range(num_videos):
+        with cols[i]:
+            streamlit.write(f"**Video {i+1}:**")
+            streamlit.markdown(f'<iframe width="280" height="157" src="https://www.youtube.com/embed/{videos[i]}" frameborder="0" allowfullscreen></iframe>', unsafe_allow_html=True)
+
 
    
 if __name__ == "__main__":
