@@ -19,6 +19,8 @@ def authenticate_user():
 
 # Login form
 def login_form():
+    # Welcome message
+    streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
     with streamlit.sidebar:
         streamlit.subheader("Login")
         username = streamlit.text_input("Username")
@@ -48,8 +50,6 @@ def display_weather(data):
     streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
-    # Welcome message
-    streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
     login_form()  # Display login form
 
     with streamlit.sidebar:
