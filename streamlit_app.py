@@ -108,14 +108,15 @@ def main():
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
+    
     @streamlit.cache
     def fetch_popular_yoga_videos():
         # Fetch popular yoga videos from YouTube API
-        api_key = 'AIzaSyC9MMMnoZEVQzwqZt1VEXFPsu0vqqa8et4'  # Replace 'YOUR_API_KEY' with your actual YouTube API key
+        api_key = 'AIzaSyC9MMMnoZEVQzwqZt1VEXFPsu0vqqa8et4'
         youtube_url = f'https://www.googleapis.com/youtube/v3/search?part=snippet&q=yoga&type=video&order=viewCount&maxResults=5&key={api_key}'
-        response = streamlit.session.get(youtube_url)
+        response = requests.get(youtube_url)
         if response.status_code == 200:
-            return response.json()['items']
+            return response.json().get('items', [])
         else:
             streamlit.error("Failed to fetch videos")
     
@@ -124,8 +125,10 @@ def main():
     videos = fetch_popular_yoga_videos()
     for i, video in enumerate(videos):
         streamlit.write(f"**Video {i+1}:**")
-        video_id = video['id']['videoId']
-        streamlit.markdown(f'<iframe width="280" height="157" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>', unsafe_allow_html=True)
-       
+        video_id = video.get('id', {}).get('videoId')
+        if video_id:
+            streamlit.markdown(f'<iframe width="280" height="157" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>', unsafe_allow_html=True)
+        else:
+            streamlit.error("Video ID not found")  
 if __name__ == "__main__":
     main()
