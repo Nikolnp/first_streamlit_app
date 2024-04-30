@@ -48,6 +48,8 @@ def display_weather(data):
     streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
+    # Welcome message
+    streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
     login_form()  # Display login form
 
     with streamlit.sidebar:
@@ -58,8 +60,7 @@ def main():
         col1.metric("Temperature", "70 °F", "1.2 °F")
         col2.metric("Wind", "9 mph", "-8%")
         col3.metric("Humidity", "86%", "4%")
-        # Welcome message
-        streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
+       
         # Title
         streamlit.title("Weather Forecast")  
         city = streamlit.text_input("Enter a city name", "London")
