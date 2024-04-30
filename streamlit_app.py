@@ -6,6 +6,45 @@ import numpy as np
 # Page Title
 # streamlit.title('Blog')
 # Object notation
+# authentication
+CLIENT_ID = '996692650919-he3g314vgpu7k9njohk1de7di9slp48o.apps.googleusercontent.com'  # Replace with your Google OAuth client ID
+REDIRECT_URI = 'https://nikolnp-first-streamlit-app-streamlit-app-iht91t.streamlit.app/'  # Replace with your redirect URI
+
+def get_google_auth_url():
+    params = {
+        'client_id': CLIENT_ID,
+        'redirect_uri': REDIRECT_URI,
+        'response_type': 'code',
+        'scope': 'openid email profile',
+        'access_type': 'offline',
+    }
+    auth_url = 'https://accounts.google.com/o/oauth2/auth?' + '&'.join([f'{k}={v}' for k, v in params.items()])
+    return auth_url
+
+def get_access_token(code):
+    token_url = 'https://oauth2.googleapis.com/token'
+    data = {
+        'code': code,
+        'client_id': CLIENT_ID,
+        'client_secret': 'YOUR_CLIENT_SECRET',  # Replace with your client secret
+        'redirect_uri': REDIRECT_URI,
+        'grant_type': 'authorization_code',
+    }
+    response = requests.post(token_url, data=data)
+    if response.status_code == 200:
+        return response.json().get('access_token')
+    else:
+        return None
+
+def get_user_info(access_token):
+    user_info_url = 'https://openidconnect.googleapis.com/v1/userinfo'
+    headers = {'Authorization': f'Bearer {access_token}'}
+    response = requests.get(user_info_url, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return None
+# End authentication
 # Define a class to represent user profiles
 class UserProfile:
     def __init__(self, username, email):
@@ -50,6 +89,21 @@ def display_weather(data):
     streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
+    streamlit.title('Google Authentication Example')
+    auth_url = get_google_auth_url()
+    streamlit.markdown(f'[Sign in with Google]({auth_url})')
+
+    code = st.text_input('Enter the code from the redirect URI:')
+    if code:
+        access_token = get_access_token(code)
+        if access_token:
+            user_info = get_user_info(access_token)
+            if user_info:
+                st.success(f'Authentication successful! User email: {user_info["email"]}')
+            else:
+                st.error('Failed to fetch user information.')
+        else:
+            st.error('Failed to obtain access token.')
     login_form()  # Display login form
 
     with streamlit.sidebar:
