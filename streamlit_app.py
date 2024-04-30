@@ -50,8 +50,6 @@ def display_weather(data):
 def main():
     login_form()  # Display login form
 
-    # Main content
-    streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
     with streamlit.sidebar:
         streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
         streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
@@ -60,6 +58,8 @@ def main():
         col1.metric("Temperature", "70 °F", "1.2 °F")
         col2.metric("Wind", "9 mph", "-8%")
         col3.metric("Humidity", "86%", "4%")
+        # Welcome message
+        streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
         # Title
         streamlit.title("Weather Forecast")  
         city = streamlit.text_input("Enter a city name", "London")
