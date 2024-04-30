@@ -2,7 +2,6 @@ import streamlit
 import pandas
 import requests
 import numpy as np
-import streamlit-youtube
 from streamlit_youtube import st_youtube
 
 # Page Title
