@@ -165,3 +165,4 @@ if __name__ == "__main__":
         streamlit.session_state.logged_in = False
     if "user" not in streamlit.session_state:
         streamlit.session_state.user = UserProfile("Guest", "guest@example.com")  # Default user profile
+    main()
