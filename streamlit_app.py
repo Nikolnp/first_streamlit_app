@@ -2,7 +2,8 @@ import streamlit
 import pandas
 import requests
 import numpy as np
-
+from google.auth.transport import requests
+from google.oauth2 import id_token
 # Page Title
 # streamlit.title('Blog')
 # Object notation
@@ -10,15 +11,17 @@ import numpy as np
 CLIENT_ID = '996692650919-he3g314vgpu7k9njohk1de7di9slp48o.apps.googleusercontent.com'  # Replace with your Google OAuth client ID
 REDIRECT_URI = 'https://nikolnp-first-streamlit-app-streamlit-app-iht91t.streamlit.app/'  # Replace with your redirect URI
 
-def get_google_auth_url():
+# Function to generate Google OAuth2 authentication URL
+def get_auth_url():
+    auth_endpoint = "https://accounts.google.com/o/oauth2/auth"
     params = {
-        'client_id': CLIENT_ID,
-        'redirect_uri': REDIRECT_URI,
-        'response_type': 'code',
-        'scope': 'openid email profile',
-        'access_type': 'offline',
+        "client_id": CLIENT_ID,
+        "redirect_uri": REDIRECT_URI,
+        "response_type": "code",
+        "scope": "openid email profile",
+        "access_type": "offline"
     }
-    auth_url = 'https://accounts.google.com/o/oauth2/auth?' + '&'.join([f'{k}={v}' for k, v in params.items()])
+    auth_url = auth_endpoint + "?" + "&".join([f"{key}={value}" for key, value in params.items()])
     return auth_url
 
 def get_access_token(code):
@@ -89,21 +92,30 @@ def display_weather(data):
     streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
-    streamlit.title('Google Authentication Example')
-    auth_url = get_google_auth_url()
-    streamlit.markdown(f'[Sign in with Google]({auth_url})')
+    # Display "Sign in with Google" button
+    auth_url = get_auth_url()
+    streamlit.write(f"[Sign in with Google]({auth_url})")
 
-    code = streamlit.text_input('Enter the code from the redirect URI:')
-    if code:
-        access_token = get_access_token(code)
-        if access_token:
-            user_info = get_user_info(access_token)
-            if user_info:
-                streamlit.success(f'Authentication successful! User email: {user_info["email"]}')
-            else:
-                streamlit.error('Failed to fetch user information.')
+    # Check if the authentication code is provided in the URL
+    if "code" in streamlit.session_state:
+        code = streamlit.session_state.code
+        # Exchange authorization code for tokens
+        token_response = requests.post("https://oauth2.googleapis.com/token", data={
+            "code": code,
+            "client_id": CLIENT_ID,
+            "client_secret": "YOUR_CLIENT_SECRET",
+            "redirect_uri": REDIRECT_URI,
+            "grant_type": "authorization_code"
+        })
+        if token_response.status_code == 200:
+            tokens = token_response.json()
+            access_token = tokens["access_token"]
+            idinfo = id_token.verify_oauth2_token(tokens["id_token"], requests.Request(), CLIENT_ID)
+            streamlit.write("Authentication successful!")
+            streamlit.write("User ID:", idinfo["sub"])
+            streamlit.write("Email:", idinfo["email"])
         else:
-            streamlit.error('Failed to obtain access token.')
+            streamlit.error("Failed to retrieve access token")
     login_form()  # Display login form
 
     with streamlit.sidebar:
