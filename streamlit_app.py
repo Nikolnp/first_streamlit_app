@@ -109,7 +109,7 @@ def main():
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
     
-           @streamlit.cache
+    @streamlit.cache
     def fetch_popular_yoga_videos():
         # Fetch popular yoga videos from YouTube API
         api_key = 'AIzaSyC9MMMnoZEVQzwqZt1VEXFPsu0vqqa8et4'
