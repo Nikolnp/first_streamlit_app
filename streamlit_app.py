@@ -19,9 +19,9 @@ def authenticate_user():
 
 # Login form
 def login_form():
-    # Welcome message
-    streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
     with streamlit.sidebar:
+        # Welcome message
+        streamlit.title("Welcome, " + streamlit.session_state.user.username + "!")
         streamlit.subheader("Login")
         username = streamlit.text_input("Username")
         password = streamlit.text_input("Password", type="password")
