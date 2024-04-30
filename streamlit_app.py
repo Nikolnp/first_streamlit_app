@@ -93,17 +93,17 @@ def main():
     auth_url = get_google_auth_url()
     streamlit.markdown(f'[Sign in with Google]({auth_url})')
 
-    code = st.text_input('Enter the code from the redirect URI:')
+    code = streamlit.text_input('Enter the code from the redirect URI:')
     if code:
         access_token = get_access_token(code)
         if access_token:
             user_info = get_user_info(access_token)
             if user_info:
-                st.success(f'Authentication successful! User email: {user_info["email"]}')
+                streamlit.success(f'Authentication successful! User email: {user_info["email"]}')
             else:
-                st.error('Failed to fetch user information.')
+                streamlit.error('Failed to fetch user information.')
         else:
-            st.error('Failed to obtain access token.')
+            streamlit.error('Failed to obtain access token.')
     login_form()  # Display login form
 
     with streamlit.sidebar:
