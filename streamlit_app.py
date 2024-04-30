@@ -111,7 +111,7 @@ def main():
     @streamlit.cache
     def fetch_popular_yoga_videos():
         # Fetch popular yoga videos from YouTube API
-        api_key = 'YOUR_API_KEY'  # Replace 'YOUR_API_KEY' with your actual YouTube API key
+        api_key = 'AIzaSyC9MMMnoZEVQzwqZt1VEXFPsu0vqqa8et4'  # Replace 'YOUR_API_KEY' with your actual YouTube API key
         youtube_url = f'https://www.googleapis.com/youtube/v3/search?part=snippet&q=yoga&type=video&order=viewCount&maxResults=5&key={api_key}'
         response = streamlit.session.get(youtube_url)
         if response.status_code == 200:
