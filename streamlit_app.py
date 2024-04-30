@@ -2,6 +2,9 @@ import streamlit
 import pandas
 import requests
 import numpy as np
+import streamlit-youtube
+from streamlit_youtube import st_youtube
+
 # Page Title
 # streamlit.title('Blog')
 # Object notation
@@ -106,6 +109,22 @@ def main():
     
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+
+  
+    
+    # Title
+    streamlit.title("Yoga Videos")
+    
+    # Popular Yoga Videos Carousel
+    streamlit.write("Popular Yoga Videos")
+    st_youtube(["VIDEO_ID_1", "VIDEO_ID_2", "VIDEO_ID_3"])
+    
+    # YouTube Search Functionality
+    search_query = streamlit.text_input("Search YouTube")
+    if search_query:
+        streamlit.write(f"Search Results for '{search_query}'")
+        st_youtube(search_query)
+
    
 if __name__ == "__main__":
     main()
