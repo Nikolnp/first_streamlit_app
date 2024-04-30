@@ -57,9 +57,9 @@ def main():
         streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
         streamlit.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
         col1, col2, col3 = streamlit.columns(3)
-        col1.metric("Temperature", "70 °F", "1.2 °F")
-        col2.metric("Wind", "9 mph", "-8%")
-        col3.metric("Humidity", "86%", "4%")
+        col1.metric("Temperature", "°C", "°F")
+        col2.metric("Wind", "mph", "+/-")
+        col3.metric("Humidity", "%", "%")
        
         # Title
         streamlit.title("Weather Forecast")  
@@ -68,7 +68,7 @@ def main():
         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
     
         if streamlit.button("Get Weather"):
-            weather_data = col1.get_weather_data(city, api_key)
+            weather_data = get_weather_data(city, api_key)
             if weather_data.get("cod") != 404:
                 display_weather(weather_data)
             else:
