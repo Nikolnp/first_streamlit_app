@@ -131,8 +131,4 @@ def main():
 
 # Run the app
 if __name__ == "__main__":
-    if "logged_in" not in streamlit.session_state:
-        streamlit.session_state.logged_in = False
-    if "user" not in streamlit.session_state:
-        streamlit.session_state.user = UserProfile("Guest", "guest@example.com")  # Default user profile
     main()
