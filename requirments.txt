@@ -1,1 +1,1 @@
-streamlit-youtube
+google-api-python-client==2.26.0
