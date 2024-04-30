@@ -51,7 +51,7 @@ def main():
     login_form()  # Display login form
 
     # Main content
-    streamlit.subtitle("Welcome, " + streamlit.session_state.user.username + "!")
+    streamlit.Title("Welcome, " + streamlit.session_state.user.username + "!")
     with streamlit.sidebar:
         streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
         streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
