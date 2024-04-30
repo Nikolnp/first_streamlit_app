@@ -109,7 +109,7 @@ def main():
     fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
     
-    @streamlit.cache
+        @streamlit.cache
     def fetch_popular_yoga_videos():
         # Fetch popular yoga videos from YouTube API
         api_key = 'AIzaSyC9MMMnoZEVQzwqZt1VEXFPsu0vqqa8et4'
@@ -123,12 +123,12 @@ def main():
     # Display videos in carousel
     streamlit.title("Popular Yoga Videos")
     videos = fetch_popular_yoga_videos()
-    for i, video in enumerate(videos):
-        streamlit.write(f"**Video {i+1}:**")
-        video_id = video.get('id', {}).get('videoId')
-        if video_id:
-            streamlit.markdown(f'<iframe width="280" height="157" src="https://www.youtube.com/embed/{video_id}" frameborder="0" allowfullscreen></iframe>', unsafe_allow_html=True)
-        else:
-            streamlit.error("Video ID not found")  
+    with streamlit.expander("Watch Videos"):
+        for video in videos:
+            video_id = video.get('id', {}).get('videoId')
+            if video_id:
+                streamlit.video(f"https://www.youtube.com/embed/{video_id}")
+            else:
+                streamlit.error("Video ID not found")
 if __name__ == "__main__":
     main()
