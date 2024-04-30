@@ -1,1 +1,1 @@
-streamlit_youtube
+streamlit-youtube
