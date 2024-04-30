@@ -6,6 +6,30 @@ import numpy as np
 # Page Title
 # streamlit.title('Blog')
 # Object notation
+# Define a class to represent user profiles
+class UserProfile:
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
+
+# Sidebar for user authentication
+def authenticate_user():
+    # Placeholder for user authentication logic
+    pass
+
+# Login form
+def login_form():
+    with streamlit.sidebar:
+        streamlit.subheader("Login")
+        username = streamlit.text_input("Username")
+        password = streamlit.text_input("Password", type="password")
+        if streamlit.button("Login"):
+            if authenticate_user(username, password):
+                streamlit.success("Logged in successfully!")
+                streamlit.session_state.logged_in = True
+                streamlit.session_state.user = UserProfile(username, "user@example.com")  # Dummy email for demo
+            else:
+                streamlit.error("Invalid username or password")
 
 def get_weather_data(city, api_key):
     """Fetch weather data from OpenWeatherMap API."""
@@ -24,6 +48,10 @@ def display_weather(data):
     streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
+    login_form()  # Display login form
+
+    # Main content
+    streamlit.write("Welcome, " + streamlit.session_state.user.username + "!")
     with streamlit.sidebar:
         streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
         streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
@@ -130,5 +158,10 @@ def main():
                 streamlit.video(f"https://www.youtube.com/embed/{video_id}")
             else:
                 streamlit.error("Video ID not found")
+
+# Run the app
 if __name__ == "__main__":
-    main()
+    if "logged_in" not in streamlit.session_state:
+        streamlit.session_state.logged_in = False
+    if "user" not in streamlit.session_state:
+        streamlit.session_state.user = UserProfile("Guest", "guest@example.com")  # Default user profile
