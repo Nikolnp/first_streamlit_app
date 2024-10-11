@@ -3,22 +3,31 @@ import pandas
 import requests
 import numpy as np
 
-
 def get_weather_data(city, api_key):
     """Fetch weather data from OpenWeatherMap API."""
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
     response = requests.get(url)
-    data = response.json()
-    return data
+    
+    if response.status_code == 200:
+        try:
+            data = response.json()
+            return data
+        except ValueError:
+            streamlit.error("Failed to parse the weather data.")
+            return None
+    else:
+        streamlit.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
+        return None
 
 def display_weather(data):
     """Display weather data in a user-friendly format."""
-    streamlit.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
-    streamlit.write(f"**Temperature:** {data['main']['temp']} °C")
-    streamlit.write(f"**Weather:** {data['weather'][0]['description']}")
-    streamlit.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
-    streamlit.write(f"**Pressure:** {data['main']['pressure']} hPa")
-    streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
+    if data:
+        streamlit.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
+        streamlit.write(f"**Temperature:** {data['main']['temp']} °C")
+        streamlit.write(f"**Weather:** {data['weather'][0]['description']}")
+        streamlit.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
+        streamlit.write(f"**Pressure:** {data['main']['pressure']} hPa")
+        streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
     with streamlit.sidebar:
@@ -38,7 +47,7 @@ def main():
     
         if streamlit.button("Get Weather"):
             weather_data = get_weather_data(city, api_key)
-            if weather_data.get("cod") != 404:
+            if weather_data and weather_data.get("cod") != 404:
                 display_weather(weather_data)
             else:
                 streamlit.error("City not found!")
@@ -98,16 +107,26 @@ def main():
     
     #Add multiselect
     fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
-    fruits_to_show = my_fruit_list.loc[fruits_selected]
     
-    #display the dataframe
-    streamlit.dataframe(fruits_to_show)
+    if fruits_selected:
+        fruits_to_show = my_fruit_list.loc[fruits_selected]
+        streamlit.dataframe(fruits_to_show)
+    else:
+        streamlit.warning("Please select at least one fruit.")
     
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+"kiwi")
-    fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+    # Fruityvice API call
+    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
+    
+    if fruityvice_response.status_code == 200:
+        try:
+            fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+            streamlit.dataframe(fruityvice_normalized)
+        except ValueError:
+            streamlit.error("The response from the Fruityvice API is not in JSON format.")
+    else:
+        streamlit.error(f"Failed to fetch data from Fruityvice API. Status code: {fruityvice_response.status_code}")
 
-    
-    @streamlit.cache
+    @streamlit.cache(ttl=3600)
     def fetch_popular_yoga_videos():
         # Fetch popular yoga videos from YouTube API
         api_key = 'AIzaSyC9MMMnoZEVQzwqZt1VEXFPsu0vqqa8et4'
@@ -117,6 +136,7 @@ def main():
             return response.json().get('items', [])
         else:
             streamlit.error("Failed to fetch videos")
+            return []
     
     # Display videos in carousel
     streamlit.title("Popular Yoga Videos")
