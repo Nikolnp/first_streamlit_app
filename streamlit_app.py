@@ -137,32 +137,36 @@ def main():
     st.subheader("2. Brahmari Pranayama (Bumble Bee Breath)")
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
-    # Brands I Support Section
-    st.title("Brands I Support")
-    
-    # Colibri Garden
-    col1, col2 = st.columns([1, 4])
-    with col1:
-        st.image("https://www.colibrigarden.com/wp-content/uploads/2020/06/logo-footer.png", width=100)  # Add the brand logo
-    with col2:
-        st.markdown("[**Colibri Garden**](https://www.colibrigarden.com)")
-        st.caption("Colibri Garden provides organic, eco-friendly gardening solutions and tools, promoting sustainable and natural living.")
-    
-    # Bokyna
-    col3, col4 = st.columns([1, 4])
-    with col3:
-        st.image("https://www.bokyna.com/wp-content/uploads/2021/07/bokyna-logo-300x75.png", width=100)  # Add the brand logo
-    with col4:
-        st.markdown("[**Bokyna**](https://www.bokyna.com)")
-        st.caption("Bokyna creates unique and handcrafted sandals, combining style, sustainability, and comfort for every occasion.")
-    
-    # Luvsko
-    col5, col6 = st.columns([1, 4])
-    with col5:
-        st.image("https://www.luvsko.com/wp-content/uploads/2021/05/Luvsko-Logo-Header.png", width=100)  # Add the brand logo
-    with col6:
-        st.markdown("[**Luvsko**](https://www.luvsko.com)")
-        st.caption("Luvsko specializes in vegan and sustainable footwear, offering stylish and cruelty-free shoes that are comfortable and ethically made.")
+   # Brands I Support Section
+st.title("Brands I Support")
+
+# Colibri Garden
+col1, col2 = st.columns([1, 4])
+with col1:
+    # Update this URL with a direct link to the Colibri Garden logo if needed
+    st.image("https://www.colibrigarden.com/wp-content/uploads/2020/06/logo-footer.png", width=100, caption="Colibri Garden")  
+with col2:
+    st.markdown("[**Colibri Garden**](https://www.colibrigarden.com)")
+    st.caption("Colibri Garden provides organic, eco-friendly gardening solutions and tools, promoting sustainable and natural living.")
+
+# Bokyna
+col3, col4 = st.columns([1, 4])
+with col3:
+    # Update this URL with a direct link to the Bokyna logo
+    st.image("https://bokyna.com/assets/images/bokyna-logo.png", width=100, caption="Bokyna")  
+with col4:
+    st.markdown("[**Bokyna**](https://www.bokyna.com)")
+    st.caption("Bokyna creates unique and handcrafted sandals, combining style, sustainability, and comfort for every occasion.")
+
+# Luvsko
+col5, col6 = st.columns([1, 4])
+with col5:
+    # Update this URL with a direct link to the Luvsko logo
+    st.image("https://www.luvsko.com/wp-content/uploads/2021/05/Luvsko-Logo-Header.png", width=100, caption="Luvsko")  
+with col6:
+    st.markdown("[**Luvsko**](https://www.luvsko.com)")
+    st.caption("Luvsko specializes in vegan and sustainable footwear, offering stylish and cruelty-free shoes that are comfortable and ethically made.")
+
 
 
 # Run the app
