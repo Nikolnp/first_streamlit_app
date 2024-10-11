@@ -1,4 +1,4 @@
-import streamlit 
+import streamlit as st
 import pandas
 import requests
 import numpy as np
@@ -13,106 +13,106 @@ def get_weather_data(city, api_key):
             data = response.json()
             return data
         except ValueError:
-            streamlit.error("Failed to parse the weather data.")
+            st.error("Failed to parse the weather data.")
             return None
     else:
-        streamlit.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
+        st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
         return None
 
 def display_weather(data):
     """Display weather data in a user-friendly format."""
     if data:
-        streamlit.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
-        streamlit.write(f"**Temperature:** {data['main']['temp']} °C")
-        streamlit.write(f"**Weather:** {data['weather'][0]['description']}")
-        streamlit.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
-        streamlit.write(f"**Pressure:** {data['main']['pressure']} hPa")
-        streamlit.write(f"**Humidity:** {data['main']['humidity']}%")
+        st.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
+        st.write(f"**Temperature:** {data['main']['temp']} °C")
+        st.write(f"**Weather:** {data['weather'][0]['description']}")
+        st.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
+        st.write(f"**Pressure:** {data['main']['pressure']} hPa")
+        st.write(f"**Humidity:** {data['main']['humidity']}%")
 
 def main():
-    with streamlit.sidebar:
-        streamlit.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
-        streamlit.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
-        streamlit.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
-        col1, col2, col3 = streamlit.columns(3)
+    with st.sidebar:
+        st.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
+        st.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
+        st.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
+        col1, col2, col3 = st.columns(3)
         col1.metric("Temperature", "°C", "°F")
         col2.metric("Wind", "mph", "+/-")
         col3.metric("Humidity", "%", "%")
        
         # Title
-        streamlit.title("Weather Forecast")  
-        city = streamlit.text_input("Enter a city name", "London")
+        st.title("Weather Forecast")  
+        city = st.text_input("Enter a city name", "London")
         
         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
     
-        if streamlit.button("Get Weather"):
+        if st.button("Get Weather"):
             weather_data = get_weather_data(city, api_key)
             if weather_data and weather_data.get("cod") != 404:
                 display_weather(weather_data)
             else:
-                streamlit.error("City not found!")
+                st.error("City not found!")
 
-    streamlit.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TASTY</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TASTY</h1>", unsafe_allow_html=True)
     
-    streamlit.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
-    col4, col5, col6 = streamlit.columns(3)
+    st.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
+    col4, col5, col6 = st.columns(3)
     with col4:
-        streamlit.header('Breakfast Menu')
-        streamlit.text('🥣 Quinoa Breakfast Bowl')
-        streamlit.text(' 🥤 Green Smoothie with Kale and Banana')
-        streamlit.text('🍳 Poached Eggs with Whole Grain Toast')
-        streamlit.text('🍓 Greek Yogurt with Mixed Berries')
+        st.header('Breakfast Menu')
+        st.text('🥣 Quinoa Breakfast Bowl')
+        st.text(' 🥤 Green Smoothie with Kale and Banana')
+        st.text('🍳 Poached Eggs with Whole Grain Toast')
+        st.text('🍓 Greek Yogurt with Mixed Berries')
     with col5:
-        streamlit.image("http://www.pngall.com/wp-content/uploads/5/Diet-PNG-Clipart.png")
+        st.image("http://www.pngall.com/wp-content/uploads/5/Diet-PNG-Clipart.png")
     with col6:
-        streamlit.header('Snack Menu')
-        streamlit.text('🍎 Apple Slices with Almond Butter')
-        streamlit.text('🥒 Sliced Cucumber with Hummus')
-        streamlit.text('🥜 Handful of Mixed Nuts')
+        st.header('Snack Menu')
+        st.text('🍎 Apple Slices with Almond Butter')
+        st.text('🥒 Sliced Cucumber with Hummus')
+        st.text('🥜 Handful of Mixed Nuts')
         
-    col1, col2, col3 = streamlit.columns(3)
+    col1, col2, col3 = st.columns(3)
     
     with col1:
-        streamlit.image("https://cdn.pixabay.com/photo/2014/04/03/10/38/yoga-310940_960_720.png")
+        st.image("https://cdn.pixabay.com/photo/2014/04/03/10/38/yoga-310940_960_720.png")
     with col2:
-        streamlit.header('Lunch Menu')
-        streamlit.text('🥗 Grilled Chicken Salad with Quinoa')
-        streamlit.text(' 🥑 Avocado and Tomato Whole Grain Wrap')
-        streamlit.text('🍲 Lentil Soup with Vegetables')
-        streamlit.text('🥦 Steamed Broccoli with Lemon')
+        st.header('Lunch Menu')
+        st.text('🥗 Grilled Chicken Salad with Quinoa')
+        st.text(' 🥑 Avocado and Tomato Whole Grain Wrap')
+        st.text('🍲 Lentil Soup with Vegetables')
+        st.text('🥦 Steamed Broccoli with Lemon')
     with col3:
-        streamlit.image("https://cdn.pixabay.com/photo/2014/04/02/10/48/woman-304646_640.png")
+        st.image("https://cdn.pixabay.com/photo/2014/04/02/10/48/woman-304646_640.png")
         
-    col7, col8, col9 = streamlit.columns(3)
+    col7, col8, col9 = st.columns(3)
     with col7:
-        streamlit.header('Snack Menu')
-        streamlit.text('🥕 Carrot Sticks with Greek Yogurt Dip')
-        streamlit.text('🍇 Frozen Grapes')
-        streamlit.text('🍵 Green Tea')
+        st.header('Snack Menu')
+        st.text('🥕 Carrot Sticks with Greek Yogurt Dip')
+        st.text('🍇 Frozen Grapes')
+        st.text('🍵 Green Tea')
     with col8:
-        streamlit.image("https://cdn3.iconfinder.com/data/icons/wrestler/755/muscle_bodybuilding_bodybuilder_bicep_tricep_healthy_fitness-512.png")
+        st.image("https://cdn3.iconfinder.com/data/icons/wrestler/755/muscle_bodybuilding_bodybuilder_bicep_tricep_healthy_fitness-512.png")
     with col9:
-        streamlit.header('Dinner Menu')
-        streamlit.text('🍛 Baked Salmon with Quinoa and Asparagus')
-        streamlit.text(' 🥦 Stir-Fried Tofu with Vegetables')
-        streamlit.text('🍲 Lentil Curry with Brown Rice')
-        streamlit.text('🍆 Grilled Eggplant with Tomato Sauce')
+        st.header('Dinner Menu')
+        st.text('🍛 Baked Salmon with Quinoa and Asparagus')
+        st.text(' 🥦 Stir-Fried Tofu with Vegetables')
+        st.text('🍲 Lentil Curry with Brown Rice')
+        st.text('🍆 Grilled Eggplant with Tomato Sauce')
         
-    col1, col2, col3 = streamlit.columns(3) 
+    col1, col2, col3 = st.columns(3) 
     #Header of Smoothie Maker
-    streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+    st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
     #initialise the dataframe
     my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
     my_fruit_list = my_fruit_list.set_index('Fruit')
     
     #Add multiselect
-    fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
+    fruits_selected = st.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
     
     if fruits_selected:
         fruits_to_show = my_fruit_list.loc[fruits_selected]
-        streamlit.dataframe(fruits_to_show)
+        st.dataframe(fruits_to_show)
     else:
-        streamlit.warning("Please select at least one fruit.")
+        st.warning("Please select at least one fruit.")
     
     # Fruityvice API call
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
@@ -120,22 +120,22 @@ def main():
     if fruityvice_response.status_code == 200:
         try:
             fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-            streamlit.dataframe(fruityvice_normalized)
+            st.dataframe(fruityvice_normalized)
         except ValueError:
-            streamlit.error("The response from the Fruityvice API is not in JSON format.")
+            st.error("The response from the Fruityvice API is not in JSON format.")
     else:
-        streamlit.error(f"Failed to fetch data from Fruityvice API. Status code: {fruityvice_response.status_code}")
+        st.error(f"Failed to fetch data from Fruityvice API. Status code: {fruityvice_response.status_code}")
 
     # Display specified videos
-    streamlit.title("Yoga Videos")
+    st.title("Yoga Videos")
     
-    # First video
-    streamlit.subheader("1. 10 min Yoga for Beginners")
-    streamlit.video("https://www.youtube.com/watch?v=g_tea8ZNk5A")
+    # First video from YouTube
+    st.subheader("1. 10 min Yoga for Beginners")
+    st.video("https://www.youtube.com/watch?v=g_tea8ZNk5A")
     
-    # Second video
-    streamlit.subheader("2. Brahmari Pranayama (Bumble Bee Breath)")
-    streamlit.video("https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath")
+    # Second video link (EkhartYoga)
+    st.subheader("2. Brahmari Pranayama (Bumble Bee Breath)")
+    st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
 # Run the app
 if __name__ == "__main__":
