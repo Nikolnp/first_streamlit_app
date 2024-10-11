@@ -126,28 +126,16 @@ def main():
     else:
         streamlit.error(f"Failed to fetch data from Fruityvice API. Status code: {fruityvice_response.status_code}")
 
-    @streamlit.cache(ttl=3600)
-    def fetch_popular_yoga_videos():
-        # Fetch popular yoga videos from YouTube API
-        api_key = 'AIzaSyC9MMMnoZEVQzwqZt1VEXFPsu0vqqa8et4'
-        youtube_url = f'https://www.googleapis.com/youtube/v3/search?part=snippet&q=yoga&type=video&order=viewCount&maxResults=5&key={api_key}'
-        response = requests.get(youtube_url)
-        if response.status_code == 200:
-            return response.json().get('items', [])
-        else:
-            streamlit.error("Failed to fetch videos")
-            return []
+    # Display specified videos
+    streamlit.title("Yoga Videos")
     
-    # Display videos in carousel
-    streamlit.title("Popular Yoga Videos")
-    videos = fetch_popular_yoga_videos()
-    with streamlit.expander("Watch Videos"):
-        for video in videos:
-            video_id = video.get('id', {}).get('videoId')
-            if video_id:
-                streamlit.video(f"https://www.youtube.com/embed/{video_id}")
-            else:
-                streamlit.error("Video ID not found")
+    # First video
+    streamlit.subheader("1. 10 min Yoga for Beginners")
+    streamlit.video("https://www.youtube.com/watch?v=g_tea8ZNk5A")
+    
+    # Second video
+    streamlit.subheader("2. Brahmari Pranayama (Bumble Bee Breath)")
+    streamlit.video("https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath")
 
 # Run the app
 if __name__ == "__main__":
