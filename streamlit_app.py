@@ -141,8 +141,13 @@ def main():
 
 
     st.title("🌍 Household Sustainability Calculator")
+
+  
     
     # --- INPUTS ---
+    user_id = st.text_input("User ID (required)")
+    email = st.text_input("Email (required)")
+    
     st.header("Enter your monthly data")
     
     electricity = st.number_input("Electricity (kWh)", value=200)
@@ -167,6 +172,9 @@ def main():
     }
     
     # --- CALCULATIONS ---
+
+    yearly_total = total * 12
+    st.write(f"Yearly CO₂: **{yearly_total:.2f} kg**")
     electricity_em = electricity * factors["electricity"]
     water_em = water * factors["water"]
     car_em = car_km * factors["car"]
@@ -194,6 +202,44 @@ def main():
             writer.writerow([electricity, water, car_km, diet, total])
     
         st.success("Data saved!")
+
+
+file_path = "data.csv"
+
+if st.button("Save my data"):
+    if not user_id or not email:
+        st.error("User ID and Email are required!")
+    else:
+        new_data = {
+            "user_id": user_id,
+            "email": email,
+            "electricity": electricity,
+            "water": water,
+            "car_km": car_km,
+            "diet": diet,
+            "monthly_total": total,
+            "yearly_total": yearly_total
+        }
+
+        # Load existing data
+        if os.path.exists(file_path):
+            df_existing = pd.read_csv(file_path)
+            
+            # Check duplicate by user_id or email
+            if ((df_existing["user_id"] == user_id) | (df_existing["email"] == email)).any():
+                st.warning("User already exists. Updating record instead.")
+                
+                df_existing = df_existing[~((df_existing["user_id"] == user_id) | (df_existing["email"] == email))]
+                
+                df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
+                df_updated.to_csv(file_path, index=False)
+            else:
+                df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
+                df_updated.to_csv(file_path, index=False)
+        else:
+            pd.DataFrame([new_data]).to_csv(file_path, index=False)
+
+        st.success("Data saved successfully!")
         # Run the app
 if __name__ == "__main__":
     main()
