@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import numpy as np
 import csv
+import os
 
 def get_weather_data(city, api_key):
     """Fetch weather data from OpenWeatherMap API."""
@@ -204,22 +205,22 @@ def main():
         st.success("Data saved!")
 
 
-file_path = "data.csv"
-
-if st.button("Save my data"):
-    if not user_id or not email:
-        st.error("User ID and Email are required!")
-    else:
-        new_data = {
-            "user_id": user_id,
-            "email": email,
-            "electricity": electricity,
-            "water": water,
-            "car_km": car_km,
-            "diet": diet,
-            "monthly_total": total,
-            "yearly_total": yearly_total
-        }
+    file_path = "data.csv"
+    
+    if st.button("Save my data"):
+        if not user_id or not email:
+            st.error("User ID and Email are required!")
+        else:
+            new_data = {
+                "user_id": user_id,
+                "email": email,
+                "electricity": electricity,
+                "water": water,
+                "car_km": car_km,
+                "diet": diet,
+                "monthly_total": total,
+                "yearly_total": yearly_total
+            }
 
         # Load existing data
         if os.path.exists(file_path):
