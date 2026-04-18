@@ -1,7 +1,8 @@
 import streamlit as st
-import pandas
+import pandas as pd
 import requests
 import numpy as np
+import csv
 
 def get_weather_data(city, api_key):
     """Fetch weather data from OpenWeatherMap API."""
@@ -137,6 +138,62 @@ def main():
     st.subheader("2. Brahmari Pranayama (Bumble Bee Breath)")
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
-# Run the app
+
+
+    st.title("🌍 Household Sustainability Calculator")
+    
+    # --- INPUTS ---
+    st.header("Enter your monthly data")
+    
+    electricity = st.number_input("Electricity (kWh)", value=200)
+    water = st.number_input("Water usage (m³)", value=3)
+    car_km = st.number_input("Car travel (km)", value=0)
+    
+    diet = st.selectbox(
+        "Diet type",
+        ["Plant-based", "Mixed", "Meat-heavy"]
+    )
+    
+    # --- EMISSION FACTORS ---
+    factors = {
+        "electricity": 0.4,
+        "water": 0.34,
+        "car": 0.2,
+        "diet": {
+            "Plant-based": 120,
+            "Mixed": 200,
+            "Meat-heavy": 350
+        }
+    }
+    
+    # --- CALCULATIONS ---
+    electricity_em = electricity * factors["electricity"]
+    water_em = water * factors["water"]
+    car_em = car_km * factors["car"]
+    food_em = factors["diet"][diet]
+    
+    total = electricity_em + water_em + car_em + food_em
+    
+    # --- OUTPUT ---
+    st.header("Results")
+    
+    st.write(f"Total CO₂ per month: **{total:.2f} kg**")
+    
+    data = {
+        "Category": ["Electricity", "Water", "Transport", "Food"],
+        "Emissions": [electricity_em, water_em, car_em, food_em]
+    }
+    
+    df = pd.DataFrame(data)
+    
+    st.bar_chart(df.set_index("Category"))
+
+    if st.button("Save my data"):
+        with open("data.csv", "a", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow([electricity, water, car_km, diet, total])
+    
+        st.success("Data saved!")
+        # Run the app
 if __name__ == "__main__":
     main()
