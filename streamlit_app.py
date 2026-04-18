@@ -256,9 +256,19 @@ def main():
     # LEVEL 2: ANALYTICS DASHBOARD
     # =========================================================
     st.title("📊 Level 2: Emissions Analytics Dashboard")
-    st.write(pie_data)
+    pie_data = pd.DataFrame({
+        "Category": ["Electricity", "Water", "Transport", "Food"],
+        "Emissions": [
+            electricity_em,
+            water_em,
+            car_em,
+            food_em
+        ]
+    })
+    st.write("### Emissions Breakdown")
     st.dataframe(pie_data)
- 
+    st.bar_chart(pie_data.set_index("Category"))
+     
 # Run the app
 if __name__ == "__main__":
     main()
