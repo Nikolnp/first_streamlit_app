@@ -141,7 +141,7 @@ def main():
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
 
-        st.title("🌍 Household Sustainability Calculator")
+    st.title("🌍 Household Sustainability Calculator")
 
     # --- INPUTS ---
     name = st.text_input("Name (required)")
