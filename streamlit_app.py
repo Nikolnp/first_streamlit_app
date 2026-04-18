@@ -256,41 +256,9 @@ def main():
     # LEVEL 2: ANALYTICS DASHBOARD
     # =========================================================
     st.title("📊 Level 2: Emissions Analytics Dashboard")
-
-    pie_data = pd.DataFrame({
-        "Category": ["Electricity", "Water", "Transport", "Food"],
-        "Emissions": [
-            results["electricity"],
-            results["water"],
-            results["car"],
-            results["food"]
-        ]
-    })
-    st.bar_chart(pie_data.set_index("Category"))
-    # ---------------- MONTHLY PIE CHART ----------------
-    st.subheader("Monthly Emissions Breakdown")
-    
-    st.plotly_chart({
-        "data": [{
-            "values": pie_data["Emissions"],
-            "labels": pie_data["Category"],
-            "type": "pie"
-        }]
-    })
-    
-    # ---------------- YEARLY PIE CHART ----------------
-    st.subheader("Yearly Emissions Projection")
-    
-    yearly_data = pie_data.copy()
-    yearly_data["Emissions"] *= 12
-    
-    st.plotly_chart({
-        "data": [{
-            "values": yearly_data["Emissions"],
-            "labels": yearly_data["Category"],
-            "type": "pie"
-        }]
-    })
+    st.write(pie_data)
+    st.dataframe(pie_data)
+ 
 # Run the app
 if __name__ == "__main__":
     main()
