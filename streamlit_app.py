@@ -171,95 +171,92 @@ def main():
             "yearly": total * 12
         }
     
-    # =========================================================
-    # MAIN APP
-    # =========================================================
-    st.title("🌍 Household Sustainability Calculator")
+    
     
     # =========================================================
-# 🌍 HOUSEHOLD SUSTAINABILITY CALCULATOR (FIXED)
-# =========================================================
-
-st.title("🌍 Household Sustainability Calculator")
-
-# ---------------- CONSTANTS ----------------
-FACTORS = {
-    "electricity": 0.4,
-    "water": 0.34,
-    "car": 0.2,
-    "diet": {
-        "Plant-based": 120,
-        "Mixed": 200,
-        "Meat-heavy": 350
+    # 🌍 HOUSEHOLD SUSTAINABILITY CALCULATOR (FIXED)
+    # =========================================================
+    
+    st.title("🌍 Household Sustainability Calculator")
+    
+    # ---------------- CONSTANTS ----------------
+    FACTORS = {
+        "electricity": 0.4,
+        "water": 0.34,
+        "car": 0.2,
+        "diet": {
+            "Plant-based": 120,
+            "Mixed": 200,
+            "Meat-heavy": 350
+        }
     }
-}
-
-# ---------------- CALC FUNCTION ----------------
-def calculate_emissions(electricity, water, car_km, diet):
-    electricity_em = electricity * FACTORS["electricity"]
-    water_em = water * FACTORS["water"]
-    car_em = car_km * FACTORS["car"]
-    food_em = FACTORS["diet"][diet]
-
-    total = electricity_em + water_em + car_em + food_em
-
-    return {
-        "electricity": electricity_em,
-        "water": water_em,
-        "car": car_em,
-        "food": food_em,
-        "total": total,
-        "yearly": total * 12
-    }
-
-# ---------------- FORM ----------------
-with st.form("sustainability_form"):
-
-    name = st.text_input("Name (required)")
-    email = st.text_input("Email (required)")
-
-    electricity = st.number_input("Electricity (kWh)", value=200)
-    water = st.number_input("Water usage (m³)", value=3)
-    car_km = st.number_input("Car travel (km)", value=0)
-
-    diet = st.selectbox(
-        "Diet type",
-        ["Plant-based", "Mixed", "Meat-heavy"]
-    )
-
-    submitted = st.form_submit_button("Calculate & Save")
-
-# ---------------- ONLY RUN AFTER SUBMIT ----------------
-if submitted:
-
-    if not name or not email:
-        st.error("Name and Email are required!")
-        st.stop()
-
-    results = calculate_emissions(electricity, water, car_km, diet)
-
-    # ---------------- OUTPUT ----------------
-    st.header("📊 Results")
-
-    st.write(f"Monthly CO₂: **{results['total']:.2f} kg**")
-    st.write(f"Yearly CO₂: **{results['yearly']:.2f} kg**")
-
-    df = pd.DataFrame({
-        "Category": ["Electricity", "Water", "Transport", "Food"],
-        "Emissions": [
-            results["electricity"],
-            results["water"],
-            results["car"],
-            results["food"]
-        ]
-    })
-
-    st.bar_chart(df.set_index("Category"))
-
-    # ---------------- PIE DATA (NO EXTRA LIBRARIES) ----------------
-    st.subheader("📈 Emissions Breakdown")
-
-    st.dataframe(df)
+    
+    # ---------------- CALC FUNCTION ----------------
+    def calculate_emissions(electricity, water, car_km, diet):
+        electricity_em = electricity * FACTORS["electricity"]
+        water_em = water * FACTORS["water"]
+        car_em = car_km * FACTORS["car"]
+        food_em = FACTORS["diet"][diet]
+    
+        total = electricity_em + water_em + car_em + food_em
+    
+        return {
+            "electricity": electricity_em,
+            "water": water_em,
+            "car": car_em,
+            "food": food_em,
+            "total": total,
+            "yearly": total * 12
+        }
+    
+    # ---------------- FORM ----------------
+    with st.form("sustainability_form"):
+    
+        name = st.text_input("Name (required)")
+        email = st.text_input("Email (required)")
+    
+        electricity = st.number_input("Electricity (kWh)", value=200)
+        water = st.number_input("Water usage (m³)", value=3)
+        car_km = st.number_input("Car travel (km)", value=0)
+    
+        diet = st.selectbox(
+            "Diet type",
+            ["Plant-based", "Mixed", "Meat-heavy"]
+        )
+    
+        submitted = st.form_submit_button("Calculate & Save")
+    
+    # ---------------- ONLY RUN AFTER SUBMIT ----------------
+    if submitted:
+    
+        if not name or not email:
+            st.error("Name and Email are required!")
+            st.stop()
+    
+        results = calculate_emissions(electricity, water, car_km, diet)
+    
+        # ---------------- OUTPUT ----------------
+        st.header("📊 Results")
+    
+        st.write(f"Monthly CO₂: **{results['total']:.2f} kg**")
+        st.write(f"Yearly CO₂: **{results['yearly']:.2f} kg**")
+    
+        df = pd.DataFrame({
+            "Category": ["Electricity", "Water", "Transport", "Food"],
+            "Emissions": [
+                results["electricity"],
+                results["water"],
+                results["car"],
+                results["food"]
+            ]
+        })
+    
+        st.bar_chart(df.set_index("Category"))
+    
+        # ---------------- PIE DATA (NO EXTRA LIBRARIES) ----------------
+        st.subheader("📈 Emissions Breakdown")
+    
+        st.dataframe(df)
 # Run the app
 if __name__ == "__main__":
     main()
