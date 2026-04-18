@@ -141,33 +141,8 @@ def main():
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
 
-    st.title("🌍 Household Sustainability Calculator")
-
-
-    file_path = "data.csv"
-    
-    # ---------------- FORM (IMPORTANT FIX) ----------------
-    with st.form("sustainability_form"):
-    
-        # --- USER INFO ---
-        name = st.text_input("Name (required)")
-        email = st.text_input("Email (required)")
-    
-        st.header("Enter your monthly data")
-    
-        electricity = st.number_input("Electricity (kWh)", value=200)
-        water = st.number_input("Water usage (m³)", value=3)
-        car_km = st.number_input("Car travel (km)", value=0)
-    
-        diet = st.selectbox(
-            "Diet type",
-            ["Plant-based", "Mixed", "Meat-heavy"]
-        )
-    
-        submitted = st.form_submit_button("Save my data")
-    
-    # ---------------- EMISSION FACTORS ----------------
-    factors = {
+    # ---------------- CONSTANTS ----------------
+    FACTORS = {
         "electricity": 0.4,
         "water": 0.34,
         "car": 0.2,
@@ -178,29 +153,70 @@ def main():
         }
     }
     
+    # ---------------- CORE FUNCTION ----------------
+    def calculate_emissions(electricity, water, car_km, diet):
+        electricity_em = electricity * FACTORS["electricity"]
+        water_em = water * FACTORS["water"]
+        car_em = car_km * FACTORS["car"]
+        food_em = FACTORS["diet"][diet]
+    
+        total = electricity_em + water_em + car_em + food_em
+    
+        return {
+            "electricity": electricity_em,
+            "water": water_em,
+            "car": car_em,
+            "food": food_em,
+            "total": total,
+            "yearly": total * 12
+        }
+    
+    # =========================================================
+    # MAIN APP
+    # =========================================================
+    st.title("🌍 Household Sustainability Calculator")
+    
+    # ---------------- FORM ----------------
+    with st.form("sustainability_form"):
+    
+        name = st.text_input("Name (required)")
+        email = st.text_input("Email (required)")
+    
+        electricity = st.number_input("Electricity (kWh)", value=200)
+        water = st.number_input("Water usage (m³)", value=3)
+        car_km = st.number_input("Car travel (km)", value=0)
+    
+        diet = st.selectbox(
+            "Diet type",
+            ["Plant-based", "Mixed", "Meat-heavy"]
+        )
+    
+        submitted = st.form_submit_button("Calculate & Save")
+    
     # ---------------- CALCULATIONS ----------------
-    electricity_em = electricity * factors["electricity"]
-    water_em = water * factors["water"]
-    car_em = car_km * factors["car"]
-    food_em = factors["diet"][diet]
+    results = calculate_emissions(electricity, water, car_km, diet)
     
-    total = electricity_em + water_em + car_em + food_em
-    yearly_total = total * 12
+    # ---------------- LEVEL 1 OUTPUT ----------------
+    st.header("📊 Results")
     
-    # ---------------- OUTPUT ----------------
-    st.header("Results")
-    
-    st.write(f"Total CO₂ per month: **{total:.2f} kg**")
-    st.write(f"Yearly CO₂: **{yearly_total:.2f} kg**")
+    st.write(f"Monthly CO₂: **{results['total']:.2f} kg**")
+    st.write(f"Yearly CO₂: **{results['yearly']:.2f} kg**")
     
     df = pd.DataFrame({
         "Category": ["Electricity", "Water", "Transport", "Food"],
-        "Emissions": [electricity_em, water_em, car_em, food_em]
+        "Emissions": [
+            results["electricity"],
+            results["water"],
+            results["car"],
+            results["food"]
+        ]
     })
     
     st.bar_chart(df.set_index("Category"))
     
-    # ---------------- SAVE LOGIC ----------------
+    # ---------------- SAVE DATA ----------------
+    file_path = "data.csv"
+    
     if submitted:
     
         if not name or not email:
@@ -217,14 +233,14 @@ def main():
             "water": water,
             "car_km": car_km,
             "diet": diet,
-            "monthly_total": total,
-            "yearly_total": yearly_total
+            "monthly_total": results["total"],
+            "yearly_total": results["yearly"]
         }
     
         if os.path.exists(file_path):
             df_existing = pd.read_csv(file_path)
     
-            # 🔁 duplicate prevention (email = unique key)
+            # prevent duplicates
             if email in df_existing["email"].values:
                 df_existing = df_existing[df_existing["email"] != email]
     
@@ -235,6 +251,50 @@ def main():
             pd.DataFrame([new_data]).to_csv(file_path, index=False)
     
         st.success(f"Saved! Your ID: {user_id}")
+    
+    # =========================================================
+    # LEVEL 2: ANALYTICS DASHBOARD
+    # =========================================================
+    st.title("📊 Level 2: Emissions Analytics Dashboard")
+    
+    pie_data = pd.DataFrame({
+        "Category": ["Electricity", "Water", "Transport", "Food"],
+        "Emissions": [
+            results["electricity"],
+            results["water"],
+            results["car"],
+            results["food"]
+        ]
+    })
+    
+    # ---------------- PIE CHART (MONTHLY) ----------------
+    fig1, ax1 = plt.subplots()
+    ax1.pie(
+        pie_data["Emissions"],
+        labels=pie_data["Category"],
+        autopct="%1.1f%%",
+        startangle=90
+    )
+    ax1.axis("equal")
+    
+    st.subheader("Monthly Emissions Breakdown")
+    st.pyplot(fig1)
+    
+    # ---------------- PIE CHART (YEARLY) ----------------
+    yearly_data = pie_data.copy()
+    yearly_data["Emissions"] *= 12
+    
+    fig2, ax2 = plt.subplots()
+    ax2.pie(
+        yearly_data["Emissions"],
+        labels=yearly_data["Category"],
+        autopct="%1.1f%%",
+        startangle=90
+    )
+    ax2.axis("equal")
+    
+    st.subheader("Yearly Emissions Projection")
+    st.pyplot(fig2)
             # Run the app
 if __name__ == "__main__":
     main()
