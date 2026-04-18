@@ -176,32 +176,74 @@ def main():
     # =========================================================
     st.title("🌍 Household Sustainability Calculator")
     
-    # ---------------- FORM ----------------
-    with st.form("sustainability_form"):
-    
-        name = st.text_input("Name (required)")
-        email = st.text_input("Email (required)")
-    
-        electricity = st.number_input("Electricity (kWh)", value=200)
-        water = st.number_input("Water usage (m³)", value=3)
-        car_km = st.number_input("Car travel (km)", value=0)
-    
-        diet = st.selectbox(
-            "Diet type",
-            ["Plant-based", "Mixed", "Meat-heavy"]
-        )
-    
-        submitted = st.form_submit_button("Calculate & Save")
-    
-    # ---------------- CALCULATIONS ----------------
+    # =========================================================
+# 🌍 HOUSEHOLD SUSTAINABILITY CALCULATOR (FIXED)
+# =========================================================
+
+st.title("🌍 Household Sustainability Calculator")
+
+# ---------------- CONSTANTS ----------------
+FACTORS = {
+    "electricity": 0.4,
+    "water": 0.34,
+    "car": 0.2,
+    "diet": {
+        "Plant-based": 120,
+        "Mixed": 200,
+        "Meat-heavy": 350
+    }
+}
+
+# ---------------- CALC FUNCTION ----------------
+def calculate_emissions(electricity, water, car_km, diet):
+    electricity_em = electricity * FACTORS["electricity"]
+    water_em = water * FACTORS["water"]
+    car_em = car_km * FACTORS["car"]
+    food_em = FACTORS["diet"][diet]
+
+    total = electricity_em + water_em + car_em + food_em
+
+    return {
+        "electricity": electricity_em,
+        "water": water_em,
+        "car": car_em,
+        "food": food_em,
+        "total": total,
+        "yearly": total * 12
+    }
+
+# ---------------- FORM ----------------
+with st.form("sustainability_form"):
+
+    name = st.text_input("Name (required)")
+    email = st.text_input("Email (required)")
+
+    electricity = st.number_input("Electricity (kWh)", value=200)
+    water = st.number_input("Water usage (m³)", value=3)
+    car_km = st.number_input("Car travel (km)", value=0)
+
+    diet = st.selectbox(
+        "Diet type",
+        ["Plant-based", "Mixed", "Meat-heavy"]
+    )
+
+    submitted = st.form_submit_button("Calculate & Save")
+
+# ---------------- ONLY RUN AFTER SUBMIT ----------------
+if submitted:
+
+    if not name or not email:
+        st.error("Name and Email are required!")
+        st.stop()
+
     results = calculate_emissions(electricity, water, car_km, diet)
-    
-    # ---------------- LEVEL 1 OUTPUT ----------------
+
+    # ---------------- OUTPUT ----------------
     st.header("📊 Results")
-    
+
     st.write(f"Monthly CO₂: **{results['total']:.2f} kg**")
     st.write(f"Yearly CO₂: **{results['yearly']:.2f} kg**")
-    
+
     df = pd.DataFrame({
         "Category": ["Electricity", "Water", "Transport", "Food"],
         "Emissions": [
@@ -211,46 +253,13 @@ def main():
             results["food"]
         ]
     })
-    
+
     st.bar_chart(df.set_index("Category"))
-    
-    # ---------------- SAVE DATA ----------------
-    file_path = "data.csv"
-    
-    if submitted:
-    
-        if not name or not email:
-            st.error("Name and Email are required!")
-            st.stop()
-    
-        user_id = str(uuid.uuid4())
-    
-        new_data = {
-            "user_id": user_id,
-            "name": name,
-            "email": email,
-            "electricity": electricity,
-            "water": water,
-            "car_km": car_km,
-            "diet": diet,
-            "monthly_total": results["total"],
-            "yearly_total": results["yearly"]
-        }
-    
-        if os.path.exists(file_path):
-            df_existing = pd.read_csv(file_path)
-    
-            # prevent duplicates
-            if email in df_existing["email"].values
-                df_existing = df_existing[df_existing["email"] != email]
-    
-            df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
-            df_updated.to_csv(file_path, index=False)
-    
-        else:
-            pd.DataFrame([new_data]).to_csv(file_path, index=False)
-    
-        st.success(f"Saved! Your ID: {user_id}")
+
+    # ---------------- PIE DATA (NO EXTRA LIBRARIES) ----------------
+    st.subheader("📈 Emissions Breakdown")
+
+    st.dataframe(df)
 # Run the app
 if __name__ == "__main__":
     main()
