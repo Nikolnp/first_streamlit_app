@@ -5,6 +5,7 @@ import numpy as np
 import csv
 import os
 import uuid
+import matplotlib.pyplot as plt
 
 def get_weather_data(city, api_key):
     """Fetch weather data from OpenWeatherMap API."""
