@@ -5,7 +5,6 @@ import numpy as np
 import csv
 import os
 import uuid
-import matplotlib.pyplot as plt
 
 def get_weather_data(city, api_key):
     """Fetch weather data from OpenWeatherMap API."""
@@ -269,17 +268,15 @@ def main():
     })
     
     # ---------------- PIE CHART (MONTHLY) ----------------
-    fig1, ax1 = plt.subplots()
-    ax1.pie(
-        pie_data["Emissions"],
-        labels=pie_data["Category"],
-        autopct="%1.1f%%",
-        startangle=90
+      st.plotly_chart(
+        {
+            "data": [{
+                "values": pie_data["Emissions"],
+                "labels": pie_data["Category"],
+                "type": "pie"
+            }]
+        }
     )
-    ax1.axis("equal")
-    
-    st.subheader("Monthly Emissions Breakdown")
-    st.pyplot(fig1)
     
     # ---------------- PIE CHART (YEARLY) ----------------
     yearly_data = pie_data.copy()
