@@ -199,37 +199,37 @@ def main():
     
     st.bar_chart(df.set_index("Category"))
 
-      file_path = "data.csv"
-    
-    if st.button("Save my data", key="save_btn"):
-    
-        if not name or not email:
-            st.error("Name and Email are required!")
-            st.stop()
-    
-        user_id = str(uuid.uuid4())
-    
-        new_data = {
-            "user_id": user_id,
-            "name": name,
-            "email": email,
-            "electricity": electricity,
-            "water": water,
-            "car_km": car_km,
-            "diet": diet,
-            "monthly_total": total,
-            "yearly_total": yearly_total
-        }
-    
-        if os.path.exists(file_path):
-            df_existing = pd.read_csv(file_path)
-    
-            df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
-            df_updated.to_csv(file_path, index=False)
-        else:
-            pd.DataFrame([new_data]).to_csv(file_path, index=False)
-    
-        st.success(f"Saved! Your ID: {user_id}")
+  file_path = "data.csv"
+
+if st.button("Save my data", key="save_btn"):
+
+    if not name or not email:
+        st.error("Name and Email are required!")
+        st.stop()
+
+    user_id = str(uuid.uuid4())
+
+    new_data = {
+        "user_id": user_id,
+        "name": name,
+        "email": email,
+        "electricity": electricity,
+        "water": water,
+        "car_km": car_km,
+        "diet": diet,
+        "monthly_total": total,
+        "yearly_total": yearly_total
+    }
+
+    if os.path.exists(file_path):
+        df_existing = pd.read_csv(file_path)
+
+        df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
+        df_updated.to_csv(file_path, index=False)
+    else:
+        pd.DataFrame([new_data]).to_csv(file_path, index=False)
+
+    st.success(f"Saved! Your ID: {user_id}")
         # Run the app
 if __name__ == "__main__":
     main()
