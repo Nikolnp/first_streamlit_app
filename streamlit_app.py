@@ -241,7 +241,7 @@ def main():
             df_existing = pd.read_csv(file_path)
     
             # prevent duplicates
-            if email in df_existing["email"].values:
+            if email in df_existing["email"].values
                 df_existing = df_existing[df_existing["email"] != email]
     
             df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
@@ -252,22 +252,7 @@ def main():
     
         st.success(f"Saved! Your ID: {user_id}")
     
-    # =========================================================
-    # LEVEL 2: ANALYTICS DASHBOARD
-    # =========================================================
-    st.title("📊 Level 2: Emissions Analytics Dashboard")
-    pie_data = pd.DataFrame({
-        "Category": ["Electricity", "Water", "Transport", "Food"],
-        "Emissions": [
-            electricity_em,
-            water_em,
-            car_em,
-            food_em
-        ]
-    })
-    st.write("### Emissions Breakdown")
-    st.dataframe(pie_data)
-    st.bar_chart(pie_data.set_index("Category"))
+  
      
 # Run the app
 if __name__ == "__main__":
