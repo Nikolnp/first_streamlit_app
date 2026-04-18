@@ -174,7 +174,7 @@ def main():
     
     # --- CALCULATIONS ---
 
-    yearly_total = total * 12
+   
     st.write(f"Yearly CO₂: **{yearly_total:.2f} kg**")
     electricity_em = electricity * factors["electricity"]
     water_em = water * factors["water"]
@@ -182,6 +182,8 @@ def main():
     food_em = factors["diet"][diet]
     
     total = electricity_em + water_em + car_em + food_em
+    
+    yearly_total = total * 12
     
     # --- OUTPUT ---
     st.header("Results")
