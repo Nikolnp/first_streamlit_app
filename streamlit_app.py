@@ -180,13 +180,13 @@ def main():
     food_em = factors["diet"][diet]
     total = electricity_em + water_em + car_em + food_em
     yearly_total = total * 12
-    st.write(f"Yearly CO₂: **{yearly_total:.2f} kg**")
+  
     
     # --- OUTPUT ---
     st.header("Results")
     
     st.write(f"Total CO₂ per month: **{total:.2f} kg**")
-    
+    st.write(f"Yearly CO₂: **{yearly_total:.2f} kg**")
     data = {
         "Category": ["Electricity", "Water", "Transport", "Food"],
         "Emissions": [electricity_em, water_em, car_em, food_em]
@@ -196,15 +196,15 @@ def main():
     
     st.bar_chart(df.set_index("Category"))
 
-    if st.button("Save my data"):
-        with open("data.csv", "a", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow([electricity, water, car_km, diet, total])
+    # if st.button("Save my data"):
+    #     with open("data.csv", "a", newline="") as f:
+    #         writer = csv.writer(f)
+    #         writer.writerow([electricity, water, car_km, diet, total])
     
-        st.success("Data saved!")
+    #     st.success("Data saved!")
 
 
-    file_path = "data.csv"
+   # file_path = "data.csv"
     
     if st.button("Save my data"):
         if not user_id or not email:
