@@ -4,3 +4,9 @@ pandas
 requests
 numpy
 plotly==5.18.0
+scipy
+matplotlib
+seaborn
+statsmodels
+scikit-learn
+requests
