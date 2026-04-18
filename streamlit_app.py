@@ -266,7 +266,7 @@ def main():
             results["food"]
         ]
     })
-    
+    st.bar_chart(pie_data.set_index("Category"))
     # ---------------- MONTHLY PIE CHART ----------------
     st.subheader("Monthly Emissions Breakdown")
     
