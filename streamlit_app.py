@@ -4,6 +4,7 @@ import requests
 import numpy as np
 import csv
 import os
+import uuid
 
 def get_weather_data(city, api_key):
     """Fetch weather data from OpenWeatherMap API."""
@@ -146,9 +147,10 @@ def main():
   
     
     # --- INPUTS ---
-    user_id = st.text_input("User ID (required)")
+  
+    name = st.text_input("Name (required)")
     email = st.text_input("Email (required)")
-    
+  
     st.header("Enter your monthly data")
     
     electricity = st.number_input("Electricity (kWh)", value=200)
@@ -180,7 +182,8 @@ def main():
     food_em = factors["diet"][diet]
     total = electricity_em + water_em + car_em + food_em
     yearly_total = total * 12
-  
+    
+    user_id = str(uuid.uuid4())
     
     # --- OUTPUT ---
     st.header("Results")
@@ -196,50 +199,37 @@ def main():
     
     st.bar_chart(df.set_index("Category"))
 
-    # if st.button("Save my data"):
-    #     with open("data.csv", "a", newline="") as f:
-    #         writer = csv.writer(f)
-    #         writer.writerow([electricity, water, car_km, diet, total])
+      file_path = "data.csv"
     
-    #     st.success("Data saved!")
-
-
-   # file_path = "data.csv"
+    if st.button("Save my data", key="save_btn"):
     
-    if st.button("Save my data"):
-        if not user_id or not email:
-            st.error("User ID and Email are required!")
-        else:
-            new_data = {
-                "user_id": user_id,
-                "email": email,
-                "electricity": electricity,
-                "water": water,
-                "car_km": car_km,
-                "diet": diet,
-                "monthly_total": total,
-                "yearly_total": yearly_total
-            }
-
-        # Load existing data
+        if not name or not email:
+            st.error("Name and Email are required!")
+            st.stop()
+    
+        user_id = str(uuid.uuid4())
+    
+        new_data = {
+            "user_id": user_id,
+            "name": name,
+            "email": email,
+            "electricity": electricity,
+            "water": water,
+            "car_km": car_km,
+            "diet": diet,
+            "monthly_total": total,
+            "yearly_total": yearly_total
+        }
+    
         if os.path.exists(file_path):
             df_existing = pd.read_csv(file_path)
-            
-            # Check duplicate by user_id or email
-            if ((df_existing["user_id"] == user_id) | (df_existing["email"] == email)).any():
-                st.warning("User already exists. Updating record instead.")
-                
-                df_existing = df_existing[~((df_existing["user_id"] == user_id) | (df_existing["email"] == email))]
-                
-                df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
-                df_updated.to_csv(file_path, index=False)
-            else:
-                df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
-                df_updated.to_csv(file_path, index=False)
+    
+            df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
+            df_updated.to_csv(file_path, index=False)
         else:
             pd.DataFrame([new_data]).to_csv(file_path, index=False)
-
-        st.success("Data saved successfully!")
+    
+        st.success(f"Saved! Your ID: {user_id}")
         # Run the app
 if __name__ == "__main__":
     main()
