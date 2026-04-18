@@ -255,8 +255,8 @@ def main():
     # =========================================================
     # LEVEL 2: ANALYTICS DASHBOARD
     # =========================================================
-    st.title("📊 Level 2: Emissions Analytics Dashboard")
-    
+   st.title("📊 Level 2: Emissions Analytics Dashboard")
+
     pie_data = pd.DataFrame({
         "Category": ["Electricity", "Water", "Transport", "Food"],
         "Emissions": [
@@ -267,32 +267,30 @@ def main():
         ]
     })
     
-    # ---------------- PIE CHART (MONTHLY) ----------------
-      st.plotly_chart(
-        {
-            "data": [{
-                "values": pie_data["Emissions"],
-                "labels": pie_data["Category"],
-                "type": "pie"
-            }]
-        }
-    )
+    # ---------------- MONTHLY PIE CHART ----------------
+    st.subheader("Monthly Emissions Breakdown")
     
-    # ---------------- PIE CHART (YEARLY) ----------------
+    st.plotly_chart({
+        "data": [{
+            "values": pie_data["Emissions"],
+            "labels": pie_data["Category"],
+            "type": "pie"
+        }]
+    })
+    
+    # ---------------- YEARLY PIE CHART ----------------
+    st.subheader("Yearly Emissions Projection")
+    
     yearly_data = pie_data.copy()
     yearly_data["Emissions"] *= 12
     
-    fig2, ax2 = plt.subplots()
-    ax2.pie(
-        yearly_data["Emissions"],
-        labels=yearly_data["Category"],
-        autopct="%1.1f%%",
-        startangle=90
-    )
-    ax2.axis("equal")
-    
-    st.subheader("Yearly Emissions Projection")
-    st.pyplot(fig2)
-            # Run the app
+    st.plotly_chart({
+        "data": [{
+            "values": yearly_data["Emissions"],
+            "labels": yearly_data["Category"],
+            "type": "pie"
+        }]
+    })
+# Run the app
 if __name__ == "__main__":
     main()
