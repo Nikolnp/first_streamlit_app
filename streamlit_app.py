@@ -255,7 +255,7 @@ def main():
     # =========================================================
     # LEVEL 2: ANALYTICS DASHBOARD
     # =========================================================
-   st.title("📊 Level 2: Emissions Analytics Dashboard")
+    st.title("📊 Level 2: Emissions Analytics Dashboard")
 
     pie_data = pd.DataFrame({
         "Category": ["Electricity", "Water", "Transport", "Food"],
