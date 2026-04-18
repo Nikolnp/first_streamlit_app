@@ -120,7 +120,7 @@ def main():
     
     if fruityvice_response.status_code == 200:
         try:
-            fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+            fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
             st.dataframe(fruityvice_normalized)
         except ValueError:
             st.error("The response from the Fruityvice API is not in JSON format.")
