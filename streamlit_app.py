@@ -141,27 +141,23 @@ def main():
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
 
-
     st.title("🌍 Household Sustainability Calculator")
 
-  
-    
     # --- INPUTS ---
-  
     name = st.text_input("Name (required)")
     email = st.text_input("Email (required)")
-  
+
     st.header("Enter your monthly data")
-    
+
     electricity = st.number_input("Electricity (kWh)", value=200)
     water = st.number_input("Water usage (m³)", value=3)
     car_km = st.number_input("Car travel (km)", value=0)
-    
+
     diet = st.selectbox(
         "Diet type",
         ["Plant-based", "Mixed", "Meat-heavy"]
     )
-    
+
     # --- EMISSION FACTORS ---
     factors = {
         "electricity": 0.4,
@@ -173,63 +169,61 @@ def main():
             "Meat-heavy": 350
         }
     }
-    
-    # --- CALCULATIONS ---
 
+    # --- CALCULATIONS ---
     electricity_em = electricity * factors["electricity"]
     water_em = water * factors["water"]
     car_em = car_km * factors["car"]
     food_em = factors["diet"][diet]
+
     total = electricity_em + water_em + car_em + food_em
     yearly_total = total * 12
-    
-    user_id = str(uuid.uuid4())
-    
+
     # --- OUTPUT ---
     st.header("Results")
-    
+
     st.write(f"Total CO₂ per month: **{total:.2f} kg**")
     st.write(f"Yearly CO₂: **{yearly_total:.2f} kg**")
+
     data = {
         "Category": ["Electricity", "Water", "Transport", "Food"],
         "Emissions": [electricity_em, water_em, car_em, food_em]
     }
-    
+
     df = pd.DataFrame(data)
-    
     st.bar_chart(df.set_index("Category"))
 
-  file_path = "data.csv"
+    # ---------------- SAVE SECTION ----------------
+    file_path = "data.csv"
 
-if st.button("Save my data", key="save_btn"):
+    if st.button("Save my data", key="save_btn"):
 
-    if not name or not email:
-        st.error("Name and Email are required!")
-        st.stop()
+        if not name or not email:
+            st.error("Name and Email are required!")
+            st.stop()
 
-    user_id = str(uuid.uuid4())
+        user_id = str(uuid.uuid4())
 
-    new_data = {
-        "user_id": user_id,
-        "name": name,
-        "email": email,
-        "electricity": electricity,
-        "water": water,
-        "car_km": car_km,
-        "diet": diet,
-        "monthly_total": total,
-        "yearly_total": yearly_total
-    }
+        new_data = {
+            "user_id": user_id,
+            "name": name,
+            "email": email,
+            "electricity": electricity,
+            "water": water,
+            "car_km": car_km,
+            "diet": diet,
+            "monthly_total": total,
+            "yearly_total": yearly_total
+        }
 
-    if os.path.exists(file_path):
-        df_existing = pd.read_csv(file_path)
+        if os.path.exists(file_path):
+            df_existing = pd.read_csv(file_path)
+            df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
+            df_updated.to_csv(file_path, index=False)
+        else:
+            pd.DataFrame([new_data]).to_csv(file_path, index=False)
 
-        df_updated = pd.concat([df_existing, pd.DataFrame([new_data])])
-        df_updated.to_csv(file_path, index=False)
-    else:
-        pd.DataFrame([new_data]).to_csv(file_path, index=False)
-
-    st.success(f"Saved! Your ID: {user_id}")
+        st.success(f"Saved! Your ID: {user_id}")
         # Run the app
 if __name__ == "__main__":
     main()
