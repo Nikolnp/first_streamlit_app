@@ -251,9 +251,6 @@ def main():
             pd.DataFrame([new_data]).to_csv(file_path, index=False)
     
         st.success(f"Saved! Your ID: {user_id}")
-    
-  
-     
 # Run the app
 if __name__ == "__main__":
     main()
