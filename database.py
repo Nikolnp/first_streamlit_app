@@ -73,3 +73,12 @@ def load_emissions():
     df = pd.read_sql("SELECT * FROM emissions", conn)
     conn.close()
     return df
+
+def save_user(user_dict):
+    pass
+
+def email_exists(email):
+    return False
+
+def get_all_users():
+    return []
