@@ -146,10 +146,12 @@ def main():
             unsafe_allow_html=True,
         )
 
-        st.image(
-            "https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png"
+        # st.image(
+        #     "https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png"
+        # )
+        st.sidebar.image(
+            "https://upload.wikimedia.org/wikipedia/commons/6/6b/Tree_of_Life.svg"
         )
-
         st.caption(
             '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
         )
