@@ -29,7 +29,7 @@ def get_weather_data(city, api_key):
     response = requests.get(url)
     if response.status_code == 200:
         try:
-        data = response.json()
+            data = response.json()
         return {
             "temp": data["main"]["temp"],
             "humidity": data["main"]["humidity"],
