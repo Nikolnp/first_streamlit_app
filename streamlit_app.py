@@ -45,6 +45,7 @@ def get_weather_data(city, api_key):
 def display_weather(data):
     """Display weather data in a user-friendly format."""
     if data:
+        st.write(data)
         st.write(f"#### Weather in {data['name']}, {data['sys']['country']}")
         st.write(f"**Temperature:** {data['main']['temp']} °C")
         st.write(f"**Weather:** {data['weather'][0]['description']}")
