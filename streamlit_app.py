@@ -184,23 +184,23 @@ def main():
         col2.metric("Wind", "m/s")
         col3.metric("Humidity", "%")
 
-    st.title("Weather Forecast 🌍")
-
-    city = st.text_input("Enter a city name", "London")
-
-    try:
-        api_key = st.secrets["1a4fb3f2dc6ead2387e5fed61756ddb3"]
-
-    except Exception:
-        st.error("API key missing. Add OPENWEATHER_API_KEY to secrets.toml")
-        return
-
-    if st.button("Get Weather"):
-
-        weather_data = get_weather(city.strip(), api_key)
-
-        if weather_data:
-            display_weather(weather_data)
+        st.title("Weather Forecast 🌍")
+    
+        city = st.text_input("Enter a city name", "London")
+    
+        try:
+            api_key = st.secrets["1a4fb3f2dc6ead2387e5fed61756ddb3"]
+    
+        except Exception:
+            st.error("API key missing. Add OPENWEATHER_API_KEY to secrets.toml")
+            return
+    
+        if st.button("Get Weather"):
+    
+            weather_data = get_weather(city.strip(), api_key)
+    
+            if weather_data:
+                display_weather(weather_data)
 
 
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TASTY</h1>", unsafe_allow_html=True)
