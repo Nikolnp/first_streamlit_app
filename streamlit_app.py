@@ -30,12 +30,12 @@ def get_weather_data(city, api_key):
     if response.status_code == 200:
         try:
             data = response.json()
-        return {
-            "temp": data["main"]["temp"],
-            "humidity": data["main"]["humidity"],
-            "wind": data["wind"]["speed"],
-            "weather": data["weather"][0]["main"]
-        }
+            return {
+                "temp": data["main"]["temp"],
+                "humidity": data["main"]["humidity"],
+                "wind": data["wind"]["speed"],
+                "weather": data["weather"][0]["main"]
+            }
         except ValueError:
         st.error('Failed to parse the weather data.')
     else:
