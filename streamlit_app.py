@@ -130,7 +130,9 @@ def get_weather(city, api_key):
 
 def display_weather(data):
     """Display weather data safely"""
-
+     col1, col2, col3 = st.columns(3)
+        col1.metric("Temperature", f"{data['temp']} °C")
+        
     if not data:
         st.warning("No weather data available.")
         return
@@ -169,11 +171,7 @@ def main():
             '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
         )
 
-        col1, col2, col3 = st.columns(3)
-        col1.metric("Temperature", f"{data['temp']} °C")
-        col1.metric("Temperature", "°C", delta = data['temp'])
-        col2.metric("Wind", "m/s", delta = data['wind'])
-        col3.metric("Humidity", "%", delta = data['humidity'])
+       
 
         st.title("Weather Forecast 🌍")
     
