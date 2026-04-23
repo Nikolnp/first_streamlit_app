@@ -10,6 +10,12 @@ from PIL import Image
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 st.write("DB exists:", os.path.exists("sustainability.db"))
+st.write(os.getcwd())
+conn = sqlite3.connect("sustainability.db")
+cursor = conn.cursor()
+
+cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+st.write(cursor.fetchall())
 
 def get_weather(city, api_key):
     """Fetch weather data safely from OpenWeather API"""
