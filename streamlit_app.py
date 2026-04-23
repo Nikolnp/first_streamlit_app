@@ -10,6 +10,7 @@ from PIL import Image
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 st.write("DB exists:", os.path.exists("sustainability.db"))
+#path to database
 st.write(os.getcwd())
 
 def get_weather(city, api_key):
