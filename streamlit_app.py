@@ -24,7 +24,7 @@ init_db()
 #         st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
 #         return None
 
-def get_weather_data(city, api_key):
+def get_weather(city, api_key):
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
     response = requests.get(url)
     if response.status_code == 200:
@@ -70,7 +70,7 @@ def main():
         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
     
         if st.button("Get Weather"):
-            weather_data = get_weather_data(city, api_key)
+            weather_data = get_weather(city, api_key)
             if weather_data and weather_data.get("cod") != 404:
                 display_weather(weather_data)
             else:
