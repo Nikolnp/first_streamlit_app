@@ -11,14 +11,7 @@ from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 st.write("DB initialized")
 st.write("DB exists:", os.path.exists("sustainability.db"))
-st.subheader("📊 Stored Emissions Data")
 
-df = load_emissions()
-
-if not df.empty:
-    st.dataframe(df)
-else:
-    st.info("No records stored yet.")
 #path to database
 #st.write(os.getcwd())
 
@@ -383,7 +376,13 @@ def main():
     
         save_user(user_payload)
         st.success("Saved successfully!")
-    
+        st.subheader("📊 Stored Emissions Data")
+        df = load_emissions()
+        
+        if not df.empty:
+            st.dataframe(df)
+        else:
+            st.info("No records stored yet.")
         # =========================================================
         # 📈 IQR OUTLIER ANALYSIS
         # =========================================================
