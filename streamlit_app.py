@@ -49,7 +49,7 @@ def display_weather(data):
     if data:
         st.write(data)
         st.write(f"#### Weather in {data['name']}, {data['country']}")
-        st.write(f"**Temperature:** {data['main']['temp']} °C")
+        st.write(f"**Temperature:** {data['temp']} °C")
         st.write(f"**Weather:** {data['weather'][0]['description']}")
         st.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
         st.write(f"**Pressure:** {data['pressure']} hPa")
