@@ -87,16 +87,13 @@ def get_weather(city, api_key):
             f"https://api.openweathermap.org/data/2.5/weather"
             f"?q={city}&appid={api_key}&units=metric"
         )
-
         response = requests.get(url, timeout=10)
-
         if response.status_code != 200:
             try:
                 error_data = response.json()
                 message = error_data.get("message", "Unknown API error")
             except Exception:
                 message = "Weather service unavailable"
-
             st.error(f"API error: {message}")
             return None
 
@@ -173,7 +170,7 @@ def main():
         )
 
         col1, col2, col3 = st.columns(3)
-
+        col1.metric("Temperature", f"{data['temp']} °C")
         col1.metric("Temperature", "°C", delta = data['temp'])
         col2.metric("Wind", "m/s", delta = data['wind'])
         col3.metric("Humidity", "%", delta = data['humidity'])
