@@ -8,75 +8,7 @@ import uuid
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 
-# def get_weather_data(city, api_key):
-#     """Fetch weather data from OpenWeatherMap API."""
-#     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-#     response = requests.get(url)
-    
-#     if response.status_code == 200:
-#         try:
-#             data = response.json()
-#             return data
-#         except ValueError:
-#             st.error("Failed to parse the weather data.")
-#             return None
-#     else:
-#         st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
-#         return None
 
-# def get_weather(city, api_key):
-#     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-#     response = requests.get(url)
-#     if response.status_code == 200:
-#         try:
-#             data = response.json()
-#             return {
-#                 "name": data["name"],
-#                 "country": data["sys"]["country"],
-#                 "temp": data["main"]["temp"],
-#                 "humidity": data["main"]["humidity"],
-#                 "wind": data["wind"]["speed"],
-#                 "weather": data["weather"][0]["main"]
-#             }
-#         except ValueError:
-#             st.error('Failed to parse the weather data.')
-#     else:
-#         st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
-#         return None
-
-# def display_weather(data):
-#     """Display weather data in a user-friendly format."""
-#     if data:
-#         st.write(data)
-#         st.write(f"#### Weather in {data['name']}, {data['country']}")
-#         st.write(f"**Temperature:** {data['temp']} °C")
-#         st.write(f"**Weather:** {data['weather']}")
-#         st.write(f"**Wind Speed:** {data['wind']} m/s")
-#         st.write(f"**Pressure:** {data['pressure']} hPa")
-#         st.write(f"**Humidity:** {data['humidity']}%")
-
-# def main():
-#     with st.sidebar:
-#         st.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
-#         st.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
-#         st.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
-#         col1, col2, col3 = st.columns(3)
-#         col1.metric("Temperature", "°C", "°F")
-#         col2.metric("Wind", "mph", "+/-")
-#         col3.metric("Humidity", "%", "%")
-       
-#         # Title
-#         st.title("Weather Forecast")  
-#         city = st.text_input("Enter a city name", "London")
-        
-#         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
-    
-#         if st.button("Get Weather"):
-#             weather_data = get_weather(city, api_key)
-#             if weather_data and weather_data.get("cod") != 404:
-#                 display_weather(weather_data)
-#             else:
-#                 st.error("City not found!")
 def get_weather(city, api_key):
     """Fetch weather data safely from OpenWeather API"""
     if not city:
