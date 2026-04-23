@@ -186,6 +186,8 @@ def main():
                         f"{round(rain_prob * 100)}%"
                     )
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>", unsafe_allow_html=True)
+
         
     st.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
     col4, col5, col6 = st.columns(3)
