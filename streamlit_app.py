@@ -10,7 +10,6 @@ from PIL import Image
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 
-
 def get_weather(city, api_key):
     """Fetch weather data safely from OpenWeather API"""
     if not city:
@@ -88,7 +87,6 @@ def estimate_rain_probability(weather_data):
     # Estimate rain probability from current weather conditions.
     # Returns probability between 0 and 1.
     
-
     try:
         humidity = weather_data["humidity"]
         pressure = weather_data["pressure"]
@@ -148,17 +146,11 @@ def main():
             unsafe_allow_html=True,
         )
 
-        # st.image(
-        #     "https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png"
-        # )
-
         image = Image.open("assets/tree.webp")
         st.sidebar.image(image)
         st.caption(
             '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
         )
-
-       
 
         st.title("Weather Forecast 🌍")
     
@@ -187,7 +179,6 @@ def main():
                     )
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>", unsafe_allow_html=True)
-
         
     st.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
     col4, col5, col6 = st.columns(3)
@@ -273,7 +264,6 @@ def main():
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
 
-
     # =========================================================
     # 🌍 HOUSEHOLD SUSTAINABILITY CALCULATOR (SQL + IQR READY)
     # =========================================================
@@ -308,8 +298,7 @@ def main():
             "food": food_em,
             "total": total,
             "yearly": total * 12
-        }
-    
+        } 
     # ---------------- FORM ----------------
     with st.form("sustainability_form"):
     
