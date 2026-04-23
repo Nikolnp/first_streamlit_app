@@ -5,11 +5,12 @@ This Streamlit application is designed to provide users with a comprehensive wel
 ## Features
 
 - **Real-Time Weather Updates**: Fetch and display weather information for any specified city.
+- **Rainfall probability statistic**: Calculates the probability of Rain given real-time daily data updates.
 - **Nutritious Meal Suggestions**: Detailed daily meal plans for breakfast, lunch, dinner, and snacks.
-- **Yoga Video Access**: Stream popular yoga videos directly within the application.
-- **Interactive Fruit Smoothie Builder**: Customize fruit smoothies using a dynamic selection interface.
-
-## Installation
+- **Yoga Video Access via API**: Stream popular yoga videos directly within the application.
+- **Interactive Fruit Smoothie Builder - API call to populate nutrition table**: Customize fruit smoothies using a dynamic selection interface.
+- **SQL database**: Save user and weather data for processing
+## Instalation
 
 Ensure you have Python installed on your system and follow these setup instructions:
 
