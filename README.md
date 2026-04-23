@@ -10,6 +10,13 @@ This Streamlit application is designed to provide users with a comprehensive wel
 - **Yoga Video Access via API**: Stream popular yoga videos directly within the application.
 - **Interactive Fruit Smoothie Builder - API call to populate nutrition table**: Customize fruit smoothies using a dynamic selection interface.
 - **SQL database**: Save user and weather data for processing
+        ***submit form
+      → calculate emissions
+      → check email_exists()
+      → insert/update user
+      → insert emissions row
+      → run IQR analytics
+      → render charts***
 ## Instalation
 
 Ensure you have Python installed on your system and follow these setup instructions:
