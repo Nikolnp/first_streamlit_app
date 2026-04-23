@@ -174,9 +174,9 @@ def main():
 
         col1, col2, col3 = st.columns(3)
 
-        col1.metric("Temperature", "°C",data['temp'])
-        col2.metric("Wind", "m/s")
-        col3.metric("Humidity", "%")
+        col1.metric("Temperature", "°C", delta = data['temp'])
+        col2.metric("Wind", "m/s", delta = data['wind'])
+        col3.metric("Humidity", "%", delta = data['humidity'])
 
         st.title("Weather Forecast 🌍")
     
