@@ -174,7 +174,7 @@ def main():
 
         col1, col2, col3 = st.columns(3)
 
-        col1.metric("Temperature", "°C")
+        col1.metric("Temperature", "°C",data['temp'])
         col2.metric("Wind", "m/s")
         col3.metric("Humidity", "%")
 
