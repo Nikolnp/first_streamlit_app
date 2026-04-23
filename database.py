@@ -141,7 +141,35 @@ def save_user_and_emissions(
     finally:
         conn.close()
 
+def get_all_users():
 
+    conn = get_connection()
+
+    if conn is None:
+        return []
+
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT
+                u.email,
+                e.monthly_total,
+                e.yearly_total
+            FROM users u
+            JOIN emissions e
+            ON u.user_id = e.user_id
+        """)
+
+        rows = cursor.fetchall()
+
+        return rows
+
+    except Exception:
+        return []
+
+    finally:
+        conn.close()
 def load_emissions():
 
     conn = get_connection()
