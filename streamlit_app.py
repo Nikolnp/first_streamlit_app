@@ -189,7 +189,7 @@ def main():
     city = st.text_input("Enter a city name", "London")
 
     try:
-        api_key = st.secrets["OPENWEATHER_API_KEY"]
+        api_key = st.secrets["1a4fb3f2dc6ead2387e5fed61756ddb3"]
 
     except Exception:
         st.error("API key missing. Add OPENWEATHER_API_KEY to secrets.toml")
