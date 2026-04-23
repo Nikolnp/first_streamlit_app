@@ -5,6 +5,8 @@ import numpy as np
 import csv
 import os
 import uuid
+from PIL import Image
+
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 
@@ -149,9 +151,9 @@ def main():
         # st.image(
         #     "https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png"
         # )
-        st.sidebar.image(
-            "https://upload.wikimedia.org/wikipedia/commons/6/6b/Tree_of_Life.svg"
-        )
+
+        image = Image.open("assets/tree.webp")
+        st.sidebar.image(image)
         st.caption(
             '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
         )
