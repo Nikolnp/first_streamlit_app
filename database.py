@@ -17,44 +17,34 @@ def get_connection():
 
 def init_db():
     conn = get_connection()
-
-    if conn is None:
-        return
-
+    c = conn.cursor()
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS emissions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id TEXT,
+        electricity REAL,
+        water REAL,
+        car_km REAL,
+        diet TEXT,
+        monthly_total REAL,
+        yearly_total REAL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    """)
+    # migration safety
     try:
-        c = conn.cursor()
-
         c.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            user_id TEXT PRIMARY KEY,
-            name TEXT,
-            email TEXT UNIQUE
-        )
+        ALTER TABLE emissions
+        ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         """)
-
-        c.execute("""
-        CREATE TABLE IF NOT EXISTS emissions (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id TEXT,
-            electricity REAL,
-            water REAL,
-            car_km REAL,
-            diet TEXT,
-            monthly_total REAL,
-            yearly_total REAL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        """)
-
-        conn.commit()
-
+    except:
+        pass
+    conn.commit()
     except Exception as e:
         conn.rollback()
         st.error(f"Database initialization failed: {e}")
-
     finally:
         conn.close()
-
 def save_user(user_dict):
 
     return save_user_and_emissions(
