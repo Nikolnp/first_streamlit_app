@@ -16,37 +16,55 @@ def get_connection():
 
 
 def init_db():
+
     conn = get_connection()
-    c = conn.cursor()
-    c.execute("""
-    CREATE TABLE IF NOT EXISTS emissions (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT,
-        electricity REAL,
-        water REAL,
-        car_km REAL,
-        diet TEXT,
-        monthly_total REAL,
-        yearly_total REAL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
-    """)
-    # migration safety
+
+    if conn is None:
+        return
+
     try:
+
+        c = conn.cursor()
+
         c.execute("""
-        ALTER TABLE emissions
-        ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        CREATE TABLE IF NOT EXISTS users (
+            user_id TEXT PRIMARY KEY,
+            name TEXT,
+            email TEXT UNIQUE
+        )
         """)
-    except:
-        pass
-    conn.commit()
+
+        c.execute("""
+        CREATE TABLE IF NOT EXISTS emissions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT,
+            electricity REAL,
+            water REAL,
+            car_km REAL,
+            diet TEXT,
+            monthly_total REAL,
+            yearly_total REAL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        """)
+
+        try:
+            c.execute("""
+            ALTER TABLE emissions
+            ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            """)
+        except:
+            pass
+
+        conn.commit()
+
     except Exception as e:
-        conn.rollback()
-        st.error(f"Database initialization failed: {e}")
+        print("DB init error:", e)
+
     finally:
         conn.close()
+        
 def save_user(user_dict):
-
     return save_user_and_emissions(
         user_id=user_dict["email"],   # using email as ID for now
         name=user_dict["name"],
@@ -69,28 +87,21 @@ def save_user_and_emissions(
     monthly_total,
     yearly_total
 ):
-
     conn = get_connection()
-
     if conn is None:
         return False
-
     try:
         c = conn.cursor()
-
         # Insert or update user
         c.execute("""
             INSERT OR IGNORE INTO users (user_id, name, email)
             VALUES (?, ?, ?)
         """, (user_id, name, email))
-
-
         c.execute("""
             UPDATE users
             SET name = ?, email = ?
             WHERE user_id = ?
         """, (name, email, user_id))
-
 
         # Insert emissions record
         c.execute("""
@@ -115,7 +126,6 @@ def save_user_and_emissions(
         ))
 
         conn.commit()
-
         return True
 
     except sqlite3.IntegrityError as e:
