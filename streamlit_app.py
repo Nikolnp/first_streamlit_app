@@ -174,13 +174,20 @@ def main():
             if weather_data:
                 display_weather(weather_data)
 
-    rain_prob = estimate_rain_probability(weather_data)
+   if st.button("Get Weather"):
 
-    if rain_prob is not None:
-        st.metric(
-            "Rain Probability",
-            f"{round(rain_prob * 100)}%"
-        )
+    weather_data = get_weather(city.strip(), api_key)
+
+    if weather_data:
+
+        rain_prob = estimate_rain_probability(weather_data)
+
+        if rain_prob is not None:
+
+            st.metric(
+                "Rain Probability",
+                f"{round(rain_prob * 100)}%"
+            )
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TASTY</h1>", unsafe_allow_html=True)
         
     st.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
