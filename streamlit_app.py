@@ -312,7 +312,7 @@ def main():
         diet = st.selectbox("Diet type", ["Plant-based", "Mixed", "Meat-heavy"])
     
         submitted = st.form_submit_button("Calculate & Save")
-    
+        
     # =========================================================
     # 🚨 EVERYTHING BELOW ONLY RUNS AFTER SUBMIT
     # =========================================================
@@ -363,7 +363,7 @@ def main():
             "monthly_total": results["total"],
             "yearly_total": results["yearly"]
         }
-    
+        
         if email_exists(email):
             st.warning("Email exists → updating record")
         else:
