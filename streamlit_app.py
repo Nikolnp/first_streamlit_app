@@ -81,7 +81,66 @@ def display_weather(data):
     except Exception as e:
         st.error(f"Unexpected display error: {e}")
 
+def estimate_rain_probability(weather_data):
+    
+    # Estimate rain probability from current weather conditions.
+    # Returns probability between 0 and 1.
+    
 
+    try:
+        humidity = weather_data["humidity"]
+        pressure = weather_data["pressure"]
+        wind = weather_data["wind"]
+        description = weather_data["weather"].lower()
+
+        probability = 0.0
+
+        # Humidity contribution
+        if humidity > 85:
+            probability += 0.35
+        elif humidity > 70:
+            probability += 0.25
+        elif humidity > 55:
+            probability += 0.10
+
+        # Pressure contribution (low pressure = rain likely)
+        if pressure < 1005:
+            probability += 0.35
+        elif pressure < 1015:
+            probability += 0.20
+
+        # Wind contribution
+        if wind > 8:
+            probability += 0.10
+
+        # Weather description keywords
+        rain_keywords = [
+            "rain",
+            "drizzle",
+            "shower",
+            "storm",
+            "thunder",
+            "cloud"
+        ]
+
+        if any(word in description for word in rain_keywords):
+            probability += 0.25
+
+        # Clamp result between 0 and 1
+        probability = min(probability, 1.0)
+
+        return probability
+
+    except Exception as e:
+        return None
+
+rain_prob = estimate_rain_probability(weather_data)
+
+if rain_prob is not None:
+    st.metric(
+        "Rain Probability",
+        f"{round(rain_prob * 100)}%"
+    )
 def main():
 
     st.set_page_config(page_title="Weather App", page_icon="🌤️")
