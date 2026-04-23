@@ -24,59 +24,184 @@ init_db()
 #         st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
 #         return None
 
+# def get_weather(city, api_key):
+#     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+#     response = requests.get(url)
+#     if response.status_code == 200:
+#         try:
+#             data = response.json()
+#             return {
+#                 "name": data["name"],
+#                 "country": data["sys"]["country"],
+#                 "temp": data["main"]["temp"],
+#                 "humidity": data["main"]["humidity"],
+#                 "wind": data["wind"]["speed"],
+#                 "weather": data["weather"][0]["main"]
+#             }
+#         except ValueError:
+#             st.error('Failed to parse the weather data.')
+#     else:
+#         st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
+#         return None
+
+# def display_weather(data):
+#     """Display weather data in a user-friendly format."""
+#     if data:
+#         st.write(data)
+#         st.write(f"#### Weather in {data['name']}, {data['country']}")
+#         st.write(f"**Temperature:** {data['temp']} °C")
+#         st.write(f"**Weather:** {data['weather']}")
+#         st.write(f"**Wind Speed:** {data['wind']} m/s")
+#         st.write(f"**Pressure:** {data['pressure']} hPa")
+#         st.write(f"**Humidity:** {data['humidity']}%")
+
+# def main():
+#     with st.sidebar:
+#         st.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
+#         st.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
+#         st.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
+#         col1, col2, col3 = st.columns(3)
+#         col1.metric("Temperature", "°C", "°F")
+#         col2.metric("Wind", "mph", "+/-")
+#         col3.metric("Humidity", "%", "%")
+       
+#         # Title
+#         st.title("Weather Forecast")  
+#         city = st.text_input("Enter a city name", "London")
+        
+#         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
+    
+#         if st.button("Get Weather"):
+#             weather_data = get_weather(city, api_key)
+#             if weather_data and weather_data.get("cod") != 404:
+#                 display_weather(weather_data)
+#             else:
+#                 st.error("City not found!")
+import streamlit as st
+import requests
+
+
 def get_weather(city, api_key):
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-    response = requests.get(url)
-    if response.status_code == 200:
+    """Fetch weather data safely from OpenWeather API"""
+
+    if not city:
+        st.warning("Please enter a city name.")
+        return None
+
+    try:
+        url = (
+            f"https://api.openweathermap.org/data/2.5/weather"
+            f"?q={city}&appid={api_key}&units=metric"
+        )
+
+        response = requests.get(url, timeout=10)
+
+        if response.status_code != 200:
+            try:
+                error_data = response.json()
+                message = error_data.get("message", "Unknown API error")
+            except Exception:
+                message = "Weather service unavailable"
+
+            st.error(f"API error: {message}")
+            return None
+
+        data = response.json()
+
+        # Validate expected fields exist
         try:
-            data = response.json()
             return {
                 "name": data["name"],
                 "country": data["sys"]["country"],
                 "temp": data["main"]["temp"],
                 "humidity": data["main"]["humidity"],
+                "pressure": data["main"]["pressure"],
                 "wind": data["wind"]["speed"],
-                "weather": data["weather"][0]["main"]
+                "weather": data["weather"][0]["description"],
             }
-        except ValueError:
-            st.error('Failed to parse the weather data.')
-    else:
-        st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
+
+        except KeyError as e:
+            st.error(f"Unexpected API response format: missing {e}")
+            return None
+
+    except requests.exceptions.Timeout:
+        st.error("Request timed out. Try again.")
         return None
 
+    except requests.exceptions.ConnectionError:
+        st.error("Connection error. Check internet access.")
+        return None
+
+    except Exception as e:
+        st.error(f"Unexpected error: {e}")
+        return None
+
+
 def display_weather(data):
-    """Display weather data in a user-friendly format."""
-    if data:
-        st.write(data)
+    """Display weather data safely"""
+
+    if not data:
+        st.warning("No weather data available.")
+        return
+
+    try:
         st.write(f"#### Weather in {data['name']}, {data['country']}")
         st.write(f"**Temperature:** {data['temp']} °C")
-        st.write(f"**Weather:** {data['weather'][0]['description']}")
-        st.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
+        st.write(f"**Weather:** {data['weather']}")
+        st.write(f"**Wind Speed:** {data['wind']} m/s")
         st.write(f"**Pressure:** {data['pressure']} hPa")
         st.write(f"**Humidity:** {data['humidity']}%")
 
+    except KeyError as e:
+        st.error(f"Display error: missing field {e}")
+
+    except Exception as e:
+        st.error(f"Unexpected display error: {e}")
+
+
 def main():
+
+    st.set_page_config(page_title="Weather App", page_icon="🌤️")
+
     with st.sidebar:
-        st.markdown("<h3 style='text-align: center; color: grey;'>Blog Content</h3>", unsafe_allow_html=True)
-        st.image("https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png")
-        st.caption('_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy."― Alain de Botton_')
+
+        st.markdown(
+            "<h3 style='text-align:center;color:grey;'>Blog Content</h3>",
+            unsafe_allow_html=True,
+        )
+
+        st.image(
+            "https://irelandtravelguides.com/wp-content/uploads/2020/06/gold-foil-tree-of-life-5262414_640.png"
+        )
+
+        st.caption(
+            '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
+        )
+
         col1, col2, col3 = st.columns(3)
-        col1.metric("Temperature", "°C", "°F")
-        col2.metric("Wind", "mph", "+/-")
-        col3.metric("Humidity", "%", "%")
-       
-        # Title
-        st.title("Weather Forecast")  
-        city = st.text_input("Enter a city name", "London")
-        
-        api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
-    
-        if st.button("Get Weather"):
-            weather_data = get_weather(city, api_key)
-            if weather_data and weather_data.get("cod") != 404:
-                display_weather(weather_data)
-            else:
-                st.error("City not found!")
+
+        col1.metric("Temperature", "°C")
+        col2.metric("Wind", "m/s")
+        col3.metric("Humidity", "%")
+
+    st.title("Weather Forecast 🌍")
+
+    city = st.text_input("Enter a city name", "London")
+
+    try:
+        api_key = st.secrets["OPENWEATHER_API_KEY"]
+
+    except Exception:
+        st.error("API key missing. Add OPENWEATHER_API_KEY to secrets.toml")
+        return
+
+    if st.button("Get Weather"):
+
+        weather_data = get_weather(city.strip(), api_key)
+
+        if weather_data:
+            display_weather(weather_data)
+
 
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY CAN BE TASTY</h1>", unsafe_allow_html=True)
     
