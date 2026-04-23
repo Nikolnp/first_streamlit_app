@@ -52,8 +52,8 @@ def display_weather(data):
         st.write(f"**Temperature:** {data['main']['temp']} °C")
         st.write(f"**Weather:** {data['weather'][0]['description']}")
         st.write(f"**Wind Speed:** {data['wind']['speed']} m/s")
-        st.write(f"**Pressure:** {data['main']['pressure']} hPa")
-        st.write(f"**Humidity:** {data['main']['humidity']}%")
+        st.write(f"**Pressure:** {data['pressure']} hPa")
+        st.write(f"**Humidity:** {data['humidity']}%")
 
 def main():
     with st.sidebar:
