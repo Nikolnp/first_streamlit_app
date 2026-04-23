@@ -55,7 +55,19 @@ def init_db():
     finally:
         conn.close()
 
+def save_user(user_dict):
 
+    return save_user_and_emissions(
+        user_id=user_dict["email"],   # using email as ID for now
+        name=user_dict["name"],
+        email=user_dict["email"],
+        electricity=user_dict["electricity"],
+        water=user_dict["water"],
+        car_km=user_dict["car_km"],
+        diet=user_dict["diet"],
+        monthly_total=user_dict["monthly_total"],
+        yearly_total=user_dict["yearly_total"]
+    )
 def save_user_and_emissions(
     user_id,
     name,
