@@ -8,21 +8,39 @@ import uuid
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 
-def get_weather_data(city, api_key):
-    """Fetch weather data from OpenWeatherMap API."""
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
-    response = requests.get(url)
+# def get_weather_data(city, api_key):
+#     """Fetch weather data from OpenWeatherMap API."""
+#     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+#     response = requests.get(url)
     
+#     if response.status_code == 200:
+#         try:
+#             data = response.json()
+#             return data
+#         except ValueError:
+#             st.error("Failed to parse the weather data.")
+#             return None
+#     else:
+#         st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
+#         return None
+
+def get_weather_data(city, api_key):
+
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+
+    response = requests.get(url)
+
     if response.status_code == 200:
-        try:
-            data = response.json()
-            return data
-        except ValueError:
-            st.error("Failed to parse the weather data.")
-            return None
-    else:
-        st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
-        return None
+
+        data = response.json()
+
+        return {
+            "temp": data["main"]["temp"],
+            "humidity": data["main"]["humidity"],
+            "wind": data["wind"]["speed"],
+            "weather": data["weather"][0]["main"]
+        }
+return None
 
 def display_weather(data):
     """Display weather data in a user-friendly format."""
