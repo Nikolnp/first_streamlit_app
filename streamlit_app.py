@@ -130,8 +130,6 @@ def get_weather(city, api_key):
 
 def display_weather(data):
     """Display weather data safely"""
-     col1, col2, col3 = st.columns(3)
-        col1.metric("Temperature", f"{data['temp']} °C")
         
     if not data:
         st.warning("No weather data available.")
