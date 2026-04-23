@@ -37,7 +37,7 @@ def get_weather_data(city, api_key):
                 "weather": data["weather"][0]["main"]
             }
         except ValueError:
-        st.error('Failed to parse the weather data.')
+            st.error('Failed to parse the weather data.')
     else:
         st.error(f"Error fetching data from OpenWeatherMap API. Status code: {response.status_code}")
         return None
