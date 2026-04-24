@@ -184,26 +184,26 @@ def main():
                         "Rain Probability",
                         f"{round(rain_prob * 100)}%"
                     )
-                    st.subheader("🎲 Need help deciding?  /n Roll the weather dice!")
-                    dice_faces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
-                    try:
-                        if st.button("Roll Decision Dice", key="umbrella_dice"):
-                            placeholder = st.empty()
-                            for _ in range(10):
-                                roll = random.randint(1,6)
-                                placeholder.markdown(
-                                    f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
-                                    unsafe_allow_html=True
-                                )
-                                time.sleep(0.06)
-                            # decision logic
-                            if roll <= 3:
-                                st.info("🚶 Would you walk without an umbrella?")
-                            else:
-                                st.success("☔ Though it might rain, to take an umbrela or not is your decition")
-                    except Exception as e:
-                        st.warning("Dice helper temporarily unavailable.")
-                        st.write(e)
+                st.subheader("🎲 Need help deciding?   Roll the weather dice!")
+                dice_faces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+                try:
+                    if st.button("Roll Decision Dice", key="umbrella_dice"):
+                        placeholder = st.empty()
+                        for _ in range(10):
+                            roll = random.randint(1,6)
+                            placeholder.markdown(
+                                f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
+                                unsafe_allow_html=True
+                            )
+                            time.sleep(0.06)
+                        # decision logic
+                        if roll <= 3:
+                            st.info("🚶 Would you walk without an umbrella?")
+                        else:
+                            st.success("☔ Though it might rain, to take an umbrela or not is your decition")
+                except Exception as e:
+                    st.warning("Dice helper temporarily unavailable.")
+                    st.write(e)
 
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>", unsafe_allow_html=True)
