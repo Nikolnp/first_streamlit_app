@@ -211,7 +211,7 @@ def main():
                     else:
                         st.success("☔ Though it might rain, to take an umbrela or not is your decition")
 
-            except Exception as e:
+                except Exception as e:
 
     st.warning("Dice helper temporarily unavailable.")
     st.write(e)
