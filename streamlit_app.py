@@ -159,48 +159,69 @@ def main():
         )
 
         st.title("Weather Forecast 🌍")
-    
+
         city = st.text_input("Enter a city name", "London")
-    
+        
         try:
             api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
-    
         except Exception:
             st.error("API key missing.")
             return
-    
+        
+        
         if st.button("Get Weather"):
-    
+        
             weather_data = get_weather(city.strip(), api_key)
-    
+        
             if weather_data:
-                display_weather(weather_data)
-            weather_data = get_weather(city.strip(), api_key)
-            if weather_data:
-                rain_prob = estimate_rain_probability(weather_data)
-                if rain_prob is not None:
-                    st.metric(
-                        "Rain Probability",
-                        f"{round(rain_prob * 100)}%"
-                    )
-                st.subheader("🎲 Need help deciding?   Roll the weather dice!")
+                st.session_state.weather_data = weather_data
+        
+        
+        # IMPORTANT: display weather AFTER button logic using session_state
+        if "weather_data" in st.session_state:
+        
+            weather_data = st.session_state.weather_data
+        
+            display_weather(weather_data)
+        
+            rain_prob = estimate_rain_probability(weather_data)
+        
+            if rain_prob is not None:
+        
+                st.metric(
+                    "Rain Probability",
+                    f"{round(rain_prob * 100)}%"
+                )
+        
+                st.subheader("🎲 Need help deciding? \n Roll the weather dice!")
+        
                 dice_faces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+        
                 try:
+        
                     if st.button("Roll Decision Dice", key="umbrella_dice"):
+        
                         placeholder = st.empty()
+        
                         for _ in range(10):
+        
                             roll = random.randint(1,6)
+        
                             placeholder.markdown(
                                 f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
                                 unsafe_allow_html=True
                             )
+        
                             time.sleep(0.06)
+        
                         # decision logic
                         if roll <= 3:
                             st.info("🚶 Would you walk without an umbrella?")
                         else:
-                            st.success("☔ Though it might rain, to take an umbrela or not is your decition")
+                            st.success("☔ Though it might rain, to take an umbrella or not is your decision")
+        
                 except Exception as e:
+        
                     st.warning("Dice helper temporarily unavailable.")
                     st.write(e)
 
