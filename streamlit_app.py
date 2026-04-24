@@ -202,9 +202,8 @@ def main():
                             else:
                                 st.success("☔ Though it might rain, to take an umbrela or not is your decition")
                     except Exception as e:
-
-    st.warning("Dice helper temporarily unavailable.")
-    st.write(e)
+                        st.warning("Dice helper temporarily unavailable.")
+                        st.write(e)
 
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>", unsafe_allow_html=True)
