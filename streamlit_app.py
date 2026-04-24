@@ -74,7 +74,6 @@ def display_weather(data):
     if not data:
         st.warning("No weather data available.")
         return
-
     try:
         st.write(f"#### Weather in {data['name']}, {data['country']}")
         st.write(f"**Temperature:** {data['temp']} °C")
