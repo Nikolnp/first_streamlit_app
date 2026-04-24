@@ -275,15 +275,15 @@ def main():
     dice_faces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
 
     if st.button("Roll Dice Animation"):
-    placeholder = st.empty()
-    # animation loop
-    for _ in range(12):
-        roll = random.randint(1,6)
-        placeholder.markdown(
-            f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
-            unsafe_allow_html=True
-        )
-        time.sleep(0.07)
+        placeholder = st.empty()
+        # animation loop
+        for _ in range(12):
+            roll = random.randint(1,6)
+            placeholder.markdown(
+                f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
+                unsafe_allow_html=True
+            )
+            time.sleep(0.07)
     # final result
     st.success(f"Final result: {roll}")
 
