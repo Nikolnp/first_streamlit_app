@@ -184,7 +184,7 @@ def main():
                         "Rain Probability",
                         f"{round(rain_prob * 100)}%"
                     )
-                    st.subheader("🎲 Need help deciding? Roll the weather dice!")
+                    st.subheader("🎲 Need help deciding?  /n Roll the weather dice!")
                     dice_faces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
                     try:
                         if st.button("Roll Decision Dice", key="umbrella_dice"):
