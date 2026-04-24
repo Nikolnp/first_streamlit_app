@@ -6,6 +6,8 @@ import csv
 import os
 import uuid
 from PIL import Image
+import random
+import time
 
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
@@ -268,6 +270,22 @@ def main():
     st.subheader("2. Brahmari Pranayama (Bumble Bee Breath)")
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
 
+    st.title("Animated Dice Roll 🎲")
+
+    dice_faces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
+
+    if st.button("Roll Dice Animation"):
+    placeholder = st.empty()
+    # animation loop
+    for _ in range(12):
+        roll = random.randint(1,6)
+        placeholder.markdown(
+            f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
+            unsafe_allow_html=True
+        )
+        time.sleep(0.07)
+    # final result
+    st.success(f"Final result: {roll}")
 
     # =========================================================
     # 🌍 HOUSEHOLD SUSTAINABILITY CALCULATOR (SQL + IQR READY)
