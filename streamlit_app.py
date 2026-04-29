@@ -434,8 +434,8 @@ def main():
         try:
             from database import get_all_users
     
-            data = get_all_users()
-            df_all = pd.DataFrame(data)
+           #data = get_all_users()
+            #df_all = pd.DataFrame(data)
     
             if len(df_all) >= 4 and "monthly_total" in df_all.columns:
     
