@@ -8,7 +8,7 @@ import uuid
 from PIL import Image
 import random
 import time
-
+from scipy.stats import bernoulli
 from database import init_db, save_user_and_emissions, load_emissions
 init_db()
 st.write("DB initialized")
