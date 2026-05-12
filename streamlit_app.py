@@ -226,8 +226,8 @@ def main():
                     st.write(e)
                     try:
                 from scipy.stats import bernoulli
-                p = st.slider("Probability of sustainable day", 0.0, 1.0, 0.5)
-                result = bernoulli.rvs(p)
+                    p = st.slider("Probability of sustainable day", 0.0, 1.0, 0.5)
+                    result = bernoulli.rvs(p)
                 if result == 1:
                     st.success("Sustainable outcome")
                 else:
