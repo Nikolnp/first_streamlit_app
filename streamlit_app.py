@@ -462,7 +462,7 @@ def main():
         except Exception as e:
             st.warning("Could not load analytics data yet.")
 
-    try:
+try:
         from scipy.stats import bernoulli
         p = st.slider("Probability of sustainable day", 0.0, 1.0, 0.5)
         result = bernoulli.rvs(p)
@@ -470,7 +470,7 @@ def main():
             st.success("Sustainable outcome")
         else:
             st.error("Unsustainable outcome")
-     except Exception as e:
+ except Exception as e:
             st.warning("Bernolli Trial Function at lines 465 - 475 has failed with exception ")
 
 # Run the app
