@@ -224,6 +224,16 @@ def main():
         
                     st.warning("Dice helper temporarily unavailable.")
                     st.write(e)
+                    try:
+                from scipy.stats import bernoulli
+                p = st.slider("Probability of sustainable day", 0.0, 1.0, 0.5)
+                result = bernoulli.rvs(p)
+                if result == 1:
+                    st.success("Sustainable outcome")
+                else:
+                    st.error("Unsustainable outcome")
+        except Exception as e:
+            st.warning("Bernolli Trial Function at lines 465 - 475 has failed with exception ")
 
     st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>", unsafe_allow_html=True)
     st.markdown("<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>", unsafe_allow_html=True)
@@ -462,16 +472,7 @@ def main():
         except Exception as e:
             st.warning("Could not load analytics data yet.")
 
-        try:
-            from scipy.stats import bernoulli
-            p = st.slider("Probability of sustainable day", 0.0, 1.0, 0.5)
-            result = bernoulli.rvs(p)
-            if result == 1:
-                st.success("Sustainable outcome")
-            else:
-                st.error("Unsustainable outcome")
-        except Exception as e:
-            st.warning("Bernolli Trial Function at lines 465 - 475 has failed with exception ")
+
 
 # Run the app
 if __name__ == "__main__":
