@@ -463,14 +463,14 @@ def main():
             st.warning("Could not load analytics data yet.")
 
 
-        p = st.slider("Probability of sustainable day", 0.0, 1.0, 0.5)
-        
-        result = bernoulli.rvs(p)
-        
-        if result == 1:
-            st.success("Sustainable outcome")
-        else:
-            st.error("Unsustainable outcome")
+    p = st.slider("Probability of sustainable day", 0.0, 1.0, 0.5)
+    
+    result = bernoulli.rvs(p)
+    
+    if result == 1:
+        st.success("Sustainable outcome")
+    else:
+        st.error("Unsustainable outcome")
 # Run the app
 if __name__ == "__main__":
     main()
