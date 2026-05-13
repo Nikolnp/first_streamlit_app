@@ -152,7 +152,7 @@ def main():
         page_icon="🌤️"
     )
 
-    weather_section()
+    
 
     with st.sidebar:
 
@@ -174,6 +174,7 @@ def main():
             "Enter a city name",
             "London"
         )
+        weather_section()
 
         try:
             api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
