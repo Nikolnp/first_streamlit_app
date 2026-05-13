@@ -206,11 +206,11 @@ with st.sidebar:
             except Exception as e:
                 st.warning("Bernolli Trial Function at lines 465 - 475 has failed with exception ")
                     
-    st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>", unsafe_allow_html=True)
-    st.markdown("<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>", unsafe_allow_html=True)
-        
-    st.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
-    col4, col5, col6 = st.columns(3)
+            st.markdown("<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>", unsafe_allow_html=True)
+            st.markdown("<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>", unsafe_allow_html=True)
+                
+            st.image("http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png")
+            col4, col5, col6 = st.columns(3)
     with col4:
         st.header('Breakfast Menu')
         st.text('🥣 Quinoa Breakfast Bowl')
