@@ -149,8 +149,8 @@ st.write("DB exists:", os.path.exists("sustainability.db"))
 
 
 def main():
-weather_section()
-st.set_page_config(page_title="Weather App", page_icon="🌤️")
+        weather_section()
+        st.set_page_config(page_title="Weather App", page_icon="🌤️")
 with st.sidebar:
         st.markdown("<h3 style='text-align:center;color:grey;'>Blog Content</h3>",unsafe_allow_html=True,)
         image = Image.open("assets/tree.webp")
