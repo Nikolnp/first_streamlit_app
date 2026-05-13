@@ -1,3 +1,15 @@
+import streamlit as st
+import pandas as pd
+import requests
+import numpy as np
+import csv
+import os
+#other imports
+import uuid
+from PIL import Image
+import random
+import time
+
 def get_weather(city, api_key):
     """Fetch weather data safely from OpenWeather API"""
     if not city:
