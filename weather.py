@@ -62,8 +62,9 @@ def get_weather(city, api_key):
         return None
 
 
-def display_weather(data):
+def weather_section():
     """Display weather data safely"""
+    data = get_weather(city, api_key)
         
     if not data:
         st.warning("No weather data available.")
