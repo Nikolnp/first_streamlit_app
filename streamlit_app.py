@@ -161,8 +161,7 @@ with st.sidebar:
         try:
             api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
         except Exception:
-            st.error("API key missing.")
-return  
+            st.error("API key missing.")  
 if st.button("Get Weather"):
     weather_data = get_weather(city.strip(), api_key)
     if weather_data:
