@@ -163,9 +163,9 @@ with st.sidebar:
         except Exception:
             st.error("API key missing.")  
 if st.button("Get Weather"):
-    weather_data = get_weather(city.strip(), api_key)
-    if weather_data:
-        st.session_state.weather_data = weather_data
+        weather_data = get_weather(city.strip(), api_key)
+        if weather_data:
+                st.session_state.weather_data = weather_data
 # IMPORTANT: display weather AFTER button logic using session_state
 if "weather_data" in st.session_state:
     weather_data = st.session_state.weather_data
