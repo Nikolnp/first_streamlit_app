@@ -146,12 +146,12 @@ st.write("DB exists:", os.path.exists("sustainability.db"))
 
 #     except Exception as e:
 #         return None
-weather_section()
+
 
 def main():
-
+        weather_section()
     st.set_page_config(page_title="Weather App", page_icon="🌤️")
-
+        
     with st.sidebar:
 
         st.markdown(
