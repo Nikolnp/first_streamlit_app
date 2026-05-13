@@ -13,7 +13,7 @@ import time
 #section imports
 from weather import weather_section
 #from sustainability import sustainability_section
-from analytics import analytics_section
+#from analytics import analytics_section
 
 #database
 from database import init_db, save_user_and_emissions, load_emissions
