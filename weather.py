@@ -89,8 +89,6 @@ def get_weather(city, api_key):
 def weather_section():
     """Display weather data safely"""
 
-    st.header("🌦 Weather Forecast")
-
     city = st.text_input(
         "Enter a city name",
         "London"
