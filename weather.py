@@ -96,7 +96,7 @@ def weather_section():
         "London"
     )
 
-    api_key = "YOUR_API_KEY"
+    api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
 
     if st.button("Get Weather", key="weather_button"):
 
