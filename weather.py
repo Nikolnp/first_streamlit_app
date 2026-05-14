@@ -189,15 +189,15 @@ def weather_section():
                         unsafe_allow_html=True
                     )
                     time.sleep(0.06)
-                    # decision logic
-                    if roll <= 3:
-                        st.info(
-                            "🚶 Would you walk without an umbrella?"
-                        )
-                    else:
-                        st.success(
-                            "☔ Though it might rain, to take an umbrella or not is your decision"
-                        )
+                # decision logic
+                if roll <= 3:
+                    st.info(
+                        "🚶 Would you walk without an umbrella?"
+                    )
+                else:
+                    st.success(
+                        "☔ Though it might rain, to take an umbrella or not is your decision"
+                    )
                 # loop finished
                 final_roll = st.session_state.dice_roll
             # =========================================================
