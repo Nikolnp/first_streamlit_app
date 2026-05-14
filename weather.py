@@ -88,8 +88,8 @@ def get_weather(city, api_key):
 # =========================================================
 def weather_section():
     """Display weather data safely"""
-    if "weather_data" not in st.session_state_state:
-        st.session_state_state.weather_data = None
+    if "weather_data" not in st.session_state:
+        st.session_state.weather_data = None
     
     city = st.text_input(
         "Enter a city name",
@@ -104,12 +104,12 @@ def weather_section():
         "Get Weather", 
          key="weather_button"
     ):
-       st.session_state_state.weather_data = get_weather(
+       st.session_state.weather_data = get_weather(
         city,
         api_key
     )
 
-    data = st.session_state_state.weather_data
+    data = st.session_state.weather_data
 
     if data:
 
@@ -179,18 +179,18 @@ def weather_section():
             ):
                  #session logic
                 if 'dice_roll' not in st.session_state.session_state:
-                    st.session_state_state.dice_roll = None
+                    st.session_state.dice_roll = None
                 placeholder = st.empty()
                 for _ in range(10):
-                    st.session_state_state.dice_roll = random.randint(1,6)
-                    roll = st.session_state_state.dice_roll
+                    st.session_state.dice_roll = random.randint(1,6)
+                    roll = st.session_state.dice_roll
                     placeholder.markdown(
                         f"<h1 style='text-align:center'>{dice_faces[roll - 1]}</h1>",
                         unsafe_allow_html=True
                     )
                     time.sleep(0.06)
                 # loop finished
-                final_roll = st.session_state_state.dice_roll
+                final_roll = st.session_state.dice_roll
                 # decision logic
                 if roll <= 3:
                     st.info(
@@ -214,9 +214,9 @@ def weather_section():
                 )
                 #bernoulli_result session logic
                 if 'bernoulli_result' not in session_state:
-                    st.session_state_state.bernoulli_result  = None
-                    st.session_state_state.bernoulli_result = bernoulli.rvs(p)
-                    result = st.session_state_state.bernoulli_result
+                    st.session_state.bernoulli_result  = None
+                    st.session_state.bernoulli_result = bernoulli.rvs(p)
+                    result = st.session_state.bernoulli_result
 
                 if result == 1:
 
