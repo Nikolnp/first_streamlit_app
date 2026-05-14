@@ -222,6 +222,7 @@ def weather_section():
                 ):
                     st.session_state.bernoulli_result = bernoulli.rvs(p)
                 result = st.session_state.bernoulli_result
+                st.write(f"DEBUG result: {result}")
                 if result is not None:
                     if result == 1:
                         st.success("Sustainable outcome")
