@@ -104,9 +104,9 @@ def weather_section():
     ):
         data = get_weather(city, api_key)
 
-    if not data:
-        st.warning("No weather data available.")
-        return
+        if not data:
+            st.warning("No weather data available.")
+            return
 
         try:
 
