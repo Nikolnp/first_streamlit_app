@@ -22,6 +22,7 @@ from database import init_db, save_user_and_emissions, load_emissions
 #path to database
 #st.write(os.getcwd())
 
+#SECTION MOVED TO WEATHER.PY to decouple code.
 # def get_weather(city, api_key):
 #     """Fetch weather data safely from OpenWeather API"""
 #     if not city:
