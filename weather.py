@@ -228,10 +228,10 @@ def weather_section():
                     else:
                         st.error("Unsustainable outcome")
 
-            except Exception:
+            except Exception as e:
 
                 st.warning(
-                    "Bernoulli Trial Function unavailable."
+                    f"Bernoulli Trial Function unavailable: {e}"
                 )
 
         except KeyError as e:
