@@ -94,15 +94,19 @@ def weather_section():
         "London"
     )
 
-    api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
+    api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3" 
+    # IMPORTANT FIX
+    data = None
 
-    if st.button("Get Weather", key="weather_button"):
+    if st.button(
+        "Get Weather", 
+         key="weather_button"
+    ):
+        data = get_weather(city, api_key)
 
-        #data = get_weather(city, api_key)
-
-        if not data:
-            st.warning("No weather data available.")
-            return
+    if not data:
+        st.warning("No weather data available.")
+        return
 
         try:
 
