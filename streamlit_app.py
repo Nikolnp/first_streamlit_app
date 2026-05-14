@@ -45,6 +45,8 @@ def main():
         st.title("Weather Forecast 🌍")
         weather_section()
         
+    st.markdown("""
+    <style>
     /* Primary Content Area */
     .main-center-area {
         display: flex;
@@ -54,6 +56,8 @@ def main():
         padding: 2rem;
         background-color: #ffffff;
     }
+    </style>
+    """, unsafe_allow_html=True)
     st.markdown(
         "<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>",
         unsafe_allow_html=True
