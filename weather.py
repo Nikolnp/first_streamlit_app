@@ -182,7 +182,11 @@ def weather_section():
 
                 for _ in range(10):
 
-                    roll = random.randint(1, 6)
+                #session logic
+                if 'dice_roll' not in st.session.session_state:
+                    st.session_state.dice_roll = None
+                    st.session_state.dice_roll = random.randint(1,6)
+                    roll = st.session_state.dice_roll
 
                     placeholder.markdown(
                         f"<h1 style='text-align:center'>{dice_faces[roll - 1]}</h1>",
@@ -190,7 +194,7 @@ def weather_section():
                     )
 
                     time.sleep(0.06)
-
+               
                 # decision logic
                 if roll <= 3:
 
