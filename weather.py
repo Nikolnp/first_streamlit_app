@@ -221,8 +221,11 @@ def weather_section():
                     1.0,
                     0.5
                 )
-
-                result = bernoulli.rvs(p)
+                #bernoulli_result session logic
+                if 'bernoulli_result' not in session_state:
+                    st.session_state.bernoulli_result  = None
+                    st.session_state.bernoulli_result = bernoulli.rvs(p)
+                result = st.session_state.bernoulli_result
 
                 if result == 1:
 
