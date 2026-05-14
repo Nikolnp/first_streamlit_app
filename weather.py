@@ -98,7 +98,7 @@ def weather_section():
 
     if st.button("Get Weather", key="weather_button"):
 
-        data = get_weather(city, api_key)
+        #data = get_weather(city, api_key)
 
         if not data:
             st.warning("No weather data available.")
