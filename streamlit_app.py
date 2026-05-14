@@ -172,106 +172,106 @@ def main():
             "London"
         ) 
         
-        try:
-            api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
+    #     try:
+    #         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
 
-        except Exception:
-            st.error("API key missing.")
-        #weather_section()
-    if st.button("Get Weather"):
+    #     except Exception:
+    #         st.error("API key missing.")
+    #     #weather_section()
+    # if st.button("Get Weather"):
 
-        weather_data = get_weather(
-            city.strip(),
-            api_key
-        )
-    if weather_data:
-            st.session_state.weather_data = weather_data
+    #     weather_data = get_weather(
+    #         city.strip(),
+    #         api_key
+    #     )
+    # if weather_data:
+    #         st.session_state.weather_data = weather_data
 
-    # IMPORTANT: display weather AFTER button logic using session_state
-    if "weather_data" in st.session_state:
+    # # IMPORTANT: display weather AFTER button logic using session_state
+    # if "weather_data" in st.session_state:
 
-        weather_data = st.session_state.weather_data
+    #     weather_data = st.session_state.weather_data
 
-        display_weather(weather_data)
+    #     display_weather(weather_data)
 
-        rain_prob = estimate_rain_probability(weather_data)
+    #     rain_prob = estimate_rain_probability(weather_data)
 
-        if rain_prob is not None:
+    #     if rain_prob is not None:
 
-            st.metric(
-                "Rain Probability",
-                f"{round(rain_prob * 100)}%"
-            )
+    #         st.metric(
+    #             "Rain Probability",
+    #             f"{round(rain_prob * 100)}%"
+    #         )
 
-            st.subheader(
-                "🎲 Need help deciding? \n Roll the weather dice!"
-            )
+    #         st.subheader(
+    #             "🎲 Need help deciding? \n Roll the weather dice!"
+    #         )
 
-            dice_faces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
+    #         dice_faces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
 
-            try:
+    #         try:
 
-                if st.button(
-                    "Roll Decision Dice",
-                    key="umbrella_dice"
-                ):
+    #             if st.button(
+    #                 "Roll Decision Dice",
+    #                 key="umbrella_dice"
+    #             ):
 
-                    placeholder = st.empty()
+    #                 placeholder = st.empty()
 
-                    for _ in range(10):
+    #                 for _ in range(10):
 
-                        roll = random.randint(1, 6)
+    #                     roll = random.randint(1, 6)
 
-                        placeholder.markdown(
-                            f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
-                            unsafe_allow_html=True
-                        )
+    #                     placeholder.markdown(
+    #                         f"<h1 style='text-align:center'>{dice_faces[roll-1]}</h1>",
+    #                         unsafe_allow_html=True
+    #                     )
 
-                        time.sleep(0.06)
+    #                     time.sleep(0.06)
 
-                    # decision logic
-                    if roll <= 3:
-                        st.info(
-                            "🚶 Would you walk without an umbrella?"
-                        )
+    #                 # decision logic
+    #                 if roll <= 3:
+    #                     st.info(
+    #                         "🚶 Would you walk without an umbrella?"
+    #                     )
 
-                    else:
-                        st.success(
-                            "☔ Though it might rain, to take an umbrella or not is your decision"
-                        )
+    #                 else:
+    #                     st.success(
+    #                         "☔ Though it might rain, to take an umbrella or not is your decision"
+    #                     )
 
-            except Exception as e:
+    #         except Exception as e:
 
-                st.warning(
-                    "Dice helper temporarily unavailable."
-                )
+    #             st.warning(
+    #                 "Dice helper temporarily unavailable."
+    #             )
 
-                st.write(e)
+    #             st.write(e)
 
-        try:
+    #     try:
 
-            from scipy.stats import bernoulli
+    #         from scipy.stats import bernoulli
 
-            p = st.slider(
-                "Probability of sustainable day",
-                0.0,
-                1.0,
-                0.5
-            )
+    #         p = st.slider(
+    #             "Probability of sustainable day",
+    #             0.0,
+    #             1.0,
+    #             0.5
+    #         )
 
-            result = bernoulli.rvs(p)
+    #         result = bernoulli.rvs(p)
 
-            if result == 1:
-                st.success("Sustainable outcome")
+    #         if result == 1:
+    #             st.success("Sustainable outcome")
 
-            else:
-                st.error("Unsustainable outcome")
+    #         else:
+    #             st.error("Unsustainable outcome")
 
-        except Exception as e:
+    #     except Exception as e:
 
-            st.warning(
-                "Bernolli Trial Function at lines 465 - 475 has failed with exception "
-            )
+    #         st.warning(
+    #             "Bernolli Trial Function at lines 465 - 475 has failed with exception "
+    #         )
 
     st.markdown(
         "<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>",
