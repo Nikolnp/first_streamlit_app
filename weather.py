@@ -8,6 +8,7 @@ import uuid
 from PIL import Image
 import random
 import time
+from scipy.stats import bernoulli
 
 
 # =========================================================
@@ -205,7 +206,6 @@ def weather_section():
             # BERNOULLI TRIAL
             # =========================================================
             try:
-                from scipy.stats import bernoulli
                 p = st.slider(
                     "Probability of sustainable day",
                     0.0,
@@ -215,16 +215,18 @@ def weather_section():
                 #bernoulli_result session logic
                 if 'bernoulli_result' not in st.session_state:
                     st.session_state.bernoulli_result  = None
+
+                if st.button(
+                    "Run Bernoulli Trial",
+                    key="bernoulli_button"
+                ):
                     st.session_state.bernoulli_result = bernoulli.rvs(p)
-                    result = st.session_state.bernoulli_result
-
-                if result == 1:
-
-                    st.success("Sustainable outcome")
-
-                else:
-
-                    st.error("Unsustainable outcome")
+                result = st.session_state.bernoulli_result
+                if result is not None:
+                    if result == 1:
+                        st.success("Sustainable outcome")
+                    else:
+                        st.error("Unsustainable outcome")
 
             except Exception:
 
