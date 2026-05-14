@@ -177,13 +177,13 @@ def weather_section():
                 "Roll Decision Dice",
                 key="umbrella_dice"
             ):
+                 #session logic
+                if 'dice_roll' not in st.session.session_state:
+                    st.session_state.dice_roll = None
                 placeholder = st.empty()
                 for _ in range(10):
-                    #session logic
-                    if 'dice_roll' not in st.session.session_state:
-                        st.session_state.dice_roll = None
-                        st.session_state.dice_roll = random.randint(1,6)
-                        roll = st.session_state.dice_roll
+                    st.session_state.dice_roll = random.randint(1,6)
+                    roll = st.session_state.dice_roll
 
                 placeholder.markdown(
                     f"<h1 style='text-align:center'>{dice_faces[roll - 1]}</h1>",
@@ -209,9 +209,7 @@ def weather_section():
             # BERNOULLI TRIAL
             # =========================================================
             try:
-
                 from scipy.stats import bernoulli
-
                 p = st.slider(
                     "Probability of sustainable day",
                     0.0,
@@ -222,7 +220,7 @@ def weather_section():
                 if 'bernoulli_result' not in session_state:
                     st.session_state.bernoulli_result  = None
                     st.session_state.bernoulli_result = bernoulli.rvs(p)
-                result = st.session_state.bernoulli_result
+                    result = st.session_state.bernoulli_result
 
                 if result == 1:
 
