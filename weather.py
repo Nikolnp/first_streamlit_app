@@ -184,27 +184,22 @@ def weather_section():
                 for _ in range(10):
                     st.session_state.dice_roll = random.randint(1,6)
                     roll = st.session_state.dice_roll
-
-                placeholder.markdown(
-                    f"<h1 style='text-align:center'>{dice_faces[roll - 1]}</h1>",
-                    unsafe_allow_html=True
-                )
-
-                time.sleep(0.06)
-               
-                # decision logic
-                if roll <= 3:
-
-                    st.info(
-                        "🚶 Would you walk without an umbrella?"
+                    placeholder.markdown(
+                        f"<h1 style='text-align:center'>{dice_faces[roll - 1]}</h1>",
+                        unsafe_allow_html=True
                     )
-
-                else:
-
-                    st.success(
-                        "☔ Though it might rain, to take an umbrella or not is your decision"
-                    )
-
+                    time.sleep(0.06)
+                    # decision logic
+                    if roll <= 3:
+                        st.info(
+                            "🚶 Would you walk without an umbrella?"
+                        )
+                    else:
+                        st.success(
+                            "☔ Though it might rain, to take an umbrella or not is your decision"
+                        )
+                # loop finished
+                final_roll = st.session_state.dice_roll
             # =========================================================
             # BERNOULLI TRIAL
             # =========================================================
