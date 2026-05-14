@@ -177,7 +177,7 @@ def main():
 
         except Exception:
             st.error("API key missing.")
-        weather_section()
+        #weather_section()
     if st.button("Get Weather"):
 
         weather_data = get_weather(
