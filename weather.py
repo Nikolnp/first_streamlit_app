@@ -88,7 +88,9 @@ def get_weather(city, api_key):
 # =========================================================
 def weather_section():
     """Display weather data safely"""
-
+    if "weather_data" not in st.session_state:
+    st.session_state.weather_data = None
+    
     city = st.text_input(
         "Enter a city name",
         "London"
@@ -102,7 +104,16 @@ def weather_section():
         "Get Weather", 
          key="weather_button"
     ):
-        data = get_weather(city, api_key)
+       st.session_state.weather_data = get_weather(
+        city,
+        api_key
+    )
+
+    data = st.session_state.weather_data
+
+    if data:
+
+        st.write(data)
 
         if not data:
             st.warning("No weather data available.")
