@@ -182,10 +182,10 @@ def weather_section():
 
                 for _ in range(10):
 
-                #session logic
-                if 'dice_roll' not in st.session.session_state:
-                    st.session_state.dice_roll = None
-                    st.session_state.dice_roll = random.randint(1,6)
+                    #session logic
+                    if 'dice_roll' not in st.session.session_state:
+                        st.session_state.dice_roll = None
+                        st.session_state.dice_roll = random.randint(1,6)
                     roll = st.session_state.dice_roll
 
                     placeholder.markdown(
