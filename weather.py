@@ -189,6 +189,8 @@ def weather_section():
                         unsafe_allow_html=True
                     )
                     time.sleep(0.06)
+                # loop finished
+                final_roll = st.session_state.dice_roll
                 # decision logic
                 if roll <= 3:
                     st.info(
@@ -198,8 +200,7 @@ def weather_section():
                     st.success(
                         "☔ Though it might rain, to take an umbrella or not is your decision"
                     )
-                # loop finished
-                final_roll = st.session_state.dice_roll
+                
             # =========================================================
             # BERNOULLI TRIAL
             # =========================================================
