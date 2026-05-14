@@ -167,11 +167,11 @@ def main():
         )
 
         st.title("Weather Forecast 🌍")
-
-        city = st.text_input(
-            "Enter a city name",
-            "London"
-        ) 
+        weather_section()
+        # city = st.text_input(
+        #     "Enter a city name",
+        #     "London"
+        # ) 
         
     #     try:
     #         api_key = "1a4fb3f2dc6ead2387e5fed61756ddb3"
