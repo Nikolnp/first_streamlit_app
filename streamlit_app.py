@@ -152,15 +152,12 @@ def main():
         page_icon="🌤️"
     )
 
-    
-
     with st.sidebar:
 
         st.markdown(
             "<h3 style='text-align:center;color:grey;'>Blog Content</h3>",
             unsafe_allow_html=True,
         )
-
         image = Image.open("assets/tree.webp")
         st.image(image)
 
@@ -181,14 +178,13 @@ def main():
         except Exception:
             st.error("API key missing.")
         weather_section()
-    # if st.button("Get Weather"):
+    if st.button("Get Weather"):
 
-    #     weather_data = get_weather(
-    #         city.strip(),
-    #         api_key
-    #     )
-
-        if weather_data:
+        weather_data = get_weather(
+            city.strip(),
+            api_key
+        )
+    if weather_data:
             st.session_state.weather_data = weather_data
 
     # IMPORTANT: display weather AFTER button logic using session_state
