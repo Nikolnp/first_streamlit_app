@@ -234,17 +234,17 @@ def weather_section():
                     "Bernoulli Trial Function unavailable."
                 )
 
-        except KeyError as e:
-
-            st.error(
-                f"Display error: missing field {e}"
-            )
-
-        except Exception as e:
-
-            st.error(
-                f"Unexpected display error: {e}"
-            )
+            except KeyError as e:
+    
+                st.error(
+                    f"Display error: missing field {e}"
+                )
+    
+            except Exception as e:
+    
+                st.error(
+                    f"Unexpected display error: {e}"
+                )
 
 
 # =========================================================
