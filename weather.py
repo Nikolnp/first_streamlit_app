@@ -178,7 +178,7 @@ def weather_section():
                 key="umbrella_dice"
             ):
                  #session logic
-                if 'dice_roll' not in st.session_state.session_state:
+                if 'dice_roll' not in st.session_state:
                     st.session_state.dice_roll = None
                 placeholder = st.empty()
                 for _ in range(10):
