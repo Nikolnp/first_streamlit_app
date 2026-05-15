@@ -265,3 +265,9 @@ def estimate_rain_probability(weather_data):
 
     except Exception:
         return None
+
+ except Exception as e:
+    
+    st.error(
+        f"Unexpected display error: {e}"
+    )
