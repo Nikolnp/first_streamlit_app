@@ -8,8 +8,6 @@ import uuid
 from PIL import Image
 import random
 import time
-#from scipy.stats import bernoulli
-
 
 # =========================================================
 # WEATHER FETCH FUNCTION
