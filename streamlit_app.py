@@ -12,7 +12,7 @@ import time
 
 #section imports
 from weather import weather_section
-#from sustainability import sustainability_section
+from sustainability import sustainability_section
 #from analytics import analytics_section
 
 #database
@@ -44,6 +44,9 @@ def main():
 
         st.title("Weather Forecast 🌍")
         weather_section()
+        st.devider()
+        st.title('Bernoulli Trial Simulation ⚖️')
+        sustainability_section()
         
     st.markdown("""
     <style>
