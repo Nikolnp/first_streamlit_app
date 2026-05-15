@@ -215,6 +215,9 @@ def weather_section():
                 # 1. Initialize the only two variables you need
                 if 'bernoulli_result' not in st.session_state.bernoulli_result:
                     st.session_state.bernoulli_result = None
+                result = st.session_state.get("bernoulli_result", 0)
+                st.write(f"Bernoulli Result: {result}")
+                git
                 if "sustainable" not in st.session_state:
                     st.session_state.sustainable = 0
                 if "unsustainable" not in st.session_state:
