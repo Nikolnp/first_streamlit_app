@@ -199,11 +199,11 @@ def weather_section():
                     st.success(
                         "☔ Though it might rain, to take an umbrella or not is your decision"
                     )
-    except Exception as e:
-        st.error(
-            f"Unexpected display error: {e}"
-        )
-            st.devider()    
+        except Exception as e:
+            st.error(
+                f"Unexpected display error: {e}"
+            )
+        st.devider()    
 # =========================================================
 # RAIN PROBABILITY ESTIMATION
 # =========================================================
@@ -265,10 +265,10 @@ def estimate_rain_probability(weather_data):
 
         return probability
 
-        except Exception:
-            return None
-    
-        except Exception as e:
-            st.error(
-                f"Unexpected display error: {e}"
-            )
+            except Exception:
+                return None
+        
+            except Exception as e:
+                st.error(
+                    f"Unexpected display error: {e}"
+                )
