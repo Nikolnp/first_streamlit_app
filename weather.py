@@ -214,7 +214,7 @@ def weather_section():
                 )
                 # 1. Initialize the only two variables you need
                 if 'bernoulli_result' not in st.session_state.bernoulli_result:
-                    st.session_state.bernoulli_result = 0
+                    st.session_state.bernoulli_result = None
                 if "sustainable" not in st.session_state:
                     st.session_state.sustainable = 0
                 if "unsustainable" not in st.session_state:
