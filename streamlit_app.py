@@ -44,7 +44,7 @@ def main():
 
         st.title("Weather Forecast 🌍")
         weather_section()
-        st.devider()
+       
         st.title('Bernoulli Trial Simulation ⚖️')
         #sustainability_section()
         
