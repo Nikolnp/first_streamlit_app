@@ -215,9 +215,14 @@ def weather_section():
                 #bernoulli_result session logic
                 if 'bernoulli_result' not in st.session_state:
                     st.session_state.bernoulli_result  = None
-                yes_counter = 0
-                no_counter = 0
-                total = 0
+                # Initialize the three counters
+                if "sustainable" not in st.session_state:
+                    st.session_state.sustainable = 0
+                if "unsustainable" not in st.session_state:
+                    st.session_state.unsustainable = 0
+                if "total" not in st.session_state:
+                    st.session_state.total = 0
+                
                 if st.button(
                     "Run Bernoulli Trial",
                     key="bernoulli_button"
@@ -228,12 +233,28 @@ def weather_section():
                 if result is not None:
                     if result == 1:
                         st.success("Sustainable outcome")
-                        yes_counter += 1
+                        st.session_state.sustainable += 1
                     else:
                         st.error("Unsustainable outcome")
-                        no_counter += 1
-                total += 1
-                print('For every'+ total +' times the button is pressed ' + yes_counter + ' times the result is positive and ' + no_counter+' times the result is negative.')
+                        st.session_state.unsustainable += 1
+                st.session_state.total += 1
+                st.divider()
+
+                # Display variables side-by-side using 3 columns
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    st.subheader("Sustainable outcomes")
+                    st.write(f"Count: {st.session_state.sustainable}")
+
+                with col2:
+                    st.subheader("Unsustainable outcomes")
+                    st.write(f"Count: {st.session_state.unsustainable}")
+
+                with col3:
+                    st.subheader("Total Outcomes")
+                    st.write(f"Count: {st.session_state.total}")
+
             except Exception as e:
 
                 st.warning(
