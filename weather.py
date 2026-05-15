@@ -203,6 +203,7 @@ def weather_section():
             st.error(
                 f"Unexpected display error: {e}"
             )
+            return None
             st.devider()    
 # =========================================================
 # RAIN PROBABILITY ESTIMATION
@@ -265,10 +266,9 @@ def estimate_rain_probability(weather_data):
 
         return probability
 
-        except Exception:
-            return None
-    
-        except Exception as e:
-            st.error(
-                f"Unexpected display error: {e}"
-            )
+    except Exception as e:
+
+        st.error(
+            f"Unexpected display error: {e}"
+        )
+        return None
