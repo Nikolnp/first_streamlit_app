@@ -145,7 +145,7 @@ def weather_section():
             st.write(
                 f"**Humidity:** {data['humidity']}%"
             )
-
+            st.devider()
             # =========================================================
             # RAIN PROBABILITY
             # =========================================================
@@ -157,7 +157,7 @@ def weather_section():
                     "Rain Probability",
                     f"{round(rain_prob * 100)}%"
                 )
-
+            st.devider()
             # =========================================================
             # WEATHER DECISION DICE
             # =========================================================
@@ -201,7 +201,7 @@ def weather_section():
                     st.success(
                         "☔ Though it might rain, to take an umbrella or not is your decision"
                     )
-                
+            st.devider()    
             # =========================================================
             # BERNOULLI TRIAL
             # =========================================================
@@ -217,7 +217,7 @@ def weather_section():
                     st.session_state.bernoulli_result = None
                 result = st.session_state.get("bernoulli_result", 0)
                 st.write(f"Bernoulli Result: {result}")
-                git
+                
                 if "sustainable" not in st.session_state:
                     st.session_state.sustainable = 0
                 if "unsustainable" not in st.session_state:
@@ -245,6 +245,7 @@ def weather_section():
                         st.error("Unsustainable outcome")
                         st.session_state.unsustainable += 1
                 st.session_state.total += 1
+                
                 st.divider()
 
                 # 3. Calculate the total instantly on the fly (Prevents +1 overhead errors)
