@@ -143,7 +143,6 @@ def weather_section():
             st.write(
                 f"**Humidity:** {data['humidity']}%"
             )
-            #st.devider()
             # =========================================================
             # RAIN PROBABILITY
             # =========================================================
@@ -155,7 +154,6 @@ def weather_section():
                     "Rain Probability",
                     f"{round(rain_prob * 100)}%"
                 )
-            #st.devider()
             # =========================================================
             # WEATHER DECISION DICE
             # =========================================================
@@ -199,7 +197,6 @@ def weather_section():
                     st.success(
                         "☔ Though it might rain, to take an umbrella or not is your decision"
                     )
-                #st.devider() 
         except Exception as e:
             st.error(
                 f"Unexpected display error: {e}"
