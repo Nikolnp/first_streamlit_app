@@ -8,7 +8,7 @@ import uuid
 from PIL import Image
 import random
 import time
-#from scipy.stats import bernoulli
+from scipy.stats import bernoulli
 # =========================================================
 # BERNOULLI TRIAL
 # =========================================================
@@ -74,12 +74,12 @@ def sustainability_section():
     
     except KeyError as e:
     
-    st.error(
-        f"Display error: missing field {e}"
-    )
+        st.error(
+            f"Display error: missing field {e}"
+        )
     
     except Exception as e:
     
-    st.error(
-        f"Unexpected display error: {e}"
-    )
+        st.error(
+            f"Unexpected display error: {e}"
+        )
