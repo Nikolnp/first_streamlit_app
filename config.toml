@@ -1,0 +1,7 @@
+[server]
+# True enforces protection (Default). False turns it off.
+enableCORS = true
+enableXsrfProtection = true
+
+# Explicitly allow domains if your app communicates across origins
+corsAllowedOrigins = ["http://localhost:8501"]
