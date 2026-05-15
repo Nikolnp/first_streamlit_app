@@ -44,7 +44,6 @@ def get_weather(city, api_key):
             return None
 
         data = response.json()
-
         # Validate expected fields exist
         try:
 

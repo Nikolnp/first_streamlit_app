@@ -21,16 +21,17 @@ def sustainability_section():
             0.5
         )
         # 1. Initialize the only two variables you need
-        if 'bernoulli_result' not in st.session_state.bernoulli_result:
+        if 'bernoulli_result' not in st.session_state:
             st.session_state.bernoulli_result = None
-        result = st.session_state.get("bernoulli_result", 0)
-        st.write(f"Bernoulli Result: {result}")
+        result = st.session_state.bernoulli_result
+        #st.write(f"Bernoulli Result: {result}")
         
         if "sustainable" not in st.session_state:
-            st.session_state.sustainable = 0
+            st.session_state['sustainable'] = 0
         if "unsustainable" not in st.session_state:
-            st.session_state.unsustainable = 0
-    
+            st.session_state['unsustainable'] = 0
+        if "total" not in st.session_state:
+            st.session_state['total'] = 0
         # 2. Separate functions to strictly modify the counts
         def increment_sustainable():
             st.session_state.sustainable += 1
@@ -44,7 +45,7 @@ def sustainability_section():
         ):
             st.session_state.bernoulli_result = bernoulli.rvs(p)
         result = st.session_state.bernoulli_result
-        st.write(f"DEBUG result: {result}")
+        # st.write(f"DEBUG result: {result}")
         if result is not None:
             if result == 1:
                 st.success("Sustainable outcome")
@@ -54,7 +55,7 @@ def sustainability_section():
                 st.session_state.unsustainable += 1
         st.session_state.total += 1
         
-        st.divider()
+        #st.divider()
     
         # 3. Calculate the total instantly on the fly (Prevents +1 overhead errors)
         total_outcomes = st.session_state.sustainable + st.session_state.unsustainable
