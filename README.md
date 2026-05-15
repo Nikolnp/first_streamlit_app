@@ -32,3 +32,9 @@ Ensure you have Python installed on your system and follow these setup instructi
    ```bash
    git clone https://github.com/yourusername/wellness-dashboard.git
    cd wellness-dashboard
+### Backend
+- containerized Python process
+- virtual environment
+- dependency layer
+- cached filesystem
+- session memory
