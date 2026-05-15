@@ -212,16 +212,20 @@ def weather_section():
                     1.0,
                     0.5
                 )
-                #bernoulli_result session logic
-                if 'bernoulli_result' not in st.session_state:
-                    st.session_state.bernoulli_result  = None
-                # Initialize the three counters
+                # 1. Initialize the only two variables you need
+                if 'bernoulli_result' not in st.session_state.bernoulli_result:
+                    st.session_state.bernoulli_result = 0
                 if "sustainable" not in st.session_state:
                     st.session_state.sustainable = 0
                 if "unsustainable" not in st.session_state:
                     st.session_state.unsustainable = 0
-                if "total" not in st.session_state:
-                    st.session_state.total = 0
+
+                # 2. Separate functions to strictly modify the counts
+                def increment_sustainable():
+                    st.session_state.sustainable += 1
+
+                def increment_unsustainable():
+                    st.session_state.unsustainable += 1
                 
                 if st.button(
                     "Run Bernoulli Trial",
@@ -240,20 +244,15 @@ def weather_section():
                 st.session_state.total += 1
                 st.divider()
 
-                # Display variables side-by-side using 3 columns
+                # 3. Calculate the total instantly on the fly (Prevents +1 overhead errors)
+                total_outcomes = st.session_state.sustainable + st.session_state.unsustainable
+
+                # 4. Display the results in 3 columns
                 col1, col2, col3 = st.columns(3)
 
-                with col1:
-                    st.subheader("Sustainable outcomes")
-                    st.write(f"Count: {st.session_state.sustainable}")
-
-                with col2:
-                    st.subheader("Unsustainable outcomes")
-                    st.write(f"Count: {st.session_state.unsustainable}")
-
-                with col3:
-                    st.subheader("Total Outcomes")
-                    st.write(f"Count: {st.session_state.total}")
+                col1.metric("Sustainable outcomes", st.session_state.sustainable)
+                col2.metric("Unsustainable outcomes", st.session_state.unsustainable)
+                col3.metric("Total Outcomes", total_outcomes)
 
             except Exception as e:
 
