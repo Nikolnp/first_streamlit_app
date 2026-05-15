@@ -199,6 +199,10 @@ def weather_section():
                     st.success(
                         "☔ Though it might rain, to take an umbrella or not is your decision"
                     )
+    except Exception as e:
+        st.error(
+            f"Unexpected display error: {e}"
+        )
             st.devider()    
 # =========================================================
 # RAIN PROBABILITY ESTIMATION
