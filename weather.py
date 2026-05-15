@@ -215,7 +215,9 @@ def weather_section():
                 #bernoulli_result session logic
                 if 'bernoulli_result' not in st.session_state:
                     st.session_state.bernoulli_result  = None
-
+                yes_counter = 0
+                no_counter = 0
+                total = 0
                 if st.button(
                     "Run Bernoulli Trial",
                     key="bernoulli_button"
@@ -226,9 +228,12 @@ def weather_section():
                 if result is not None:
                     if result == 1:
                         st.success("Sustainable outcome")
+                        yes_counter += 1
                     else:
                         st.error("Unsustainable outcome")
-
+                        no_counter += 1
+                total += 1
+                print('For every'+ total +' times the button is pressed ' + yes_counter + ' times the result is positive and ' + no_counter+' times the result is negative.')
             except Exception as e:
 
                 st.warning(
