@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 from scipy.stats import bernoulli
-
+from database import get_all_users
 from database import load_emissions
 
 # =========================================================
@@ -123,8 +123,6 @@ def  sustainability_section():
         st.subheader("📈 Outlier Detection (IQR)")
 
         try:
-            from database import get_all_users
-
             data = get_all_users()
             df_all = pd.DataFrame(data)
 
