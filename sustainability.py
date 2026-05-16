@@ -1,8 +1,10 @@
+from random import random
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 from PIL import Image
-from scipy.stats import bernoulli
+#from scipy.stats import bernoulli
 from database import get_all_users
 from database import load_emissions
 
@@ -185,7 +187,8 @@ def bernoulli_section():
             "Run Bernoulli Trial",
             key="bernoulli_button"
         ):
-            st.session_state.bernoulli_result = bernoulli.rvs(p)
+            st.session_state.result = 1 if random.random() < p else 0
+            #st.session_state.bernoulli_result = bernoulli.rvs(p)
         result = st.session_state.bernoulli_result
         # st.write(f"DEBUG result: {result}")
         if result is not None:
