@@ -187,10 +187,7 @@ def bernoulli_section():
             "Run Bernoulli Trial",
             key="bernoulli_button"
         ):
-            if random.random() < p:
-                result = 1 
-            else 
-                result = 0
+            result = 1 if random.random() < p else 0
             st.session_state.bernoulli_result = result
         result = st.session_state.bernoulli_result
         st.write(f"DEBUG result: {result}")
