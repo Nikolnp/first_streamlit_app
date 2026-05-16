@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 #from scipy.stats import bernoulli
-from database import get_all_users
+from database import get_emissions_analytics
 from database import load_emissions
 
 # =========================================================
