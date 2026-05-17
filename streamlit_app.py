@@ -59,12 +59,13 @@ def main():
         "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
     )
 
-    col1, col2, col3 = st.columns(3)
-    tab1, tab2, tab3,tab4= st.tabs([
+    col1, col2, col3 = st.columns(5)
+    tab1, tab2, tab3,tab4,tab5 = st.tabs([
         "Sustainability Calculator",
         'Food Ideas',
         "Smoothie Maker",
-        'Wellness Excercises'
+        'Wellness Excercises',
+        'Blog'
     ])
 
     with tab1:
