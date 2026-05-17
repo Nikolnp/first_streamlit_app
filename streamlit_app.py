@@ -66,7 +66,7 @@ def main():
         "Smoothie Maker",
         'Wellness Excercises',
         'Blog',
-        'Science Podcast,
+        'Science Podcast',
         'Education & Learning'
         
     ])
