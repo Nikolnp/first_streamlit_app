@@ -60,12 +60,15 @@ def main():
     )
 
     col1, col2, col3 = st.columns(3)
-    tab1, tab2, tab3,tab4,tab5 = st.tabs([
+    tab1, tab2, tab3,tab4,tab5, tab6, tab7 = st.tabs([
         "Sustainability Calculator",
         'Food Ideas',
         "Smoothie Maker",
         'Wellness Excercises',
-        'Blog'
+        'Blog',
+        'Science Podcast,
+        'Education & Learning'
+        
     ])
 
     with tab1:
