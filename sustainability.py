@@ -181,20 +181,25 @@ def bernoulli_section():
             st.session_state['total'] = 0
 
         # =====================================================
-        # RESET COUNTERS IF p CHANGES
+        # RESET EXPERIMENT IF p CHANGES
         # =====================================================
         
         if p != st.session_state.previous_p:
         
+            # reset counters
             st.session_state.sustainable = 0
         
             st.session_state.unsustainable = 0
         
+            # reset previous result
+            st.session_state.bernoulli_result = None
+        
+            # update stored probability
             st.session_state.previous_p = p
         
             st.warning(
                 "Probability changed. "
-                "Bernoulli experiment reset."
+                "Experiment reset."
             )
         # 2. Separate functions to strictly modify the counts
         def increment_sustainable():
