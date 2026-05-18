@@ -125,6 +125,7 @@ def  sustainability_section():
         st.subheader("📈 Outlier Detection (IQR)")
 
         try:
+            #implement the method
             data = get_all_users()
             df_all = pd.DataFrame(data)
 
