@@ -432,6 +432,49 @@ def save_article(
     finally:
 
         conn.close()
+#Load Published Articles functions
+def load_published_articles():
+
+    conn = get_connection()
+
+    if conn is None:
+        return pd.DataFrame()
+
+    try:
+
+        query = """
+
+        SELECT
+            article_id,
+            title,
+            excerpt,
+            content,
+            author,
+            created_at
+
+        FROM articles
+
+        WHERE status = 'published'
+
+        ORDER BY created_at DESC
+
+        """
+
+        df = pd.read_sql(query, conn)
+
+        return df
+
+    except Exception as e:
+
+        st.error(
+            f"Loading articles failed: {e}"
+        )
+
+        return pd.DataFrame()
+
+    finally:
+
+        conn.close()
 
 #def get_all_users():
     
