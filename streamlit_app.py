@@ -17,7 +17,7 @@ from sustainability import bernoulli_section
 #from analytics import analytics_section
 
 #database
-from database import init_db
+from database import init_db, save_article
 
 
 #path to database ; code used for debugging
