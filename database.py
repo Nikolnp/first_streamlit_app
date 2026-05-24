@@ -89,6 +89,26 @@ def init_db():
         )
         """)
 
+                #Articles
+        c.execute("""
+        CREATE TABLE IF NOT EXISTS articles (
+        
+            article_id TEXT PRIMARY KEY,
+        
+            title TEXT,
+        
+            excerpt TEXT,
+        
+            content TEXT,
+        
+            author TEXT,
+        
+            status TEXT,
+        
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        """)
+
         conn.commit()
 
     except Exception as e:
@@ -353,25 +373,7 @@ def get_emissions_analytics():
 
         conn.close()
 
-#Articles
-c.execute("""
-CREATE TABLE IF NOT EXISTS articles (
 
-    article_id TEXT PRIMARY KEY,
-
-    title TEXT,
-
-    excerpt TEXT,
-
-    content TEXT,
-
-    author TEXT,
-
-    status TEXT,
-
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
-""")
 
 #def get_all_users():
     
