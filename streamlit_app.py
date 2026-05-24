@@ -15,6 +15,7 @@ from weather import weather_section
 from sustainability import sustainability_section
 from sustainability import bernoulli_section
 #from analytics import analytics_section
+from database import load_published_articles
 
 #database
 from database import init_db, save_article
@@ -110,6 +111,38 @@ def add_article():
         )
     
         st.success("Draft saved")
+
+def display_published_articles():
+
+    st.title("Research Journal")
+    
+    articles = load_published_articles()
+    
+    if not articles.empty:
+    
+        for _, article in articles.iterrows():
+    
+            with st.container():
+    
+                st.subheader(article["title"])
+    
+                st.caption(
+                    f"By {article['author']}"
+                )
+    
+                st.write(article["excerpt"])
+    
+                with st.expander("Read Article"):
+    
+                    st.markdown(
+                        article["content"]
+                    )
+    
+                st.divider()
+    
+    else:
+    
+        st.info("No published articles yet.")
 
 def wellness_excercises():        
     # Display specified videos
