@@ -374,6 +374,64 @@ def get_emissions_analytics():
         conn.close()
 
 
+def save_article(
+    title,
+    excerpt,
+    content,
+    author,
+    status="draft"
+):
+
+    conn = get_connection()
+
+    if conn is None:
+        return False
+
+    try:
+
+        c = conn.cursor()
+
+        article_id = str(uuid.uuid4())
+
+        c.execute("""
+
+            INSERT INTO articles (
+
+                article_id,
+                title,
+                excerpt,
+                content,
+                author,
+                status
+
+            )
+
+            VALUES (?, ?, ?, ?, ?, ?)
+
+        """, (
+
+            article_id,
+            title,
+            excerpt,
+            content,
+            author,
+            status
+
+        ))
+
+        conn.commit()
+
+        return True
+
+    except Exception as e:
+
+        st.error(f"Article save failed: {e}")
+
+        return False
+
+    finally:
+
+        conn.close()
 
 #def get_all_users():
     
