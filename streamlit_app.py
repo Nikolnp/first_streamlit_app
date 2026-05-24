@@ -83,6 +83,34 @@ def main():
     with tab4:
         wellness_excercises()
 
+    with tab5:
+        add_article()
+
+def add_article():
+    st.title("Write Article")
+    
+    title = st.text_input("Title")
+    
+    excerpt = st.text_area("Excerpt")
+    
+    content = st.text_area(
+        "Content",
+        height=400
+    )
+    
+    author = st.text_input("Author")
+    
+    if st.button("Save Draft"):
+    
+        save_article(
+            title,
+            excerpt,
+            content,
+            author
+        )
+    
+        st.success("Draft saved")
+
 def wellness_excercises():        
     # Display specified videos
     st.title("Yoga Videos")
