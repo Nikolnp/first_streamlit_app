@@ -101,14 +101,21 @@ def add_article():
     )
     
     author = st.text_input("Author")
-    
+    status = st.selectbox(
+    "Status",
+    [
+        "draft",
+        "published"
+    ]
+)
     if st.button("Save Draft"):
     
         save_article(
             title,
             excerpt,
             content,
-            author
+            author,
+            status
         )
     
         st.success("Draft saved")
