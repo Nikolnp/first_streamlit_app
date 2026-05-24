@@ -85,6 +85,7 @@ def main():
         wellness_excercises()
 
     with tab5:
+        print('In development...')
         #add_article()
         #display_published_articles()
 
