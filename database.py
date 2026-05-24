@@ -217,6 +217,8 @@ def save_user(user_dict):
 
             user_id = existing_user_id
 
+
+        
         # -------------------------------------------------
         # INSERT EMISSIONS EVENT
         # -------------------------------------------------
@@ -350,6 +352,26 @@ def get_emissions_analytics():
     finally:
 
         conn.close()
+
+#Articles
+c.execute("""
+CREATE TABLE IF NOT EXISTS articles (
+
+    article_id TEXT PRIMARY KEY,
+
+    title TEXT,
+
+    excerpt TEXT,
+
+    content TEXT,
+
+    author TEXT,
+
+    status TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+""")
 
 #def get_all_users():
     
