@@ -86,7 +86,7 @@ def main():
 
     with tab5:
         add_article()
-        display_published_articles()
+        #display_published_articles()
 
 def add_article():
     st.title("Write Article")
