@@ -32,6 +32,7 @@ if "is_admin" not in st.session_state:
 
     st.session_state.is_admin = False
 
+
 # =====================================================
 # ADMIN LOGIN
 # =====================================================
@@ -44,7 +45,17 @@ admin_password = st.sidebar.text_input(
 )
 
 if st.sidebar.button("Login"):
-
+    #check admin secrets
+    admin_secret = st.secrets.get(
+        "ADMIN_KEY"
+    ) 
+    if admin_secret is None:
+        st.error(
+            "Admin secret not configured."
+        )  
+    else:
+        if admin_password == admin_secret:
+            st.session_state.is_admin = True
     if admin_password == st.secrets["ADMIN_KEY"]:
 
         st.session_state.is_admin = True
