@@ -24,6 +24,53 @@ from database import init_db, save_article
 #path to database ; code used for debugging
 #st.write(os.getcwd())
 
+# =====================================================
+# SESSION AUTH STATE
+# =====================================================
+
+if "is_admin" not in st.session_state:
+
+    st.session_state.is_admin = False
+
+# =====================================================
+# ADMIN LOGIN
+# =====================================================
+
+st.sidebar.subheader("Admin Access")
+
+admin_password = st.sidebar.text_input(
+    "Admin Password",
+    type="password"
+)
+
+if st.sidebar.button("Login"):
+
+    if admin_password == st.secrets["ADMIN_KEY"]:
+
+        st.session_state.is_admin = True
+
+        st.sidebar.success(
+            "Admin authenticated"
+        )
+
+    else:
+
+        st.sidebar.error(
+            "Invalid admin password"
+        )
+
+if st.session_state.is_admin:
+
+    st.sidebar.success(
+        "Admin session active"
+    )
+
+    if st.sidebar.button("Logout"):
+
+        st.session_state.is_admin = False
+
+        st.rerun()
+
 def main():
     
     #App title
@@ -85,10 +132,13 @@ def main():
         wellness_excercises()
 
     with tab5:
-        print('In development...')
-        #add_article()
+        if st.session_state.is_admin:
+            add_article()
+        else: 
+            st.info(
+                "Admin access required."
+            )
         #display_published_articles()
-
 def add_article():
     st.title("Write Article")
     
