@@ -48,6 +48,7 @@ if st.sidebar.button("Login"):
     #check admin secrets
     admin_secret = st.secrets.get(
         "ADMIN_KEY"
+    st.write(st.secrets)
     ) 
     if admin_secret is None:
         st.error(
