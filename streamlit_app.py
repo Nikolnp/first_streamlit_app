@@ -48,7 +48,6 @@ if st.sidebar.button("Login"):
     #check admin secrets
     admin_secret = st.secrets.get(
         "ADMIN_KEY"
-    st.write(st.secrets)
     ) 
     if admin_secret is None:
         st.error(
@@ -58,9 +57,9 @@ if st.sidebar.button("Login"):
         if admin_password == admin_secret:
             st.session_state.is_admin = True
     if admin_password == st.secrets["ADMIN_KEY"]:
-
+        st.write(st.secrets)
         st.session_state.is_admin = True
-
+        st.write('')
         st.sidebar.success(
             "Admin authenticated"
         )
