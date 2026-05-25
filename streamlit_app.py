@@ -49,6 +49,7 @@ if st.sidebar.button("Login"):
     admin_secret = st.secrets.get(
         "ADMIN_KEY"
     ) 
+    st.write(dict(st.secrets))
     if admin_secret is None:
         st.error(
             "Admin secret not configured."
