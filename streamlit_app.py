@@ -16,7 +16,7 @@ from sustainability import sustainability_section
 from sustainability import bernoulli_section
 #from analytics import analytics_section
 from database import load_published_articles
-
+from analytics import bernoulli
 #database
 from database import init_db, save_article
 
@@ -151,6 +151,9 @@ def main():
                 "Admin access required."
             )
         #display_published_articles()
+    with tab6:
+        st.title("Interactive Learning Dashboard")
+        bernoulli()
 def add_article():
     st.title("Write Article")
     
