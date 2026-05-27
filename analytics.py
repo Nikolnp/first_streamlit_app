@@ -58,7 +58,7 @@ def visualize_outcomes(history):
 # BERNOULLI SECTION
 # =========================================================
 
-def bernoulli_section():
+def bernoulli():
 
     try:
 
