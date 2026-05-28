@@ -10,7 +10,7 @@ from PIL import Image
 import random
 import time
 from random import random
-
+import altair as alt
 
 #section imports
 from weather import weather_section
