@@ -519,7 +519,7 @@ def bernoulli():
 
             "Run Bernoulli Trial",
 
-            key="bernoulli_button"
+            key="b_button"
         ):
 
             result = 1 if random() < p else 0
