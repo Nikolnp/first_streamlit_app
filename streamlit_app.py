@@ -9,6 +9,7 @@ import uuid
 from PIL import Image
 import random
 import time
+from random import random
 
 
 #section imports
