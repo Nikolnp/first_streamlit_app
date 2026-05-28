@@ -9,6 +9,8 @@ import uuid
 from PIL import Image
 import random
 import time
+import plotly.express as px
+
 
 #section imports
 from weather import weather_section
