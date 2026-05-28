@@ -374,12 +374,6 @@ with st.sidebar:
 # BERNOULLI LEARNING VISUALIZATION ENGINE
 # =========================================================
 
-from random import random
-
-import streamlit as st
-import pandas as pd
-import plotly.express as px
-
 
 # =========================================================
 # VISUALIZATION FUNCTION
