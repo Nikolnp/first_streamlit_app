@@ -517,24 +517,24 @@ def bernoulli():
 
         def reset_bernoulli_experiment():
     
-        st.session_state.sustainable = 0
-    
-        st.session_state.unsustainable = 0
-    
-        st.session_state.total = 0
-    
-        st.session_state.bernoulli_result = None
-    
-        st.session_state.trial_history = []
-    
-        st.session_state.sustainable_history = []
-    
-        st.session_state.unsustainable_history = []
-    
-        st.warning(
-            "Probability changed. "
-            "Experiment reset."
-        )
+            st.session_state.sustainable = 0
+        
+            st.session_state.unsustainable = 0
+        
+            st.session_state.total = 0
+        
+            st.session_state.bernoulli_result = None
+        
+            st.session_state.trial_history = []
+        
+            st.session_state.sustainable_history = []
+        
+            st.session_state.unsustainable_history = []
+        
+            st.warning(
+                "Probability changed. "
+                "Experiment reset."
+            )
 
         # =================================================
         # RUN BERNOULLI TRIAL
