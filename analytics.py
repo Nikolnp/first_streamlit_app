@@ -35,24 +35,40 @@ def visualize_outcomes(history):
         ]
     })
 
-    fig = px.scatter(
-
-        df,
+    chart = alt.Chart(df).mark_circle(
+        size=120
+    ).encode(
 
         x="Trial",
 
-        y="Outcome",
+        y=alt.Y(
+            "Outcome",
+            sort=[
+                "Sustainable",
+                "Unsustainable"
+            ]
+        ),
 
         color="Outcome",
 
-        title="Bernoulli Trial Visualization"
+        tooltip=[
+            "Trial",
+            "Outcome"
+        ]
+    ).properties(
+
+        title=
+        "Bernoulli Trial Visualization",
+
+        width=700,
+
+        height=300
     )
 
-    st.plotly_chart(
-        fig,
+    st.altair_chart(
+        chart,
         use_container_width=True
     )
-
 
 # =========================================================
 # BERNOULLI SECTION
