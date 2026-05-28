@@ -613,7 +613,7 @@ def bernoulli():
             "📘 Bernoulli Formula"
         )
 
-        :contentReference[oaicite:0]{index=0}
+        st.latex(r"P(X=1)=p")
 
         # =================================================
         # VISUALIZATION
