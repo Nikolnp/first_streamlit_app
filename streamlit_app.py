@@ -426,7 +426,7 @@ def visualize_outcomes(history):
 # =========================================================
 
 def bernoulli():
-
+    
     try:
 
         st.title(
@@ -440,14 +440,17 @@ def bernoulli():
         p = st.slider(
 
             "Probability of sustainable day",
-
+        
             0.0,
-
+        
             1.0,
-
-            0.5
+        
+            0.5,
+        
+            key="bernoulli_probability",
+        
+            on_change=reset_bernoulli_experiment
         )
-
         # =================================================
         # SESSION INITIALIZATION
         # =================================================
@@ -511,6 +514,27 @@ def bernoulli():
                 "Probability changed. "
                 "Experiment reset."
             )
+
+        def reset_bernoulli_experiment():
+    
+        st.session_state.sustainable = 0
+    
+        st.session_state.unsustainable = 0
+    
+        st.session_state.total = 0
+    
+        st.session_state.bernoulli_result = None
+    
+        st.session_state.trial_history = []
+    
+        st.session_state.sustainable_history = []
+    
+        st.session_state.unsustainable_history = []
+    
+        st.warning(
+            "Probability changed. "
+            "Experiment reset."
+        )
 
         # =================================================
         # RUN BERNOULLI TRIAL
