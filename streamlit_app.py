@@ -372,11 +372,6 @@ with st.sidebar:
     bernoulli_section()
 
 # =========================================================
-# BERNOULLI LEARNING VISUALIZATION ENGINE
-# =========================================================
-
-
-# =========================================================
 # VISUALIZATION FUNCTION
 # =========================================================
 
@@ -397,7 +392,6 @@ def visualize_outcomes(history):
             "Sustainable"
             if x == 1
             else "Unsustainable"
-
             for x in history
         ]
     })
@@ -425,13 +419,35 @@ def visualize_outcomes(history):
 # BERNOULLI SECTION
 # =========================================================
 
-def bernoulli():
-    
+def bernoulli(): 
     try:
-
         st.title(
             "🧠 Bernoulli Trial Explorer"
         )
+        # =================================================
+        # RESET EXPERIMENT IF p CHANGES
+        # =================================================
+
+        def reset_bernoulli_experiment():
+    
+            st.session_state.sustainable = 0
+        
+            st.session_state.unsustainable = 0
+        
+            st.session_state.total = 0
+        
+            st.session_state.bernoulli_result = None
+        
+            st.session_state.trial_history = []
+        
+            st.session_state.sustainable_history = []
+        
+            st.session_state.unsustainable_history = []
+        
+            st.warning(
+                "Probability changed. "
+                "Experiment reset."
+            )
 
         # =================================================
         # PROBABILITY SLIDER
@@ -487,31 +503,7 @@ def bernoulli():
 
             st.session_state.unsustainable_history = []
 
-        # =================================================
-        # RESET EXPERIMENT IF p CHANGES
-        # =================================================
-
-        def reset_bernoulli_experiment():
-    
-            st.session_state.sustainable = 0
-        
-            st.session_state.unsustainable = 0
-        
-            st.session_state.total = 0
-        
-            st.session_state.bernoulli_result = None
-        
-            st.session_state.trial_history = []
-        
-            st.session_state.sustainable_history = []
-        
-            st.session_state.unsustainable_history = []
-        
-            st.warning(
-                "Probability changed. "
-                "Experiment reset."
-            )
-
+       
         # =================================================
         # RUN BERNOULLI TRIAL
         # =================================================
