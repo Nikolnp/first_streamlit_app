@@ -371,48 +371,60 @@ with st.sidebar:
     st.title('Bernoulli Trial Simulation ⚖️')
     bernoulli_section()
 
-# =========================================================
-# VISUALIZATION FUNCTION
-# =========================================================
-
-def visualize_outcomes(history):
-
-    if len(history) == 0:
-
-        st.info("No trials yet.")
-
-        return
-
-    df = pd.DataFrame({
-
-        "Trial": list(range(len(history))),
-
-        "Outcome": [
-
-            "Sustainable"
-            if x == 1
-            else "Unsustainable"
-            for x in history
-        ]
-    })
-
-    fig = px.scatter(
-
-        df,
-
-        x="Trial",
-
-        y="Outcome",
-
-        color="Outcome",
-
-        title="Bernoulli Trial Visualization"
-    )
-
-    st.plotly_chart(
-        fig,
-        use_container_width=True
-    )
+    # =========================================================
+    # VISUALIZATION FUNCTION
+    # =========================================================
+    
+    def visualize_outcomes(history):
+    
+        if len(history) == 0:
+    
+            st.info("No trials yet.")
+    
+            return
+    
+        df = pd.DataFrame({
+    
+            "Trial": list(range(len(history))),
+    
+            "Outcome": [
+    
+                "Sustainable"
+                if x == 1
+                else "Unsustainable"
+    
+                for x in history
+            ]
+        })
+    
+        chart = alt.Chart(df).mark_circle(
+            size=120
+        ).encode(
+    
+            x="Trial",
+    
+            y="Outcome",
+    
+            color="Outcome",
+    
+            tooltip=[
+                "Trial",
+                "Outcome"
+            ]
+        ).properties(
+    
+            title=
+            "Bernoulli Trial Visualization",
+    
+            width=700,
+    
+            height=300
+        )
+    
+        st.altair_chart(
+            chart,
+            use_container_width=True
+        )
 
 
 # =========================================================
@@ -448,7 +460,27 @@ def bernoulli():
                 "Probability changed. "
                 "Experiment reset."
             )
-
+        if "current_page" not in st.session_state:
+        
+            st.session_state.current_page = (
+                "Bernoulli Trials"
+            )
+        
+        page = st.sidebar.selectbox(
+        
+            "Choose Module",
+        
+            [
+        
+                "Bernoulli Trials",
+        
+                "Linear Regression",
+        
+                "Clustering"
+            ],
+        
+            key="current_page"
+        )
         # =================================================
         # PROBABILITY SLIDER
         # =================================================
