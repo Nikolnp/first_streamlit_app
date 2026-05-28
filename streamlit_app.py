@@ -491,30 +491,6 @@ def bernoulli():
         # RESET EXPERIMENT IF p CHANGES
         # =================================================
 
-        if p != st.session_state.previous_p:
-
-            st.session_state.sustainable = 0
-
-            st.session_state.unsustainable = 0
-
-            st.session_state.total = 0
-
-            st.session_state.bernoulli_result = None
-
-            st.session_state.trial_history = []
-
-            st.session_state.sustainable_history = []
-
-            st.session_state.unsustainable_history = []
-
-            st.session_state.previous_p = p
-
-            st.warning(
-
-                "Probability changed. "
-                "Experiment reset."
-            )
-
         def reset_bernoulli_experiment():
     
             st.session_state.sustainable = 0
