@@ -587,21 +587,21 @@ def bernoulli():
                     1
                 )
 
-            st.session_state.total += 1
-            st.write(
-                "Trial History:",
-                st.session_state.trial_history
-            )
-            
-            st.write(
-                "Sustainable History:",
-                st.session_state.sustainable_history
-            )
-            
-            st.write(
-                "Unsustainable History:",
-                st.session_state.unsustainable_history
-            )
+                st.session_state.total += 1
+                st.write(
+                    "Trial History:",
+                    st.session_state.trial_history
+                )
+                
+                st.write(
+                    "Sustainable History:",
+                    st.session_state.sustainable_history
+                )
+                
+                st.write(
+                    "Unsustainable History:",
+                    st.session_state.unsustainable_history
+                )
         # =================================================
         # METRICS
         # =================================================
