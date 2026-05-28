@@ -153,7 +153,7 @@ def main():
                 "Admin access required."
             )
         #display_published_articles()
-    with tab6:
+    with tab7:
         st.title("Interactive Learning Dashboard")
         bernoulli()
 def add_article():
@@ -564,7 +564,20 @@ def bernoulli():
                 )
 
             st.session_state.total += 1
-
+            st.write(
+                "Trial History:",
+                st.session_state.trial_history
+            )
+            
+            st.write(
+                "Sustainable History:",
+                st.session_state.sustainable_history
+            )
+            
+            st.write(
+                "Unsustainable History:",
+                st.session_state.unsustainable_history
+            )
         # =================================================
         # METRICS
         # =================================================
