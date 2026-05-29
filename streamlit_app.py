@@ -86,6 +86,7 @@ if st.session_state.is_admin:
         st.rerun()
 
 def main():
+    initialize_session_state()
     #App title
     st.set_page_config(
         page_title="The Every Day App",
@@ -261,7 +262,7 @@ def main():
     else:
 
         page["handler"]()
-    initialize_session_state()
+    #initialize_session_state()
    
 
     #Navigation 
