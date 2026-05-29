@@ -264,56 +264,56 @@ def main():
     initialize_session_state()
    
 
-    # #Navigation 
-    # page = st.sidebar.radio(
+    #Navigation 
+    page = st.sidebar.radio(
     
-    #     "Navigation",
+        "Navigation",
     
-    #     options=list(PAGES.keys()),
+        options=list(PAGES.keys()),
     
-    #     format_func=lambda x:
-    #         PAGES[x]["title"],
+        format_func=lambda x:
+            PAGES[x]["title"],
     
-    #     key="active_page"
-    # )
+        key="active_page"
+    )
 
-    # if "active_page" not in st.session_state:
+    if "active_page" not in st.session_state:
     
-    #     st.session_state.active_page = 'sustainability'
+        st.session_state.active_page = 'sustainability'
     
-    #     selected_title = st.sidebar.radio(
+        selected_title = st.sidebar.radio(
     
-    #     "Navigation",
+        "Navigation",
     
-    #     options=[
-    #         page["title"]
-    #         for page in PAGES.values()
-    #     ]
-    # )
+        options=[
+            page["title"]
+            for page in PAGES.values()
+        ]
+    )
             
-    #     current_page = PAGES[
+        current_page = PAGES[
         
-    #     st.session_state.active_page]
+        st.session_state.active_page]
     
-    #     current_page["handler"]()
+        current_page["handler"]()
     
-    #     page = PAGES[st.session_state.active_page]
+        page = PAGES[st.session_state.active_page]
 
-    # if page["admin_only"]:
+    if page["admin_only"]:
     
-    #     if st.session_state.is_admin:
+        if st.session_state.is_admin:
     
-    #         page["handler"]()
+            page["handler"]()
     
-    #     else:
+        else:
     
-    #         st.warning(
-    #             "Admin access required."
-    #         )
-    # else:
-    #     page["handler"]()
+            st.warning(
+                "Admin access required."
+            )
+    else:
+        page["handler"]()
 
-    render_navigation()
+   # render_navigation()
     
     route_to_page()
 
