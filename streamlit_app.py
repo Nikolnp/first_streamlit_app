@@ -758,37 +758,37 @@ def bernoulli():
         # SESSION INITIALIZATION
         # =================================================
 
-        if "bernoulli_result" not in st.session_state:
+        # if "bernoulli_result" not in st.session_state:
 
-            st.session_state.bernoulli_result = None
+        #     st.session_state.bernoulli_result = None
 
-        if "previous_p" not in st.session_state:
+        # if "previous_p" not in st.session_state:
 
-            st.session_state.previous_p = p
+        #     st.session_state.previous_p = p
 
-        if "sustainable" not in st.session_state:
+        # if "sustainable" not in st.session_state:
 
-            st.session_state.sustainable = 0
+        #     st.session_state.sustainable = 0
 
-        if "unsustainable" not in st.session_state:
+        # if "unsustainable" not in st.session_state:
 
-            st.session_state.unsustainable = 0
+        #     st.session_state.unsustainable = 0
 
-        if "total" not in st.session_state:
+        # if "total" not in st.session_state:
 
-            st.session_state.total = 0
+        #     st.session_state.total = 0
 
-        if "trial_history" not in st.session_state:
+        # if "trial_history" not in st.session_state:
 
-            st.session_state.trial_history = []
+        #     st.session_state.trial_history = []
 
-        if "sustainable_history" not in st.session_state:
+        # if "sustainable_history" not in st.session_state:
 
-            st.session_state.sustainable_history = []
+        #     st.session_state.sustainable_history = []
 
-        if "unsustainable_history" not in st.session_state:
+        # if "unsustainable_history" not in st.session_state:
 
-            st.session_state.unsustainable_history = []
+        #     st.session_state.unsustainable_history = []
 
        
         # =================================================
