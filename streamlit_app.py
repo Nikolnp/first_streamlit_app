@@ -96,92 +96,92 @@ def main():
 
         st.session_state.is_admin = False
     # Pages with keys
-        PAGES = {
-        
-            "sustainability": {
-        
-                "title":
-                "🌍 Sustainability Calculator",
-        
-                "handler":
-                sustainability_section,
-        
-                "admin_only":
-                False
-            },
-        
-            "food": {
-        
-                "title":
-                "🍎 Food Ideas",
-        
-                "handler":
-                food_ideas,
-        
-                "admin_only":
-                False
-            },
-        
-            "smoothie": {
-        
-                "title":
-                "🥤 Smoothie Maker",
-        
-                "handler":
-                smoothie_maker_section,
-        
-                "admin_only":
-                False
-            },
-        
-            "wellness": {
-        
-                "title":
-                "🧘 Wellness Exercises",
-        
-                "handler":
-                wellness_excercises,
-        
-                "admin_only":
-                False
-            },
-        
-            "blog": {
-        
-                "title":
-                "📝 Blog",
-        
-                "handler":
-                add_article,
-        
-                "admin_only":
-                True
-            },
-        
-            "podcast": {
-        
-                "title":
-                "🎙 Science Podcast",
-        
-                "handler":
-                science_podcast,
-        
-                "admin_only":
-                False
-            },
-        
-            "learning": {
-        
-                "title":
-                "🧠 Education & Learning",
-        
-                "handler":
-                bernoulli,
-        
-                "admin_only":
-                False
-            }
+    PAGES = {
+    
+        "sustainability": {
+    
+            "title":
+            "🌍 Sustainability Calculator",
+    
+            "handler":
+            sustainability_section,
+    
+            "admin_only":
+            False
+        },
+    
+        "food": {
+    
+            "title":
+            "🍎 Food Ideas",
+    
+            "handler":
+            food_ideas,
+    
+            "admin_only":
+            False
+        },
+    
+        "smoothie": {
+    
+            "title":
+            "🥤 Smoothie Maker",
+    
+            "handler":
+            smoothie_maker_section,
+    
+            "admin_only":
+            False
+        },
+    
+        "wellness": {
+    
+            "title":
+            "🧘 Wellness Exercises",
+    
+            "handler":
+            wellness_excercises,
+    
+            "admin_only":
+            False
+        },
+    
+        "blog": {
+    
+            "title":
+            "📝 Blog",
+    
+            "handler":
+            add_article,
+    
+            "admin_only":
+            True
+        },
+    
+        "podcast": {
+    
+            "title":
+            "🎙 Science Podcast",
+    
+            "handler":
+            science_podcast,
+    
+            "admin_only":
+            False
+        },
+    
+        "learning": {
+    
+            "title":
+            "🧠 Education & Learning",
+    
+            "handler":
+            bernoulli,
+    
+            "admin_only":
+            False
         }
+    }
     # ==========================================
     # NAVIGATION
     # ==========================================
