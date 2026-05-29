@@ -95,7 +95,93 @@ def main():
     if "is_admin" not in st.session_state:
 
         st.session_state.is_admin = False
-
+    # Pages with keys
+        PAGES = {
+        
+            "sustainability": {
+        
+                "title":
+                "🌍 Sustainability Calculator",
+        
+                "handler":
+                sustainability_section,
+        
+                "admin_only":
+                False
+            },
+        
+            "food": {
+        
+                "title":
+                "🍎 Food Ideas",
+        
+                "handler":
+                food_ideas,
+        
+                "admin_only":
+                False
+            },
+        
+            "smoothie": {
+        
+                "title":
+                "🥤 Smoothie Maker",
+        
+                "handler":
+                smoothie_maker_section,
+        
+                "admin_only":
+                False
+            },
+        
+            "wellness": {
+        
+                "title":
+                "🧘 Wellness Exercises",
+        
+                "handler":
+                wellness_excercises,
+        
+                "admin_only":
+                False
+            },
+        
+            "blog": {
+        
+                "title":
+                "📝 Blog",
+        
+                "handler":
+                add_article,
+        
+                "admin_only":
+                True
+            },
+        
+            "podcast": {
+        
+                "title":
+                "🎙 Science Podcast",
+        
+                "handler":
+                science_podcast,
+        
+                "admin_only":
+                False
+            },
+        
+            "learning": {
+        
+                "title":
+                "🧠 Education & Learning",
+        
+                "handler":
+                bernoulli,
+        
+                "admin_only":
+                False
+            }
+        }
     # ==========================================
     # NAVIGATION
     # ==========================================
@@ -176,131 +262,8 @@ def main():
         "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
     )
 #---------------------------------------------------------------------------------------------------------------------#
-    #Pages with numbers
-    PAGES2 = {
-    
-        1: {
-            "title": "Sustainability Calculator",
-            "handler": sustainability_section
-        },
-    
-        2: {
-            "title": "Food Ideas",
-            "handler": food_ideas
-        },
-    
-        3: {
-            "title": "Smoothie Maker",
-            "handler": smoothie_maker_section
-        },
-    
-        4: {
-            "title": "Wellness Exercises",
-            "handler": wellness_excercises
-        },
-    
-        5: {
-            "title": "Blog",
-            "handler": add_article
-        },
-    
-        6: {
-            "title": "Science Podcast",
-            "handler": science_podcast
-        },
-    
-        7: {
-            "title": "Education & Learning",
-            "handler": bernoulli
-        }
-    }
-# Pages with keys
-    PAGES = {
-    
-        "sustainability": {
-    
-            "title":
-            "🌍 Sustainability Calculator",
-    
-            "handler":
-            sustainability_section,
-    
-            "admin_only":
-            False
-        },
-    
-        "food": {
-    
-            "title":
-            "🍎 Food Ideas",
-    
-            "handler":
-            food_ideas,
-    
-            "admin_only":
-            False
-        },
-    
-        "smoothie": {
-    
-            "title":
-            "🥤 Smoothie Maker",
-    
-            "handler":
-            smoothie_maker_section,
-    
-            "admin_only":
-            False
-        },
-    
-        "wellness": {
-    
-            "title":
-            "🧘 Wellness Exercises",
-    
-            "handler":
-            wellness_excercises,
-    
-            "admin_only":
-            False
-        },
-    
-        "blog": {
-    
-            "title":
-            "📝 Blog",
-    
-            "handler":
-            add_article,
-    
-            "admin_only":
-            True
-        },
-    
-        "podcast": {
-    
-            "title":
-            "🎙 Science Podcast",
-    
-            "handler":
-            science_podcast,
-    
-            "admin_only":
-            False
-        },
-    
-        "learning": {
-    
-            "title":
-            "🧠 Education & Learning",
-    
-            "handler":
-            bernoulli,
-    
-            "admin_only":
-            False
-        }
-    }
+ 
+
     #Navigation 
     page = st.sidebar.radio(
     
