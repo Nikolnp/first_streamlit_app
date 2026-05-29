@@ -86,6 +86,40 @@ if st.session_state.is_admin:
         st.rerun()
 
 def main():
+    #App title
+    st.set_page_config(
+        page_title="The Every Day App",
+        page_icon="🌤️"
+    )
+        
+    st.markdown("""
+    <style>
+    /* Primary Content Area */
+    .main-center-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background-color: #ffffff;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+        "<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>",
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        "<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>",
+        unsafe_allow_html=True
+    )
+
+    st.image(
+        "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
+    )
+#---------------------------------------------------------------------------------------------------------------------#
     if "active_page" not in st.session_state:
 
         st.session_state.active_page = (
