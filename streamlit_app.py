@@ -606,6 +606,9 @@ def smoothie_maker_section():
         st.error(f"Failed to fetch data from Fruityvice API. Status code: {fruityvice_response.status_code}")
     return None  
 
+def science_podcast():
+    # ...
+    
 #LEFT HAND SIDEBAR
 with st.sidebar:
 
