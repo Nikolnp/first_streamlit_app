@@ -607,7 +607,7 @@ def smoothie_maker_section():
     return None  
 
 def science_podcast():
-    # ...
+    write('Coming soon')
     
 #LEFT HAND SIDEBAR
 with st.sidebar:
