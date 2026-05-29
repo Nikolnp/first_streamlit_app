@@ -274,19 +274,20 @@ def main():
     )
 
     for page_id, page in PAGES.items():
-
-    if page["title"] == selected_title:
-
-        st.session_state.active_page = page_id
-
-        break
-
-    current_page = PAGES[
-    st.session_state.active_page]
-
-    current_page["handler"]()
-
-    page = PAGES[st.session_state.active_page]
+        
+        if page["title"] == selected_title:
+            
+            st.session_state.active_page = page_id
+            
+            break
+            
+        current_page = PAGES[
+        
+        st.session_state.active_page]
+    
+        current_page["handler"]()
+    
+        page = PAGES[st.session_state.active_page]
 
     if page["admin_only"]:
     
