@@ -262,129 +262,60 @@ def main():
 
         page["handler"]()
     initialize_session_state()
-    #App title
-    st.set_page_config(
-        page_title="The Every Day App",
-        page_icon="🌤️"
-    )
-        
-    st.markdown("""
-    <style>
-    /* Primary Content Area */
-    .main-center-area {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        background-color: #ffffff;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+   
 
-    st.markdown(
-        "<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>",
-        unsafe_allow_html=True
-    )
+    # #Navigation 
+    # page = st.sidebar.radio(
+    
+    #     "Navigation",
+    
+    #     options=list(PAGES.keys()),
+    
+    #     format_func=lambda x:
+    #         PAGES[x]["title"],
+    
+    #     key="active_page"
+    # )
 
-    st.markdown(
-        "<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>",
-        unsafe_allow_html=True
-    )
-
-    st.image(
-        "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
-    )
-#---------------------------------------------------------------------------------------------------------------------#
- 
-
-    #Navigation 
-    page = st.sidebar.radio(
+    # if "active_page" not in st.session_state:
     
-        "Navigation",
+    #     st.session_state.active_page = 'sustainability'
     
-        options=list(PAGES.keys()),
+    #     selected_title = st.sidebar.radio(
     
-        format_func=lambda x:
-            PAGES[x]["title"],
+    #     "Navigation",
     
-        key="active_page"
-    )
-
-    if "active_page" not in st.session_state:
-    
-        st.session_state.active_page = 'sustainability'
-    
-        selected_title = st.sidebar.radio(
-    
-        "Navigation",
-    
-        options=[
-            page["title"]
-            for page in PAGES.values()
-        ]
-    )
+    #     options=[
+    #         page["title"]
+    #         for page in PAGES.values()
+    #     ]
+    # )
             
-        current_page = PAGES[
+    #     current_page = PAGES[
         
-        st.session_state.active_page]
+    #     st.session_state.active_page]
     
-        current_page["handler"]()
+    #     current_page["handler"]()
     
-        page = PAGES[st.session_state.active_page]
+    #     page = PAGES[st.session_state.active_page]
 
-    if page["admin_only"]:
+    # if page["admin_only"]:
     
-        if st.session_state.is_admin:
+    #     if st.session_state.is_admin:
     
-            page["handler"]()
+    #         page["handler"]()
     
-        else:
+    #     else:
     
-            st.warning(
-                "Admin access required."
-            )
-    else:
-        page["handler"]()
+    #         st.warning(
+    #             "Admin access required."
+    #         )
+    # else:
+    #     page["handler"]()
 
     render_navigation()
     
     route_to_page()
-    # col1, col2, col3 = st.columns(3)
-    # tab1, tab2, tab3,tab4,tab5, tab6, tab7 = st.tabs([
-    #     "Sustainability Calculator",
-    #     'Food Ideas',
-    #     "Smoothie Maker",
-    #     'Wellness Excercises',
-    #     'Blog',
-    #     'Science Podcast',
-    #     'Education & Learning'
-        
-    # ])
-
-    # with tab1:
-    #     sustainability_section()
-
-    # with tab2:
-    #     food_ideas()
-
-    # with tab3:
-    #     smoothie_maker_section()
-
-    # with tab4:
-    #     wellness_excercises()
-
-    # with tab5:
-    #     if st.session_state.is_admin:
-    #         add_article()
-    #     else: 
-    #         st.info(
-    #             "Admin access required."
-    #         )
-    #     #display_published_articles()
-    # with tab7:
-    #     st.title("Interactive Learning Dashboard")
-    #     bernoulli()
 
 def initialize_session_state():
     defaults = {
