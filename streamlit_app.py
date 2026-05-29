@@ -261,7 +261,7 @@ def main():
 
     if "active_page" not in st.session_state:
     
-        st.session_state.active_page = 1
+        st.session_state.active_page = 'sustainability'
     
         selected_title = st.sidebar.radio(
     
@@ -272,14 +272,6 @@ def main():
             for page in PAGES.values()
         ]
     )
-
-    for page_id, page in PAGES.items():
-        
-        if page["title"] == selected_title:
-            
-            st.session_state.active_page = page_id
-            
-            break
             
         current_page = PAGES[
         
