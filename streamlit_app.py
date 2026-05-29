@@ -122,7 +122,7 @@ def main():
     )
 #---------------------------------------------------------------------------------------------------------------------#
     #Pages with numbers
-    PAGES = {
+    PAGES2 = {
     
         1: {
             "title": "Sustainability Calculator",
@@ -160,7 +160,7 @@ def main():
         }
     }
 # Pages with keys
-    PAGES2 = {
+    PAGES = {
     
         "sustainability": {
     
