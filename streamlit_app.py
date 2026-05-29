@@ -86,7 +86,7 @@ if st.session_state.is_admin:
         st.rerun()
 
 def main():
-    
+    initialize_session_state()
     #App title
     st.set_page_config(
         page_title="The Every Day App",
@@ -120,42 +120,296 @@ def main():
     st.image(
         "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
     )
+#---------------------------------------------------------------------------------------------------------------------#
+    #Pages with numbers
+    PAGES = {
+    
+        1: {
+            "title": "Sustainability Calculator",
+            "handler": sustainability_section
+        },
+    
+        2: {
+            "title": "Food Ideas",
+            "handler": food_ideas
+        },
+    
+        3: {
+            "title": "Smoothie Maker",
+            "handler": smoothie_maker_section
+        },
+    
+        4: {
+            "title": "Wellness Exercises",
+            "handler": wellness_excercises
+        },
+    
+        5: {
+            "title": "Blog",
+            "handler": add_article
+        },
+    
+        6: {
+            "title": "Science Podcast",
+            "handler": science_podcast
+        },
+    
+        7: {
+            "title": "Education & Learning",
+            "handler": bernoulli
+        }
+    }
+# Pages with keys
+    PAGES2 = {
+    
+        "sustainability": {
+    
+            "title":
+            "🌍 Sustainability Calculator",
+    
+            "handler":
+            sustainability_section,
+    
+            "admin_only":
+            False
+        },
+    
+        "food": {
+    
+            "title":
+            "🍎 Food Ideas",
+    
+            "handler":
+            food_ideas,
+    
+            "admin_only":
+            False
+        },
+    
+        "smoothie": {
+    
+            "title":
+            "🥤 Smoothie Maker",
+    
+            "handler":
+            smoothie_maker_section,
+    
+            "admin_only":
+            False
+        },
+    
+        "wellness": {
+    
+            "title":
+            "🧘 Wellness Exercises",
+    
+            "handler":
+            wellness_excercises,
+    
+            "admin_only":
+            False
+        },
+    
+        "blog": {
+    
+            "title":
+            "📝 Blog",
+    
+            "handler":
+            add_article,
+    
+            "admin_only":
+            True
+        },
+    
+        "podcast": {
+    
+            "title":
+            "🎙 Science Podcast",
+    
+            "handler":
+            science_podcast,
+    
+            "admin_only":
+            False
+        },
+    
+        "learning": {
+    
+            "title":
+            "🧠 Education & Learning",
+    
+            "handler":
+            bernoulli,
+    
+            "admin_only":
+            False
+        }
+    }
+    #Navigation 
+    page = st.sidebar.radio(
+    
+        "Navigation",
+    
+        options=list(PAGES.keys()),
+    
+        format_func=lambda x:
+            PAGES[x]["title"],
+    
+        key="active_page"
+    )
 
-    col1, col2, col3 = st.columns(3)
-    tab1, tab2, tab3,tab4,tab5, tab6, tab7 = st.tabs([
-        "Sustainability Calculator",
-        'Food Ideas',
-        "Smoothie Maker",
-        'Wellness Excercises',
-        'Blog',
-        'Science Podcast',
-        'Education & Learning'
-        
-    ])
+    if "active_page" not in st.session_state:
+    
+        st.session_state.active_page = 1
+    
+        selected_title = st.sidebar.radio(
+    
+        "Navigation",
+    
+        options=[
+            page["title"]
+            for page in PAGES.values()
+        ]
+    )
 
-    with tab1:
-        sustainability_section()
+    for page_id, page in PAGES.items():
 
-    with tab2:
-        food_ideas()
+    if page["title"] == selected_title:
 
-    with tab3:
-        smoothie_maker_section()
+        st.session_state.active_page = page_id
 
-    with tab4:
-        wellness_excercises()
+        break
 
-    with tab5:
+    current_page = PAGES[
+    st.session_state.active_page]
+
+    current_page["handler"]()
+
+    page = PAGES[st.session_state.active_page]
+
+    if page["admin_only"]:
+    
         if st.session_state.is_admin:
-            add_article()
-        else: 
-            st.info(
+    
+            page["handler"]()
+    
+        else:
+    
+            st.warning(
                 "Admin access required."
             )
-        #display_published_articles()
-    with tab7:
-        st.title("Interactive Learning Dashboard")
-        bernoulli()
+    else:
+        page["handler"]()
+
+    render_navigation()
+    
+    route_to_page()
+    # col1, col2, col3 = st.columns(3)
+    # tab1, tab2, tab3,tab4,tab5, tab6, tab7 = st.tabs([
+    #     "Sustainability Calculator",
+    #     'Food Ideas',
+    #     "Smoothie Maker",
+    #     'Wellness Excercises',
+    #     'Blog',
+    #     'Science Podcast',
+    #     'Education & Learning'
+        
+    # ])
+
+    # with tab1:
+    #     sustainability_section()
+
+    # with tab2:
+    #     food_ideas()
+
+    # with tab3:
+    #     smoothie_maker_section()
+
+    # with tab4:
+    #     wellness_excercises()
+
+    # with tab5:
+    #     if st.session_state.is_admin:
+    #         add_article()
+    #     else: 
+    #         st.info(
+    #             "Admin access required."
+    #         )
+    #     #display_published_articles()
+    # with tab7:
+    #     st.title("Interactive Learning Dashboard")
+    #     bernoulli()
+
+def initialize_session_state():
+    defaults = {
+
+        "active_page": "sustainability",
+
+        "is_admin": False,
+
+        "bernoulli_result": None,
+
+        "sustainable": 0,
+
+        "unsustainable": 0,
+
+        "total": 0,
+
+        "trial_history": [],
+
+        "sustainable_history": [],
+
+        "unsustainable_history": []
+    }
+
+    for key, value in defaults.items():
+
+        if key not in st.session_state:
+
+            st.session_state[key] = value    
+            
+def render_navigation():
+
+    page_titles = {
+
+        key: f"{page['icon']} {page['title']}"
+
+        for key, page in PAGES.items()
+    }
+
+    selected = st.sidebar.radio(
+
+        "Navigation",
+
+        options=list(page_titles.keys()),
+
+        format_func=lambda x:
+            page_titles[x]
+    )
+
+    st.session_state.active_page = selected
+
+
+def route_to_page():
+
+    page = PAGES[
+        st.session_state.active_page
+    ]
+
+    if page["admin_only"]:
+
+        if not st.session_state.is_admin:
+
+            st.warning(
+                "Admin access required."
+            )
+
+            return
+
+    page["handler"]()
+
+
 def add_article():
     st.title("Write Article")
     
