@@ -86,6 +86,61 @@ if st.session_state.is_admin:
         st.rerun()
 
 def main():
+    if "active_page" not in st.session_state:
+
+        st.session_state.active_page = (
+            "sustainability"
+        )
+
+    if "is_admin" not in st.session_state:
+
+        st.session_state.is_admin = False
+
+    # ==========================================
+    # NAVIGATION
+    # ==========================================
+
+    st.sidebar.radio(
+
+        "Navigation",
+
+        options=list(
+            PAGES.keys()
+        ),
+
+        format_func=lambda x:
+            PAGES[x]["title"],
+
+        key="active_page"
+    )
+
+    # ==========================================
+    # ROUTER
+    # ==========================================
+
+    page = PAGES[
+        st.session_state.active_page
+    ]
+
+    # ==========================================
+    # ADMIN PROTECTION
+    # ==========================================
+
+    if page["admin_only"]:
+
+        if st.session_state.is_admin:
+
+            page["handler"]()
+
+        else:
+
+            st.warning(
+                "Admin access required."
+            )
+
+    else:
+
+        page["handler"]()
     initialize_session_state()
     #App title
     st.set_page_config(
