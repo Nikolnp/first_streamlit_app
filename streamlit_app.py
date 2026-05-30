@@ -170,24 +170,7 @@ def initialize_session_state():
         if key not in st.session_state:
 
             st.session_state[key] = value
-    page_titles = {
-
-        key: f"{page['icon']} {page['title']}"
-
-        for key, page in PAGES.items()
-    }
-
-    selected = st.sidebar.radio(
-
-        "Navigation",
-
-        options=list(page_titles.keys()),
-
-        format_func=lambda x:
-            page_titles[x]
-    )
-
-    st.session_state.active_page = selected
+    
 
 def route_to_page():
 
