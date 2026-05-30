@@ -85,14 +85,18 @@ if st.session_state.is_admin:
 
         st.rerun()
 
+#-----------------------------------------------------------------------------------------------#
+
 def main():
-    initialize_session_state()
+    
     #App title
     st.set_page_config(
         page_title="The Every Day App",
         page_icon="🌤️"
     )
-        
+
+    initialize_session_state()
+
     st.markdown("""
     <style>
     /* Primary Content Area */
@@ -120,203 +124,24 @@ def main():
     st.image(
         "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
     )
+
+    render_navigation()
+    route_to_page()  
 #---------------------------------------------------------------------------------------------------------------------#
-    if "active_page" not in st.session_state:
-
-        st.session_state.active_page = (
-            "sustainability"
-        )
-
-    if "is_admin" not in st.session_state:
-
-        st.session_state.is_admin = False
-    # Pages with keys
-    PAGES = {
-    
-        "sustainability": {
-    
-            "title":
-            "🌍 Sustainability Calculator",
-    
-            "handler":
-            sustainability_section,
-    
-            "admin_only":
-            False
-        },
-    
-        "food": {
-    
-            "title":
-            "🍎 Food Ideas",
-    
-            "handler":
-            food_ideas,
-    
-            "admin_only":
-            False
-        },
-    
-        "smoothie": {
-    
-            "title":
-            "🥤 Smoothie Maker",
-    
-            "handler":
-            smoothie_maker_section,
-    
-            "admin_only":
-            False
-        },
-    
-        "wellness": {
-    
-            "title":
-            "🧘 Wellness Exercises",
-    
-            "handler":
-            wellness_excercises,
-    
-            "admin_only":
-            False
-        },
-    
-        "blog": {
-    
-            "title":
-            "📝 Blog",
-    
-            "handler":
-            add_article,
-    
-            "admin_only":
-            True
-        },
-    
-        "podcast": {
-    
-            "title":
-            "🎙 Science Podcast",
-    
-            "handler":
-            science_podcast,
-    
-            "admin_only":
-            False
-        },
-    
-        "learning": {
-    
-            "title":
-            "🧠 Education & Learning",
-    
-            "handler":
-            bernoulli,
-    
-            "admin_only":
-            False
-        }
-    }
-    # ==========================================
-    # NAVIGATION
-    # ==========================================
+       
+def render_navigation():
 
     st.sidebar.radio(
 
         "Navigation",
 
-        options=list(
-            PAGES.keys()
-        ),
-
-        format_func=lambda x:
-            PAGES[x]["title"],
-
-        key="active_page"
-    )
-
-    # ==========================================
-    # ROUTER
-    # ==========================================
-
-    page = PAGES[
-        st.session_state.active_page
-    ]
-
-    # ==========================================
-    # ADMIN PROTECTION
-    # ==========================================
-
-    if page["admin_only"]:
-
-        if st.session_state.is_admin:
-
-            page["handler"]()
-
-        else:
-
-            st.warning(
-                "Admin access required."
-            )
-
-    else:
-
-        page["handler"]()
-    #initialize_session_state()
-   
-
-    #Navigation 
-    page = st.sidebar.radio(
-    
-        "Navigation",
-    
         options=list(PAGES.keys()),
-    
+
         format_func=lambda x:
             PAGES[x]["title"],
-    
+
         key="active_page"
     )
-
-    if "active_page" not in st.session_state:
-    
-        st.session_state.active_page = 'sustainability'
-    
-        selected_title = st.sidebar.radio(
-    
-        "Navigation",
-    
-        options=[
-            page["title"]
-            for page in PAGES.values()
-        ]
-    )
-            
-        current_page = PAGES[
-        
-        st.session_state.active_page]
-    
-        current_page["handler"]()
-    
-        page = PAGES[st.session_state.active_page]
-
-    if page["admin_only"]:
-    
-        if st.session_state.is_admin:
-    
-            page["handler"]()
-    
-        else:
-    
-            st.warning(
-                "Admin access required."
-            )
-    else:
-        page["handler"]()
-
-   # render_navigation()
-    
-    route_to_page()
 
 def initialize_session_state():
     defaults = {
@@ -344,10 +169,7 @@ def initialize_session_state():
 
         if key not in st.session_state:
 
-            st.session_state[key] = value    
-            
-def render_navigation():
-
+            st.session_state[key] = value
     page_titles = {
 
         key: f"{page['icon']} {page['title']}"
@@ -367,7 +189,6 @@ def render_navigation():
 
     st.session_state.active_page = selected
 
-
 def route_to_page():
 
     page = PAGES[
@@ -385,7 +206,6 @@ def route_to_page():
             return
 
     page["handler"]()
-
 
 def add_article():
     st.title("Write Article")
@@ -473,8 +293,7 @@ def wellness_excercises():
     # Second video link (EkhartYoga)
     st.subheader("2. Brahmari Pranayama (Bumble Bee Breath)")
     st.markdown("[Watch Brahmari Pranayama on EkhartYoga](https://www.ekhartyoga.com/classes/3863/brahmari-pranayama-bumble-bee-breath)")
-    return None
-    
+    return None  
     
 def food_ideas():
     st.header('🍽️ Healthy Food Ideas')
@@ -536,9 +355,7 @@ def food_ideas():
         st.text(' 🥦 Stir-Fried Tofu with Vegetables')
         st.text('🍲 Lentil Curry with Brown Rice')
         st.text('🍆 Grilled Eggplant with Tomato Sauce')
-    return None
-
-   
+    return None 
 
 def smoothie_maker_section():
     # Header of Smoothie Maker
@@ -583,7 +400,7 @@ def smoothie_maker_section():
     return None  
 
 def science_podcast():
-    write('Coming soon')
+    print('Coming soon')
     
 #LEFT HAND SIDEBAR
 with st.sidebar:
@@ -733,42 +550,7 @@ def bernoulli():
         
             on_change=reset_bernoulli_experiment
         )
-        # =================================================
-        # SESSION INITIALIZATION
-        # =================================================
-
-        # if "bernoulli_result" not in st.session_state:
-
-        #     st.session_state.bernoulli_result = None
-
-        # if "previous_p" not in st.session_state:
-
-        #     st.session_state.previous_p = p
-
-        # if "sustainable" not in st.session_state:
-
-        #     st.session_state.sustainable = 0
-
-        # if "unsustainable" not in st.session_state:
-
-        #     st.session_state.unsustainable = 0
-
-        # if "total" not in st.session_state:
-
-        #     st.session_state.total = 0
-
-        # if "trial_history" not in st.session_state:
-
-        #     st.session_state.trial_history = []
-
-        # if "sustainable_history" not in st.session_state:
-
-        #     st.session_state.sustainable_history = []
-
-        # if "unsustainable_history" not in st.session_state:
-
-        #     st.session_state.unsustainable_history = []
-
+      
        
         # =================================================
         # RUN BERNOULLI TRIAL
@@ -1010,7 +792,93 @@ def bernoulli():
 
             f"Bernoulli Section Error: {e}"
         )
-    
+# Pages with keys
+PAGES = {
+
+    "sustainability": {
+
+        "title":
+        "🌍 Sustainability Calculator",
+
+        "handler":
+        sustainability_section,
+
+        "admin_only":
+        False
+    },
+
+    "food": {
+
+        "title":
+        "🍎 Food Ideas",
+
+        "handler":
+        food_ideas,
+
+        "admin_only":
+        False
+    },
+
+    "smoothie": {
+
+        "title":
+        "🥤 Smoothie Maker",
+
+        "handler":
+        smoothie_maker_section,
+
+        "admin_only":
+        False
+    },
+
+    "wellness": {
+
+        "title":
+        "🧘 Wellness Exercises",
+
+        "handler": 
+        wellness_excercises,
+
+        "admin_only":
+        False
+    },
+
+    "blog": {
+
+        "title":
+        "📝 Blog",
+
+        "handler":
+        add_article,
+
+        "admin_only":
+        True
+    },
+
+    "podcast": {
+
+        "title":
+        "🎙 Science Podcast",
+
+        "handler":
+        science_podcast,
+
+        "admin_only":
+        False
+    },
+
+    "learning": {
+
+        "title":
+        "🧠 Education & Learning",
+
+        "handler":
+        bernoulli,
+
+        "admin_only":
+        False
+    }
+} 
 # Run the app
 if __name__ == "__main__":
     init_db()
