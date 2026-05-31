@@ -399,377 +399,320 @@ with st.sidebar:
     st.title("Weather Forecast 🌍")
     weather_section()
     
-    #st.title('Bernoulli Trial Simulation ⚖️')
-    #bernoulli_section()
-
-    # =========================================================
-    # VISUALIZATION FUNCTION
-    # =========================================================
-    
-    def visualize_outcomes(history):
-    
-        if len(history) == 0:
-    
-            st.info("No trials yet.")
-    
-            return
-    
-        df = pd.DataFrame({
-    
-            "Trial": list(range(len(history))),
-    
-            "Outcome": [
-    
-                "Sustainable"
-                if x == 1
-                else "Unsustainable"
-    
-                for x in history
-            ]
-        })
-    
-        chart = alt.Chart(df).mark_circle(
-            size=120
-        ).encode(
-    
-            x="Trial",
-    
-            y="Outcome",
-    
-            color="Outcome",
-    
-            tooltip=[
-                "Trial",
-                "Outcome"
-            ]
-        ).properties(
-    
-            title=
-            "Bernoulli Trial Visualization",
-    
-            width=700,
-    
-            height=300
-        )
-    
-        st.altair_chart(
-            chart,
-            use_container_width=True
-        )
-
-
 # =========================================================
-# BERNOULLI SECTION
+# LEARNING SECTION
 # =========================================================
 
-def sidebar_radio_menu(): 
-    try:
-        st.title(
-            "🧠 Bernoulli Trial Explorer"
-        )
-        # =================================================
-        # RESET EXPERIMENT IF p CHANGES
-        # =================================================
 
-        def reset_bernoulli_experiment():
+
+# def sidebar_radio_menu(): 
+#     try:
+#         st.title(
+#             "🧠 Bernoulli Trial Explorer"
+#         )
+#     #     # =================================================
+#     #     # RESET EXPERIMENT IF p CHANGES
+#     #     # =================================================
+
+#     #     def reset_bernoulli_experiment():
     
-            st.session_state.sustainable = 0
+#     #         st.session_state.sustainable = 0
         
-            st.session_state.unsustainable = 0
+#     #         st.session_state.unsustainable = 0
         
-            st.session_state.total = 0
+#     #         st.session_state.total = 0
         
-            st.session_state.bernoulli_result = None
+#     #         st.session_state.bernoulli_result = None
         
-            st.session_state.trial_history = []
+#     #         st.session_state.trial_history = []
         
-            st.session_state.sustainable_history = []
+#     #         st.session_state.sustainable_history = []
         
-            st.session_state.unsustainable_history = []
+#     #         st.session_state.unsustainable_history = []
         
-            st.warning(
-                "Probability changed. "
-                "Experiment reset."
-            )
-        if "current_page" not in st.session_state:
+#     #         st.warning(
+#     #             "Probability changed. "
+#     #             "Experiment reset."
+#     #         )
+#     #     if "current_page" not in st.session_state:
         
-            st.session_state.current_page = (
-                "Bernoulli Trials"
-            )
+#     #         st.session_state.current_page = (
+#     #             "Bernoulli Trials"
+#     #         )
         
-        page = st.sidebar.selectbox(
+#     #     page = st.sidebar.selectbox(
         
-            "Choose Module",
+#     #         "Choose Module",
         
-            [
+#     #         [
         
-                "Bernoulli Trials",
+#     #             "Bernoulli Trials",
         
-                "Linear Regression",
+#     #             "Linear Regression",
         
-                "Clustering"
-            ],
+#     #             "Clustering"
+#     #         ],
         
-            key="current_page"
-        )
-        # =================================================
-        # PROBABILITY SLIDER
-        # =================================================
+#     #         key="current_page"
+#     #     )
+#     #     # =================================================
+#     #     # PROBABILITY SLIDER
+#     #     # =================================================
 
-        p = st.slider(
+#     #     p = st.slider(
 
-            "Probability of sustainable day",
+#     #         "Probability of sustainable day",
         
-            0.0,
+#     #         0.0,
         
-            1.0,
+#     #         1.0,
         
-            0.5,
+#     #         0.5,
         
-            key="bernoulli_probability",
+#     #         key="bernoulli_probability",
         
-            on_change=reset_bernoulli_experiment
-        )
+#     #         on_change=reset_bernoulli_experiment
+#     #     )
       
        
-        # =================================================
-        # RUN BERNOULLI TRIAL
-        # =================================================
+#     #     # =================================================
+#     #     # RUN BERNOULLI TRIAL
+#     #     # =================================================
 
-        if st.button(
+#     #     if st.button(
 
-            "Run Bernoulli Trial",
+#     #         "Run Bernoulli Trial",
 
-            key="b_button"
-        ):
+#     #         key="b_button"
+#     #     ):
 
-            result = 1 if random() < p else 0
+#     #         result = 1 if random() < p else 0
 
-            st.session_state.bernoulli_result = result
+#     #         st.session_state.bernoulli_result = result
 
-            st.session_state.trial_history.append(
-                result
-            )
+#     #         st.session_state.trial_history.append(
+#     #             result
+#     #         )
 
-            if result == 1:
+#     #         if result == 1:
 
-                st.success(
-                    "Sustainable outcome"
-                )
+#     #             st.success(
+#     #                 "Sustainable outcome"
+#     #             )
 
-                st.session_state.sustainable += 1
+#     #             st.session_state.sustainable += 1
 
-                st.session_state.sustainable_history.append(
-                    1
-                )
+#     #             st.session_state.sustainable_history.append(
+#     #                 1
+#     #             )
 
-                st.session_state.unsustainable_history.append(
-                    0
-                )
+#     #             st.session_state.unsustainable_history.append(
+#     #                 0
+#     #             )
 
-            else:
+#     #         else:
 
-                st.error(
-                    "Unsustainable outcome"
-                )
+#     #             st.error(
+#     #                 "Unsustainable outcome"
+#     #             )
 
-                st.session_state.unsustainable += 1
+#     #             st.session_state.unsustainable += 1
 
-                st.session_state.sustainable_history.append(
-                    0
-                )
+#     #             st.session_state.sustainable_history.append(
+#     #                 0
+#     #             )
 
-                st.session_state.unsustainable_history.append(
-                    1
-                )
+#     #             st.session_state.unsustainable_history.append(
+#     #                 1
+#     #             )
 
-                st.session_state.total += 1
-                st.write(
-                    "Trial History:",
-                    st.session_state.trial_history
-                )
+#     #             st.session_state.total += 1
+#     #             st.write(
+#     #                 "Trial History:",
+#     #                 st.session_state.trial_history
+#     #             )
                 
-                st.write(
-                    "Sustainable History:",
-                    st.session_state.sustainable_history
-                )
+#     #             st.write(
+#     #                 "Sustainable History:",
+#     #                 st.session_state.sustainable_history
+#     #             )
                 
-                st.write(
-                    "Unsustainable History:",
-                    st.session_state.unsustainable_history
-                )
-        # =================================================
-        # METRICS
-        # =================================================
+#     #             st.write(
+#     #                 "Unsustainable History:",
+#     #                 st.session_state.unsustainable_history
+#     #             )
+#     #     # =================================================
+#     #     # METRICS
+#     #     # =================================================
 
-        total_outcomes = (
+#     #     total_outcomes = (
 
-            st.session_state.sustainable +
+#     #         st.session_state.sustainable +
 
-            st.session_state.unsustainable
-        )
+#     #         st.session_state.unsustainable
+#     #     )
 
-        col1, col2, col3 = st.columns(3)
+#     #     col1, col2, col3 = st.columns(3)
 
-        col1.metric(
+#     #     col1.metric(
 
-            "Sustainable Outcomes",
+#     #         "Sustainable Outcomes",
 
-            st.session_state.sustainable
-        )
+#     #         st.session_state.sustainable
+#     #     )
 
-        col2.metric(
+#     #     col2.metric(
 
-            "Unsustainable Outcomes",
+#     #         "Unsustainable Outcomes",
 
-            st.session_state.unsustainable
-        )
+#     #         st.session_state.unsustainable
+#     #     )
 
-        col3.metric(
+#     #     col3.metric(
 
-            "Total Outcomes",
+#     #         "Total Outcomes",
 
-            total_outcomes
-        )
+#     #         total_outcomes
+#     #     )
 
-        # =================================================
-        # LIVE FORMULA
-        # =================================================
+#     #     # =================================================
+#     #     # LIVE FORMULA
+#     #     # =================================================
 
-        st.subheader(
-            "📘 Bernoulli Formula"
-        )
+#     #     st.subheader(
+#     #         "📘 Bernoulli Formula"
+#     #     )
 
-        st.latex(r"P(X=1)=p")
+#     #     st.latex(r"P(X=1)=p")
 
-        # =================================================
-        # VISUALIZATION
-        # =================================================
+#     #     # =================================================
+#     #     # VISUALIZATION
+#     #     # =================================================
 
-        st.subheader(
-            "📈 Outcome Visualization"
-        )
+#     #     st.subheader(
+#     #         "📈 Outcome Visualization"
+#     #     )
 
-        visualize_outcomes(
+#     #     visualize_outcomes(
 
-            st.session_state.trial_history
-        )
+#     #         st.session_state.trial_history
+#     #     )
 
-        # =================================================
-        # ACTIVE LEARNING QUESTIONS
-        # =================================================
+#     #     # =================================================
+#     #     # ACTIVE LEARNING QUESTIONS
+#     #     # =================================================
 
-        st.subheader(
-            "🧪 Knowledge Check"
-        )
+#     #     st.subheader(
+#     #         "🧪 Knowledge Check"
+#     #     )
 
-        q1 = st.radio(
+#     #     q1 = st.radio(
 
-            "What happens when p approaches 1?",
+#     #         "What happens when p approaches 1?",
 
-            [
+#     #         [
 
-                "More failures",
+#     #             "More failures",
 
-                "More successes",
+#     #             "More successes",
 
-                "No change"
-            ]
-        )
+#     #             "No change"
+#     #         ]
+#     #     )
 
-        if q1 == "More successes":
+#     #     if q1 == "More successes":
 
-            st.success(
-                "Correct!"
-            )
+#     #         st.success(
+#     #             "Correct!"
+#     #         )
 
-        q2 = st.radio(
+#     #     q2 = st.radio(
 
-            "Why must probability remain constant?",
+#     #         "Why must probability remain constant?",
 
-            [
+#     #         [
 
-                "Because Bernoulli assumes identical trials",
+#     #             "Because Bernoulli assumes identical trials",
 
-                "Only for visualization",
+#     #             "Only for visualization",
 
-                "It does not matter"
-            ]
-        )
+#     #             "It does not matter"
+#     #         ]
+#     #     )
 
-        if q2 == "Because Bernoulli assumes identical trials":
+#     #     if q2 == "Because Bernoulli assumes identical trials":
 
-            st.success(
-                "Correct!"
-            )
+#     #         st.success(
+#     #             "Correct!"
+#     #         )
 
-        q3 = st.radio(
+#     #     q3 = st.radio(
 
-            "What does a Bernoulli trial produce?",
+#     #         "What does a Bernoulli trial produce?",
 
-            [
-                "Continuous outcomes",
-                "One binary outcome",
-                "Infinite values"
-            ]
-        )
+#     #         [
+#     #             "Continuous outcomes",
+#     #             "One binary outcome",
+#     #             "Infinite values"
+#     #         ]
+#     #     )
 
-        if q3 == "One binary outcome":
+#     #     if q3 == "One binary outcome":
 
-            st.success(
-                "Correct!"
-            )
+#     #         st.success(
+#     #             "Correct!"
+#     #         )
 
-        # =================================================
-        # MINI EXPERIMENT
-        # =================================================
+#     #     # =================================================
+#     #     # MINI EXPERIMENT
+#     #     # =================================================
 
-        st.subheader(
-            "🔬 Mini Experiment"
-        )
+#     #     st.subheader(
+#     #         "🔬 Mini Experiment"
+#     #     )
 
-        st.info(
+#     #     st.info(
 
-            "Set p = 0.8 and run 20 trials.\n\n"
+#     #         "Set p = 0.8 and run 20 trials.\n\n"
 
-            "Then compare against p = 0.2.\n\n"
+#     #         "Then compare against p = 0.2.\n\n"
 
-            "Observe how the visualization changes."
-        )
+#     #         "Observe how the visualization changes."
+#     #     )
 
-        # =================================================
-        # RELATED CONCEPTS
-        # =================================================
+#     #     # =================================================
+#     #     # RELATED CONCEPTS
+#     #     # =================================================
 
-        st.subheader(
-            "🔗 Related Concepts"
-        )
+#     #     st.subheader(
+#     #         "🔗 Related Concepts"
+#     #     )
 
-        related_cols = st.columns(4)
+#     #     related_cols = st.columns(4)
 
-        related_cols[0].button(
-            "Probability"
-        )
+#     #     related_cols[0].button(
+#     #         "Probability"
+#     #     )
 
-        related_cols[1].button(
-            "Binomial Distribution"
-        )
+#     #     related_cols[1].button(
+#     #         "Binomial Distribution"
+#     #     )
 
-        related_cols[2].button(
-            "Statistics"
-        )
+#     #     related_cols[2].button(
+#     #         "Statistics"
+#     #     )
 
-        related_cols[3].button(
-            "Random Variables"
-        )
+#     #     related_cols[3].button(
+#     #         "Random Variables"
+#     #     )
 
-    except Exception as e:
+#     except Exception as e:
 
-        st.error(
+#         st.error(
 
-            f"Bernoulli Section Error: {e}"
-        )
-# Pages with keys
+#             f"Bernoulli Section Error: {e}"
+#         )
+# # Pages with keys
 PAGES = {
 
     "sustainability": {
@@ -850,12 +793,13 @@ PAGES = {
         "🧠 Education & Learning",
 
         "handler":
-        bernoulli_section,
+        bernoulli_trial,
 
         "admin_only":
         False
     }
 } 
+
 # Run the app
 if __name__ == "__main__":
     init_db()
