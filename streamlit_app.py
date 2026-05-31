@@ -15,7 +15,7 @@ import altair as alt
 #section imports
 from weather import weather_section
 from sustainability import sustainability_section
-from sustainability import bernoulli_section
+#from sustainability import bernoulli_section #commented out for debuging
 #from analytics import analytics_section
 from database import load_published_articles
 from analytics import educational_section
@@ -402,8 +402,8 @@ with st.sidebar:
     st.title("Weather Forecast 🌍")
     weather_section()
     
-    st.title('Bernoulli Trial Simulation ⚖️')
-    bernoulli_section()
+    #st.title('Bernoulli Trial Simulation ⚖️')
+    #bernoulli_section()
 
     # =========================================================
     # VISUALIZATION FUNCTION
