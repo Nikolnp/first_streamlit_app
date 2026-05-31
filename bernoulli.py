@@ -74,7 +74,7 @@ def visualize_outcomes(history):
 # BERNOULLI SECTION
 # =========================================================
 
-def educational_section():
+def bernoulli_trial():
 
     try:
 

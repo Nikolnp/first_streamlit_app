@@ -11,14 +11,11 @@ import random
 import time
 from random import random
 import altair as alt
-
 #section imports
 from weather import weather_section
 from sustainability import sustainability_section
-#from sustainability import bernoulli_section #commented out for debuging
-#from analytics import analytics_section
 from database import load_published_articles
-from analytics import educational_section
+from bernoulli import bernoulli_trial
 #database
 from database import init_db, save_article
 
@@ -711,11 +708,8 @@ def sidebar_radio_menu():
             "What does a Bernoulli trial produce?",
 
             [
-
                 "Continuous outcomes",
-
                 "One binary outcome",
-
                 "Infinite values"
             ]
         )
@@ -856,7 +850,7 @@ PAGES = {
         "🧠 Education & Learning",
 
         "handler":
-        educational_section,
+        bernoulli_section,
 
         "admin_only":
         False
