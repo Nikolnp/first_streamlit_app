@@ -81,7 +81,30 @@ def bernoulli_trial():
         st.title(
             "🧠 Bernoulli Trial Explorer"
         )
+      
+        st.header("🌱 Will Tomorrow Be Sustainable?")
 
+        with st.expander("🤔 The Question"):
+
+            st.markdown("""
+            Imagine you're trying to live sustainably.
+
+            Tomorrow will either be:
+
+            - ✅ Sustainable
+            - ❌ Unsustainable
+
+            Only one outcome can happen.
+            """)
+
+        with st.expander("🧪 The Experiment"):
+
+            st.markdown("""
+            Move the slider and run a Bernoulli trial.
+            Observe whether the outcome is sustainable or unsustainable.
+            """)
+
+        
         # =================================================
         # PROBABILITY SLIDER
         # =================================================
@@ -247,7 +270,18 @@ def bernoulli_trial():
 
             total_outcomes
         )
+        # =================================================
+        # VISUALIZATION
+        # =================================================
 
+        st.subheader(
+            "📈 Outcome Visualization"
+        )
+
+        visualize_outcomes(
+
+            st.session_state.trial_history
+        )
         # =================================================
         # LIVE FORMULA
         # =================================================
@@ -274,18 +308,31 @@ def bernoulli_trial():
         """)
 
         # =================================================
-        # VISUALIZATION
+        # MINI EXPERIMENT
         # =================================================
 
         st.subheader(
-            "📈 Outcome Visualization"
+            "🔬 Mini Experiment"
         )
 
-        visualize_outcomes(
+        st.info(
 
-            st.session_state.trial_history
+            "Set p = 0.65 and run 20 trials.\n\n"
+
+            "Then compare against p = 0.2.\n\n"
+
+            "Observe how the visualization changes."
         )
+        with st.expander("👀 What Did We Observe?"):
 
+            st.markdown("""
+            Even when supposedly p = 0.65, failure can still occur.
+
+            Probability is not certainty.
+
+            A 65% chance of success still leaves a 35% chance of failure.
+            """)
+        
         # =================================================
         # ACTIVE LEARNING QUESTIONS
         # =================================================
@@ -354,22 +401,7 @@ def bernoulli_trial():
                 "Correct!"
             )
 
-        # =================================================
-        # MINI EXPERIMENT
-        # =================================================
-
-        st.subheader(
-            "🔬 Mini Experiment"
-        )
-
-        st.info(
-
-            "Set p = 0.8 and run 20 trials.\n\n"
-
-            "Then compare against p = 0.2.\n\n"
-
-            "Observe how the visualization changes."
-        )
+        
 
         # =================================================
         # RELATED CONCEPTS
@@ -396,6 +428,23 @@ def bernoulli_trial():
         related_cols[3].button(
             "Random Variables"
         )
+        st.markdown("""
+        ## 🔗 Where This Leads Next
+
+        🌱 **Bernoulli Trial**
+        ⬇️
+
+        📊 **Binomial Distribution**
+        ⬇️
+
+        🎯 **Geometric Distribution**
+        ⬇️
+
+        📈 **Negative Binomial Distribution**
+        ⬇️
+
+        🤖 **Machine Learning Classification**
+        """)
 
     except Exception as e:
 
