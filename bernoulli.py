@@ -260,16 +260,18 @@ def bernoulli_trial():
             r"P(X=x)=p^x(1-p)^{1-x}"
         )
 
-        # Where:
+        st.markdown("""
+        **Where:**
 
-        # - X = outcome
-        # - x = 0 or 1
-        # - p = probability of success
+        - X = outcome
+        - x = 0 or 1
+        - p = probability of success
 
-        # For this simulation:
+        For this simulation:
 
-        # - Success = Sustainable day
-        # - Failure = Unsustainable day
+        - Success = Sustainable day
+        - Failure = Unsustainable day
+        """)
 
         # =================================================
         # VISUALIZATION
