@@ -18,7 +18,7 @@ from sustainability import sustainability_section
 from sustainability import bernoulli_section
 #from analytics import analytics_section
 from database import load_published_articles
-#from analytics import bernoulli
+from analytics import educational_section
 #database
 from database import init_db, save_article
 
@@ -465,7 +465,7 @@ with st.sidebar:
 # BERNOULLI SECTION
 # =========================================================
 
-def bernoulli(): 
+def sidebar_radio_menu(): 
     try:
         st.title(
             "🧠 Bernoulli Trial Explorer"
@@ -856,7 +856,7 @@ PAGES = {
         "🧠 Education & Learning",
 
         "handler":
-        bernoulli,
+        educational_section,
 
         "admin_only":
         False

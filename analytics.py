@@ -74,7 +74,7 @@ def visualize_outcomes(history):
 # BERNOULLI SECTION
 # =========================================================
 
-def bernoulli():
+def educational_section():
 
     try:
 
@@ -105,9 +105,9 @@ def bernoulli():
 
             st.session_state.bernoulli_result = None
 
-        if "previous_p" not in st.session_state:
+        if "probability" not in st.session_state:
 
-            st.session_state.previous_p = p
+            st.session_state.probability = p
 
         if "sustainable" not in st.session_state:
 
@@ -137,7 +137,7 @@ def bernoulli():
         # RESET EXPERIMENT IF p CHANGES
         # =================================================
 
-        if p != st.session_state.previous_p:
+        if p != st.session_state.probability:
 
             st.session_state.sustainable = 0
 
@@ -153,7 +153,7 @@ def bernoulli():
 
             st.session_state.unsustainable_history = []
 
-            st.session_state.previous_p = p
+            st.session_state.probability = p
 
             st.warning(
 
@@ -256,7 +256,20 @@ def bernoulli():
             "📘 Bernoulli Formula"
         )
 
-        :contentReference[oaicite:0]{index=0}
+        st.latex(
+            r"P(X=x)=p^x(1-p)^{1-x}"
+        )
+
+        # Where:
+
+        # - X = outcome
+        # - x = 0 or 1
+        # - p = probability of success
+
+        # For this simulation:
+
+        # - Success = Sustainable day
+        # - Failure = Unsustainable day
 
         # =================================================
         # VISUALIZATION

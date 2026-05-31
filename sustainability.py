@@ -1,11 +1,6 @@
 from random import random
-
 import streamlit as st
 import pandas as pd
-import numpy as np
-from PIL import Image
-#from scipy.stats import bernoulli
-from database import get_emissions_analytics
 from database import load_emissions
 
 # =========================================================
@@ -210,7 +205,7 @@ def bernoulli_section():
         
         if st.button(
             "Run Bernoulli Trial",
-            key="bernoulli_button"
+            key="bernoulli_button1"
         ):
             result = 1 if random() < p else 0
             st.session_state.bernoulli_result = result
@@ -254,3 +249,11 @@ def bernoulli_section():
         st.error(
             f"Unexpected display error: {e}"
         )
+
+def get_all_users():
+    try:
+        from database import get_all_users
+        return get_all_users()
+    except Exception as e:
+        st.warning(f"Could not load users: {e}")
+        return []
