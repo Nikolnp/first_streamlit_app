@@ -432,18 +432,22 @@ def bernoulli_trial():
         ## 🔗 Where This Leads Next
 
         🌱 **Bernoulli Trial**
+
         ⬇️
 
-        📊 **Binomial Distribution**
+        📊 [**Binomial Distribution**](https://en.wikipedia.org/wiki/Binomial_distribution)
+
         ⬇️
 
-        🎯 **Geometric Distribution**
+        🎯 [**Geometric Distribution**](https://en.wikipedia.org/wiki/Geometric_distribution)
+
         ⬇️
 
-        📈 **Negative Binomial Distribution**
+        📈 [**Negative Binomial Distribution**](https://en.wikipedia.org/wiki/Negative_binomial_distribution)
+
         ⬇️
 
-        🤖 **Machine Learning Classification**
+        🤖 [**Machine Learning Classification**](https://en.wikipedia.org/wiki/Statistical_classification)
         """)
 
     except Exception as e:
