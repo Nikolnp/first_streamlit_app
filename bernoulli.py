@@ -7,7 +7,6 @@ from random import random
 import streamlit as st
 import pandas as pd
 import altair as alt
-from translation import render_with_llm
 
 
 # =========================================================

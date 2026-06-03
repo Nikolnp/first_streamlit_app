@@ -1,14 +1,9 @@
 import streamlit as st
 from openai import OpenAI
-
-client = OpenAI(
-    api_key=st.secrets["OPENAI_API_KEY"]
-)
+from openai import RateLimitError
 
 
-def render_with_llm(
-    content: str
-) -> str:
+def render_with_llm(content: str) -> str:
 
     language = st.session_state.get(
         "language",
@@ -16,14 +11,25 @@ def render_with_llm(
     )
 
     if language == "English":
-
         return content
 
-    response = client.responses.create(
+    if "OPENAI_API_KEY" not in st.secrets:
+        st.warning(
+            "OpenAI API key not configured."
+        )
+        return content
 
-        model="gpt-4o",
+    client = OpenAI(
+        api_key=st.secrets["OPENAI_API_KEY"]
+    )
 
-        input=f"""
+    try:
+
+        response = client.responses.create(
+
+            model="gpt-4o",
+
+            input=f"""
 Translate the following educational content into {language}.
 
 Rules:
@@ -37,6 +43,22 @@ Content:
 
 {content}
 """
-    )
+        )
 
-    return response.output_text
+        return response.output_text
+
+    except RateLimitError:
+
+        st.warning(
+            "Translation quota exceeded."
+        )
+
+        return content
+
+    except Exception as e:
+
+        st.warning(
+            f"Translation failed: {e}"
+        )
+
+        return content

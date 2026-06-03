@@ -224,17 +224,7 @@ def render_navigation():
         key="active_page"
     )
 
-def render_content(content):
 
-    if st.session_state.language == "English":
-
-        return content
-
-    return translate_with_llm(
-        content,
-        target_language=
-        st.session_state.language
-    )
 
 
 def initialize_session_state():
