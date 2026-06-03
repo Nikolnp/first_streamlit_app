@@ -18,7 +18,12 @@ from database import load_published_articles
 from bernoulli import bernoulli_trial
 #database
 from database import init_db, save_article
-
+from translation import render_with_llm
+#test function to check translation rendering
+content = "Welcome to The Everyday App!"
+st.markdown(
+    render_with_llm(content)
+)
 
 #path to database ; code used for debugging
 #st.write(os.getcwd())
@@ -38,11 +43,17 @@ with st.sidebar:
         "<h3 style='text-align:center;color:grey;'>The Every Day App</h3>",
         unsafe_allow_html=True,
     )
+    st.caption(
+        '_"*Welcome to The Everyday App: STREAMS Garden - Where Ideas Grow Into Understanding and Action!*_"'
+
+    )
     image = Image.open("assets/tree.webp")
     st.image(image)
 
     st.caption(
         '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
+        #'_"*Welcome to The Everyday App ` STREAMS Garden - Where Ideas Grow Into Understanding and Action!*_"'
+
     )
     st.title("Settings ⚙️")
     if "language" not in st.session_state:
@@ -67,6 +78,28 @@ with st.sidebar:
 
     key="language"
     )
+    st.sidebar.selectbox(
+    "🧠 Level",
+    [
+        "Beginner",
+        "Student",
+        "Advanced",
+        "Research"
+    ],
+    key="learning_level"
+    )
+
+    st.sidebar.selectbox(
+        "🎨 Style",
+        [
+            "Educational",
+            "Story",
+            "Technical",
+            "Scientific"
+        ],
+        key="learning_style"
+    )
+
 
     st.sidebar.divider()
 
@@ -165,16 +198,14 @@ def main():
     )
     st.markdown("""
     ###### 🔬Science 💻Technology 📚Research ⚙️Engineering 🎨Arts 🧮Mathematics 🌍Sustainability ######
-    ---
-    *Welcome to The Everyday App ` STREAMS Garden - Where Ideas Grow Into Understanding and Action!*    
+    ---   
     """)
 
     st.image(
         "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
     )
-   
-
     render_navigation()
+    
     route_to_page()  
 #---------------------------------------------------------------------------------------------------------------------#
        
@@ -193,7 +224,33 @@ def render_navigation():
         key="active_page"
     )
 
+def render_content(content):
+
+    if st.session_state.language == "English":
+
+        return content
+
+    return translate_with_llm(
+        content,
+        target_language=
+        st.session_state.language
+    )
+
+
 def initialize_session_state():
+
+    if "language" not in st.session_state:
+
+        st.session_state.language = "English"
+
+    if "learning_level" not in st.session_state:
+
+        st.session_state.learning_level = "Research"
+
+    if "learning_style" not in st.session_state:
+
+        st.session_state.learning_style = "Technical"
+
     defaults = {
 
         "active_page": "sustainability",
@@ -434,24 +491,7 @@ def smoothie_maker_section():
 
 def science_podcast():
     print('Coming soon')
-    
-# #LEFT HAND SIDEBAR
-# with st.sidebar:
-
-#     st.markdown(
-#         "<h3 style='text-align:center;color:grey;'>Blog Content</h3>",
-#         unsafe_allow_html=True,
-#     )
-#     image = Image.open("assets/tree.webp")
-#     st.image(image)
-
-#     st.caption(
-#         '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
-#     )
-
-#     st.title("Weather Forecast 🌍")
-#     weather_section()
-    
+      
 # =========================================================
 # LEARNING SECTION
 # =========================================================
