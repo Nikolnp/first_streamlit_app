@@ -31,58 +31,104 @@ if "is_admin" not in st.session_state:
 
     st.session_state.is_admin = False
 
+#LEFT HAND SIDEBAR
+with st.sidebar:
 
-# =====================================================
-# ADMIN LOGIN
-# =====================================================
+    st.markdown(
+        "<h3 style='text-align:center;color:grey;'>The Every Day App</h3>",
+        unsafe_allow_html=True,
+    )
+    image = Image.open("assets/tree.webp")
+    st.image(image)
 
-st.sidebar.subheader("Admin Access")
+    st.caption(
+        '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
+    )
+    st.title("Settings ⚙️")
+    if "language" not in st.session_state:
 
-admin_password = st.sidebar.text_input(
-    "Admin Password",
-    type="password"
-)
+        st.session_state.language = "English"
 
-if st.sidebar.button("Login"):
-    #check admin secrets
-    admin_secret = st.secrets.get(
-        "ADMIN_KEY"
-    ) 
-    st.write(dict(st.secrets))
-    if admin_secret is None:
-        st.error(
-            "Admin secret not configured."
-        )  
-    else:
-        if admin_password == admin_secret:
-            st.session_state.is_admin = True
-        if admin_password == st.secrets["ADMIN_KEY"]:
-            st.write(st.secrets)
-            st.session_state.is_admin = True
-            st.write('')
-            st.sidebar.success(
-                "Admin authenticated"
-            )
-    
-        else:
-    
-            st.sidebar.error(
-                "Invalid admin password"
-            )
+    st.sidebar.selectbox(
 
-if st.session_state.is_admin:
+    "🌍 Language",
 
-    st.sidebar.success(
-        "Admin session active"
+    [
+        "English",
+        "Bulgarian",
+        "Spanish",
+        "French",
+        "German",
+        "Italian",
+        "Portuguese",
+        "Chinese",
+        "Japanese"
+    ],
+
+    key="language"
     )
 
-    if st.sidebar.button("Logout"):
+    st.sidebar.divider()
 
-        st.session_state.is_admin = False
+    # =====================================================
+    # ADMIN LOGIN
+    # =====================================================
+    st.title("Admin Access")
+    st.sidebar.subheader("Admin Access")
 
-        st.rerun()
+    admin_password = st.sidebar.text_input(
+        "Admin Password",
+        type="password"
+    )
 
-#-----------------------------------------------------------------------------------------------#
+    if st.sidebar.button("Login"):
+        #check admin secrets
+        admin_secret = st.secrets.get(
+            "ADMIN_KEY"
+        ) 
+        st.write(dict(st.secrets))
+        if admin_secret is None:
+            st.error(
+                "Admin secret not configured."
+            )  
+        else:
+            if admin_password == admin_secret:
+                st.session_state.is_admin = True
+            if admin_password == st.secrets["ADMIN_KEY"]:
+                st.write(st.secrets)
+                st.session_state.is_admin = True
+                st.write('')
+                st.sidebar.success(
+                    "Admin authenticated"
+                )
+        
+            else:
+        
+                st.sidebar.error(
+                    "Invalid admin password"
+                )
+
+    if st.session_state.is_admin:
+
+        st.sidebar.success(
+            "Admin session active"
+        )
+
+        if st.sidebar.button("Logout"):
+
+            st.session_state.is_admin = False
+
+            st.rerun()
+#---------------------------------------------------------------------------------------------------------------------#
+
+    st.title("Weather Forecast 🌍")
+    weather_section()
+    
+#---------------------------------------------------------------------------------------------------------------------#
+
+
+
+#---------------------------------------------------------------------------------------------------------------------#
 
 def main():
     
@@ -109,28 +155,35 @@ def main():
     """, unsafe_allow_html=True)
 
     st.markdown(
-        "<h1 style='text-align: center; color: grey;'>HEALTHY - WEALTHY</h1>",
+        "<h1 style='text-align: center; color: grey;'>The Every Day App</h1>",
         unsafe_allow_html=True
     )
 
     st.markdown(
-        "<h2 style='text-align: center; color: grey;'>Тhe true science behind good choices</h2>",
+        "<h2 style='text-align: center; color: grey;'>True science behind good choices</h2>",
         unsafe_allow_html=True
     )
+    st.markdown("""
+    ###### 🔬Science 💻Technology 📚Research ⚙️Engineering 🎨Arts 🧮Mathematics 🌍Sustainability ######
+    ---
+    *Welcome to The Everyday App ` STREAMS Garden - Where Ideas Grow Into Understanding and Action!*    
+    """)
 
     st.image(
         "http://www.pngall.com/wp-content/uploads/2016/07/Meditation-Transparent.png"
     )
+   
 
     render_navigation()
     route_to_page()  
 #---------------------------------------------------------------------------------------------------------------------#
        
 def render_navigation():
-
+    
+    
     st.sidebar.radio(
 
-        "Navigation",
+        "Explore & Learn ☀️",
 
         options=list(PAGES.keys()),
 
@@ -167,7 +220,7 @@ def initialize_session_state():
         if key not in st.session_state:
 
             st.session_state[key] = value
-    
+
 
 def route_to_page():
 
@@ -382,22 +435,22 @@ def smoothie_maker_section():
 def science_podcast():
     print('Coming soon')
     
-#LEFT HAND SIDEBAR
-with st.sidebar:
+# #LEFT HAND SIDEBAR
+# with st.sidebar:
 
-    st.markdown(
-        "<h3 style='text-align:center;color:grey;'>Blog Content</h3>",
-        unsafe_allow_html=True,
-    )
-    image = Image.open("assets/tree.webp")
-    st.image(image)
+#     st.markdown(
+#         "<h3 style='text-align:center;color:grey;'>Blog Content</h3>",
+#         unsafe_allow_html=True,
+#     )
+#     image = Image.open("assets/tree.webp")
+#     st.image(image)
 
-    st.caption(
-        '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
-    )
+#     st.caption(
+#         '_"One rarely falls in love without being as much attracted to what is interestingly wrong with someone as what is objectively healthy." — Alain de Botton_'
+#     )
 
-    st.title("Weather Forecast 🌍")
-    weather_section()
+#     st.title("Weather Forecast 🌍")
+#     weather_section()
     
 # =========================================================
 # LEARNING SECTION
