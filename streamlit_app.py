@@ -21,9 +21,9 @@ from database import init_db, save_article
 #from translation import render_with_llm
 #test function to check translation rendering
 content = "Welcome to The Everyday App!"
-st.markdown(
-    render_with_llm(content)
-)
+# st.markdown(
+#     render_with_llm(content)
+# )
 
 #path to database ; code used for debugging
 #st.write(os.getcwd())
