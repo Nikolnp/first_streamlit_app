@@ -18,7 +18,7 @@ from database import load_published_articles
 from bernoulli import bernoulli_trial
 #database
 from database import init_db, save_article
-from translation import render_with_llm
+#from translation import render_with_llm
 #test function to check translation rendering
 content = "Welcome to The Everyday App!"
 st.markdown(
